@@ -10,6 +10,13 @@ let egzaminoRezultatas = rand(1, 10);
 //2.
 let eksperimentoRezultatas = rand(1, 4);
 // Išvesti eksperimento rezultatą ir sprendimą ar pavyko. Pavykęs eksperimentas tas, kurio rezultatas 1 arba 4
+
+if(eksperimentoRezultatas == (1 || 4)) {
+    console.log('pavyko', eksperimentoRezultatas)
+}
+else {
+    console.log('nepavyko', eksperimentoRezultatas)
+}
 //3.
 let automobilioGreitis = rand(40, 125);
 // Išvesti automobilio greitį ir baudos dydį, jeigu greiti didesnis nei 60. Bauda yra viršytas greitis X 5
@@ -65,9 +72,10 @@ console.log('//');
 
 let asilai = rand(0, 2);
 let karves = rand(0, 2);
+
 //7.
 // Išvesti asilų ir karvių skaičių ir išvesti rezultatą "gyvulių yra" kai yra nors viena karvė ar asilas arba "gyvulių nėra" jeigu nėra nei karvių nei asilų
-if (asilai + karves) { //jeigu karviu ir asilu yra 0, tuomet nulis sklaiustuose uzskaitomas, kaip false
+if (!(!asilai && !karves)) { //jeigu karviu ir asilu yra 0, tuomet nulis sklaiustuose uzskaitomas, kaip false
     console.log('turim gyvuliu', karves, asilai)
 }
 else {
@@ -89,8 +97,7 @@ let daug = rand(1000000, 9999999);
 
 
 let kiek = 0;
-if (!(daug % 5)) { // jeigu padalinus kintamaji "daug" is 5 ir turim liekana, tuomet su ! paneigiam 
-    // false vykdom
+if (!(daug % 5)) { // jeigu padalinus kintamaji "daug" is 5 ir turim liekana, tuomet su ! paneigiam "false" vykdom
     
     //arba kitoks uzrasymas (daug % 5 == 0 )
 //su kiek++ isimenam salyga, kuri atitiko palyginima
@@ -114,43 +121,45 @@ console.log(kiek, daug);
 let as = rand(0, 2) ? (rand(0, 1) ? 'popierius' : 'zirklės') : 'akmuo';
 let tu = rand(0, 2) ? (rand(0, 1) ? 'popierius' : 'zirklės') : 'akmuo';
 // Išvesti as ir tu kintamuosius ir kas laimėjo as ar tu
+let laimejauAs = ((as == 'popierius') == (tu == 'akmuo')) || ((as == 'akmuo') == (tu == 'zirkles')) || ((as == 'zirkles') == (tu == 'popierius'));
+let laimejaiTu = ((tu == 'popierius') == (as == 'akmuo')) || ((tu == 'akmuo') == (as == 'zirkles')) || ((tu == 'zirkles') == (as == 'popierius'));
 
-if (as == 'popierius') {
+if (laimejauAs && (as == ('popierius' || 'zirkles' || 'akmuo'))) {
 
-    if(tu == 'popierius') {
-        console.log('lygiosios')
-    }
-    else if (tu == 'akmuo'){
-    console.log('laimejo AS')
-    }
-    else {
-        console.log('laimejo TU')
-    }
-
+    console.log('<---------------------Laimejai Tu----------------->', laimejauAs, 'Tu:',tu, 'As:',as)
 }
-else if (as == 'zirkles') {
-    if(tu == 'zirkles') {
-        console.log('lygiosios')
-    }
-    else if (tu == 'akmuo'){
-    console.log('laimejo AS')
-    }
-    else {
-        console.log('laimejo TU')
-    }   
+else if (laimejaiTu && (tu ==( 'popierius' || 'zirkles' || 'akmuo'))) {
+    console.log('<---------------------Laimejau As----------------->', laimejaiTu, 'Tu:',tu, 'As:',as)
+}
+else if (as && tu) {
+    console.log('<---------------------Lygiosios----------------->', 'Tu:',tu, 'As:',as)
+};
+
+
+let color1 = rand(0, 1) ? 'red' : 'green';
+let color2 = rand(0, 1) ? 'red' : 'green';
+let color3 = rand(0, 1) ? 'red' : 'green';
+let color4 = rand(0, 1) ? 'red' : 'green';
+
+//let colorPirmasDerinys = (color1  &&  color2);
+//let colorAirmasDerinys = (color3  &&  color4);
+
+//if (colorPirmasDerinys == (color1 || color2) || colorAirmasDerinys == (color3  ||  color4)) {
+// if ((color1 == color2) || (color3  ==  color4)) {
+
+//     console.log('Ok', color2, color1, 'antras derinys', color3, color4)
+// }
+// else {
+//     console.log('Nesutapo', color1, color2, color, color4)
+// };
+
+if (color1 != color2 && color1  ==  color4) {
+
+    console.log('Ok', color1, color2, 'antras derinys', color1, color4)
 }
 else {
-    if(tu == 'akmuo') {
-        console.log('lygiosios')
-    }
-    else if (tu == 'akmuo'){
-    console.log('laimejo AS')
-    }
-    else {
-        console.log('laimejo TU')
-    }  
-}
-
+    console.log('Nesutapo', color1, color2, color1, color4)
+};
 
 
 console.log('<---------------------klijai----------------->')
@@ -169,6 +178,8 @@ console.log(preke + ' ' + kaina + valiuta);
 
 
 let sk1 = 4;
+
+let sk2 = 5;
 
 sk1 = sk1 +1;//gaunasi 5
 
