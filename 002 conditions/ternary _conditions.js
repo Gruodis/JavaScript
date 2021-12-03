@@ -14,13 +14,13 @@ let priskirta = (1 < 2) ? true : false //vykdo salyga, kuri pries ? ir parodo tr
 
 let priskirta2 = rand(1 < 2) ? true : false //vykdo salyga, kuri pries ? ir parodo true arba false
 
-let trys = rand(0, 2) ? (rand(0,1) ? 'green' : 'yellow' ) : 'red';
+let trys = rand(0, 2) ? (rand(0, 1) ? 'green' : 'yellow' ) : 'red';
 // pirma salyga - du trecdaliai(du kartus iskris true ir viena karta false = 0),
 // antra salyga po ? 50 ant 50
 console.log(trys)
 
 
-//logines salygos atliekamos tik tarp 1 ir 0
+//logines salygos atliekamos tik tarp 1 ir 0, true ir false
 
 //and && abui salygos turi buti true
 //or || bent viena salyga turi buti true
