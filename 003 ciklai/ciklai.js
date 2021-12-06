@@ -3,6 +3,14 @@ function rand(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+//////////////////////////////// FOR ciklai //////////////////////////////////
+
+// ciklas FOR naudojamas, kai zinome, kiek kartu tures buti atlikta ciklo iteracija (konkretus iteraciju(prasisukimu) skaicius)
+
+//----------------------------------------------------------------
+
 //ciklas yra pasikartojimas sklaistu viduje
 
 //ciklo kintamojo deklaravimas, kad butu aisku kiek kartu pakartoti
