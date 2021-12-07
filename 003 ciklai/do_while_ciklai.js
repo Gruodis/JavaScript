@@ -88,7 +88,8 @@ console.log('//');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 6. UZDAVINYS is ciklai_2.js ----------------------------------------------------------------
-//
+////
+// SALYGA:
 // kartojam cikla, kol bus sugeneruoti 3 Herbai
 
 H = 0;
@@ -117,9 +118,12 @@ console.log('//');
 //
 // Ciklai 8. UZDAVINYS -------------------------------------------------------------------------------
 //
-//
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti skirtingus atsitiktinius skaičius nuo 0 iki 10 (vienas skaičius vienoje eilutėje). 
 //Paskutinis atspausdintas skaičius turi būti 5;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 let randomDigitFive;
 let skaitiklis = 0;
 do {
@@ -153,9 +157,12 @@ console.log('//');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Ciklai 9. UZDAVINYS -------------------------------------------------------------------------------
-//
+////
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti atsitiktinius skirtingus skaičius nuo 0 iki 10 (vienas skaičius vienoje eilutėje). 
 // Ciklas turi pasibaigti tada, kai atsitiktinių skaičių suma viršija 100;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 skaitiklis = 0;
 //let randomDigitFiveB = 0;
@@ -176,9 +183,12 @@ console.log('//');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Ciklai 10. UZDAVINYS -------------------------------------------------------------------------------
-//
+////
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti skirtingus atsitiktinius skaičius nuo 0 iki 10 (vienas skaičius vienoje eilutėje). 
 // Paskutinis atspausdintas skaičius turi būti 5 arba 7; Suskaičiuoti kiek ciklų prasisuko;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 let randomDigitC;
 skaitiklis = 0;
@@ -200,9 +210,12 @@ console.log('//');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Ciklai 11. UZDAVINYS -------------------------------------------------------------------------------
-//
+////
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti atsitiktinius skirtingus skaičius nuo 0 iki 10 (vienas skaičius vienoje eilutėje). 
 // Ciklas turi pasibaigti tada, kai atsitiktinių skaičių suma viršija 20, bet ne anksčiau nei po 11 ciklų;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
 randomDigitC = 0;
@@ -261,8 +274,11 @@ console.log('//');
 //
 // Ciklai 12. UZDAVINYS -------------------------------------------------------------------------------
 //
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti skirtingus atsitiktinius skaičius nuo 0 iki 10 (vienas skaičius vienoje eilutėje). 
 // Ciklą kartoti kol bus sugeneruoti trys nelyginiai skaičiai;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 let nelyginisSaicius = 0;
 skaitiklis = 0;
@@ -290,8 +306,11 @@ console.log('//');
 //
 // Ciklai 13. UZDAVINYS -------------------------------------------------------------------------------
 //
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti po porą skirtingų atsitiktinių skaičių nuo 0 iki 10 (abu skaičiai vienoje eilutėje). 
 // Ciklą kartoti tol, kol neiškris abu vienodi skaičiai;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 let randomDigit = rand(0, 10);
 let randomDigit2 = rand(0, 10);
@@ -331,9 +350,13 @@ console.log('//');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Ciklai 14.
-//
+////
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti po porą skirtingų atsitiktinių skaičių nuo 0 iki 10 (abu skaičiai vienoje eilutėje). 
 // Skaičiuoti abiejų skaičių sumas skirtinguose kintamuosiuose (skaičiuoti skaičių stulpelių sumas). Ciklą kartoti tol, kol kiekviena iš sumų bus daugiau nei 100;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 // randomDigit = 0;
 // randomDigit2 = 0;
 let randomDigitSuma1 = 0;
@@ -359,10 +382,12 @@ console.log('//');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Ciklai 15. UZDAVINYS -----------------------------
-//
+////
+// SALYGA:
 // console.log’e, naudojant ciklą atspausdinti po porą skirtingų atsitiktinių skaičių nuo 0 iki 10 (abu skaičiai vienoje eilutėje). 
 // Ciklą kartoti kol bus sugeneruota po tris arba daugiau nelyginių skaičių  (skaičiai atskiruose stulpeliuose).
-
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 let nelyginisSaicius1 = 0;
 let nelyginisSaicius2 = 0;

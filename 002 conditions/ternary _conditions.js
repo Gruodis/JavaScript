@@ -4,10 +4,27 @@ function rand(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
   }
 
-let digit = 0; //kintamasis su false reiksme
+let digit = 0; //kintamasis su 0 == false reiksmei.
 
-// minusine reiksme yra true, tik nulis yra false
-
+// TERNARY susideda is salyga ? TRUE : FALSE
+// salyga ==>
+// sekanti dalis po ? TRUE, po : FALSE
+// todel jeigu randomDigit issidalina be liekanos = 0 = FALSE
+// jeigu randomDigit issidalina be liekanos = 1 = TRUE (visi tiegiami ir neigiami skaiciai yra TRUE)
+//
+// tik nulis yra false !!!
+//
+// Noredami suskaiciuoti, kiek lyginiu/nelyginiu skaiciu sugeneravome, po salygos nurodome nelyginius skaicius,
+// nes norint skaiciuoti lyginius skaicius salygoje random skaiciu padalinus is 2, turime gauti TRUE, bet
+// kai salygoje skaicius issidalina is 2, mes gauname 0 ==> FALSE, todel turi issidalinti su liekana, kad gautumem TRUE
+//
+// pvz.: randomDigit % 2 ? randomDigitNelygniaiSkaiciai++ : randomDigitLyginiaiSkaiciai++;
+//
+// galime parasyti % 2 !=1, tuomet, pirma galesime sukeisti Lyginiu ir Nelygiu skaiciu vietas
+//
+// pvz.: randomDigit % 2 !=1 ? randomDigitLyginiaiSkaiciai++ : randomDigitNelygniaiSkaiciai++;
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let priskirta = (1 < 2) ? true : false //vykdo salyga, kuri pries ? ir parodo true arba false
 //salyga visad yra true arba false
