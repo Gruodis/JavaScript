@@ -4,7 +4,7 @@ function rand(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//////////////////////////////// Ciklas DO WHILE Basic Loop UZDAVINIAI /////////////////////////
+//////////////////////////////// Ciklas DO WHILE Basic Loop 8 Punkto UZDAVINIAI /////////////////////////
 //
 //
 // Ciklai 8. UZDAVINYS ------------------------------------------------------------------------
@@ -229,16 +229,36 @@ console.log(`Ciklas STOP, kai ${randomDigit} < 12, Ciklu kiekis: ${cikluKiekis}`
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 randomDigit = 0;
-iteracijuKiekis = 0;
+let iteracijuKiekisF;
+
+let smallCicleCount = 0;
+let bigCicleCount = 0;
+
 do {
-    randomDigit = rand(10, 14);
-    console.log(randomDigit);
-    iteracijuKiekis++;
-}
-while (iteracijuKiekis <= 20);
+    bigCicleCount++;
+    iteracijuKiekisF = 0;
+    do {
+        smallCicleCount++;
+        randomDigit = rand(10, 14);
+        console.log(randomDigit);
+        iteracijuKiekis++;
+
+        //console.log(`|| Small Cicle Count: ${smallCicleCount}`);
+
+    }
+    while (randomDigit >= 12);
+    console.log(`MAZASIS: ${smallCicleCount}`);
+
+
+} while (iteracijuKiekis <= 20)
 
 console.log(`<============ F ===============`);
-console.log(`Ciklas STOP, kai ${iteracijuKiekis} > 20.`);
+console.log(`Ciklas STOP, kai ${iteracijuKiekis} > 20. ${randomDigit}`);
+console.log(`
+||
+|| Big Cicle Count: ${bigCicleCount}
+|| Small Cicle Count: ${smallCicleCount}`);
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 console.log('//');
