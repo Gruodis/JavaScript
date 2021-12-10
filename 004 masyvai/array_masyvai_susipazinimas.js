@@ -4,7 +4,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 // daugiau kintamuju tipu:
 
 // String	vaizduoja tekstinius duomenis	'hello'ir "hello world!"kt
@@ -15,7 +14,6 @@
 // null	žymi nullvertę	let a = null;
 // Symbol	duomenų tipas, kurio egzemplioriai yra unikalūs ir nekintami	let value = Symbol('hello');
 // Object	pagrindinių duomenų ir porų rinkimo poros	let student = ( );
-
 
 // Masyvo struktura
 //
@@ -33,15 +31,14 @@
 //
 //  <===[ Isimame Stalciu NR 1 ]===
 //
-//  Zemiau 
+//  Zemiau
 //
 //                     ||______Stalcius NR 2__.
 //                     ||______Stalcius NR 3__.
 //                     ||______Stalcius NR 4__.
 
+let stringas = "hello";
 
-let stringas = 'hello';
-
-if (stringas == 'hello') {
-    console.log('PAvyko')
+if (stringas == "hello") {
+    console.log("PAvyko");
 }
