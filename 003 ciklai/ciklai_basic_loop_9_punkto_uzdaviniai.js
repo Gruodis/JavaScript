@@ -59,10 +59,10 @@ do {
     console.log(`'Random number Didziojo ciklo viduje  ${loopRandomNumber}.
     ||`);
 
-        for (let i = 1; i < loopRandomNumber; i++) {
-            console.log(`   'Mazojo Ciklo numeris: ${i}.`);
-            cicleWithinCicleCount++;
-        }
+    for (let i = 1; i < loopRandomNumber; i++) {
+        console.log(`   'Mazojo Ciklo numeris: ${i}.`);
+        cicleWithinCicleCount++;
+    }
 
     bigCicleCount++;
 
@@ -104,22 +104,22 @@ do {
     'Random number Didziojo ciklo viduje  ${loopRandomNumber}.
     ||`);
 
-        for (let i = 1; i < loopRandomNumber; i++) {
-            console.log(`   'Mazojo Ciklo numeris: ${i}.`);
-            cicleWithinCicleCount++;
-        }
-    
-        //loopRandomNumber == 5 ? threeSameNumbers++ : threeSameNumbers;
+    for (let i = 1; i < loopRandomNumber; i++) {
+        console.log(`   'Mazojo Ciklo numeris: ${i}.`);
+        cicleWithinCicleCount++;
+    }
 
-        if (loopRandomNumber == 5) {
+    //loopRandomNumber == 5 ? threeSameNumbers++ : threeSameNumbers;
 
-                threeSameNumbers++;
+    if (loopRandomNumber == 5) {
 
-        };
+        threeSameNumbers++;
+
+    };
 
     bigCicleCount++;
 
-// } while (loopRandomNumber != 5 || threeSameNumbers != 3);
+    // } while (loopRandomNumber != 5 || threeSameNumbers != 3);
 } while (threeSameNumbers != 3);
 
 
@@ -158,11 +158,11 @@ do {
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ||`);
 
-        for (let i = 0; i < loopRandomNumber; i++) {
-            console.log(`   'Mazojo Ciklo numeris: ${i + 1}.`);
-            cicleWithinCicleCount++;
-        }
-    
+    for (let i = 0; i < loopRandomNumber; i++) {
+        console.log(`   'Mazojo Ciklo numeris: ${i + 1}.`);
+        cicleWithinCicleCount++;
+    }
+
     loopRandomNumber == 5 ? threeSameNumbers++ : threeSameNumbers = 0;
 
     // if (loopRandomNumber == 5) {
@@ -173,7 +173,7 @@ do {
 
     bigCicleCount++;
 
-// } while (loopRandomNumber != 5 || threeSameNumbers != 3);
+    // } while (loopRandomNumber != 5 || threeSameNumbers != 3);
 } while (threeSameNumbers != 3);
 
 
@@ -221,13 +221,13 @@ do {
     ||`);
 
 
-    if (zaidejasKazys < 200  ) {
+    if (zaidejasKazys < 200) {
         susumuotiKazioTaskai += zaidejasKazys;
     }
     zaidejasKazys++;
-    
 
-    if (zaidejasPetras < 200  ) {
+
+    if (zaidejasPetras < 200) {
         susumuotiPetroTaskai += zaidejasPetras;
     }
     zaidejasPetras++;
@@ -243,13 +243,12 @@ console.log(`
 ////////////////////////////////////////////////////////////////////////////////
 // `);
 console.log(
-    susumuotiKazioTaskai > susumuotiPetroTaskai ? 
-    ('=====================>  Laimejo Kazys'  + ' ' + susumuotiKazioTaskai) : ('========================>  Laimejo Petras' + ' ' + susumuotiPetroTaskai)
-    );
+    susumuotiKazioTaskai > susumuotiPetroTaskai ?
+    ('=====================>  Laimejo Kazys' + ' ' + susumuotiKazioTaskai) : ('========================>  Laimejo Petras' + ' ' + susumuotiPetroTaskai)
+);
 
 console.log(`// 
-////////////////////////////////////////////////////////////////////////////////`
-);
+////////////////////////////////////////////////////////////////////////////////`);
 
 console.log(`//
 ||================ 10. STATISTIKA ===============>
@@ -264,5 +263,3 @@ console.log(`//
 ||<================== 10. END ===================||
 //
 //`);
-
-
