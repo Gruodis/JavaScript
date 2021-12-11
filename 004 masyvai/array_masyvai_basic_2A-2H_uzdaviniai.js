@@ -35,7 +35,7 @@ function rand(min, max) {
 
 let masyvas = [];
 let masyvasH = [];
-let kintantisMasyvoDydis = rand(0, 30)
+let kintantisMasyvoDydis = rand(0, 22)
 
 let cicleWithinCicleCount = 0;
 
@@ -286,7 +286,7 @@ console.log(`
 //// Ciklai 2. F UZDAVINYS ------------------------------------------------------------------------
 //
 //      Naudodamiesi 1 uždavinio masyvu:
-// 	    Iš masyvo elementų sukurkite du naujus masyvus. Vienas turi būti sudarytas iš neporinių indeksų reikšmių, 
+// 	    Iš masyvo elementų sukurkite du naujus masyvus. Vienas turi būti sudarytas iš neporinių Elementu(index'o) reikšmių, 
 //      o kitas iš porinių(pagal neporinį - porinį indeksą, ne reikšmę);
 //
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -294,18 +294,38 @@ console.log(`
 let masyvasF1 = [];
 let masyvasF2 = [];
 
-for (let i = 0; i <= masyvas.length - 1; i++) { //Kol i maziau uz masyvas.length, kartok Cikla
+// for (let i = 0; i <= masyvas.length - 1; i++) { //Kol i maziau uz masyvas.length, kartok Cikla;
 
-    if (i % 2) {
-        masyvasF1.push(masyvas[i]);
-    }
+//     if (i % 2 == 0) { //randame Elementus su lyginiais skaiciais(reiksmemis);
+//         masyvasF2.push(masyvas[i]);
+//     }
 
-    else { //Kol i maziau uz masyvas.length, kartok Cikla
+//     else { //like Elementai su NElyginiais skaiciais(reiksmemis);
 
-        if (i % 2 === 0) {
-            masyvasF2.push(masyvas[i]);
-        };
-    }
+//         masyvasF1.push(masyvas[i]);
+
+//     }
+
+// };
+
+//////////////////------------------- DESTYTOJO SPRENDIMAS--------------------  ////////////////////////
+//                                                                                                    //
+//                                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+masyvasF1 = [];
+masyvasF2 = [];
+
+for (let i = 0; i < masyvas.length; i += 2) { //Kol i maziau uz masyvas.length, kartok Cikla;
+    masyvasF2.push(masyvas[i]);
+
+};
+for (let i = 0; i < masyvas.length - 1; i += 2) { //Kol i maziau uz masyvas.length, kartok Cikla;
+
+
+
+    masyvasF1.push(masyvas[i + 1]);
 
 };
 
@@ -381,6 +401,91 @@ console.log(`
 
 
 
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//
+//// Ciklai 2. G UZDAVINYS ------------------------------------------------------------------------
+//
+//      Naudodamiesi 1 uždavinio masyvu:
+// 	    Lyginiu Elementu(index'u) reiksmes paverskite 0, jeigu Elemento reiksme didesne už 15;
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+didziausiaMasyvoReiksme = masyvas[0]; // kintamasis, kuris bus naudojamas palyginti Stalciuje esancia reiksme.
+stalciausIndeksas = 0; // kuris bus naudojamas indexo(Stalciaus) numeriui atvaizduoti.
+
+oddIndexVariableSum = 0;
+stalciausIndeksasSumavimui = 0;
+
+// for (let i = 0; i < masyvas.length; i++) {// kartojame Cikla, kol pasieksime Masyvo DYDI(.length).
+
+//     ////////////////// 1 UZDAVINIO DALIS ////////////////////////
+//     //
+//     // Ieskome didžiausios masyvo reikšmę ir jos indeksą:
+
+//     if (masyvas[i] > didziausiaMasyvoReiksme) { // imame Stalciuje esancia reiksme [i] ir Patikriname ar ji didesne uz Lygynamaja reiksme;
+
+//         didziausiaMasyvoReiksme = masyvas[i]; // jeigu [i] reiksme buvo didesne uz Lygynamaja - 'didziausiaMasyvoReiksme', keiciam mazesne kintamojo 'didziausiaMasyvoReiksme'
+//         // i didesne reiksme - [i];
+
+//         stalciausIndeksas = i; //  kintamajam 'stalciausIndeksas', priskiriame indexo(Stalciaus) numeri - i.
+//         // console.log('Pirmas cikle did reiksm', didziausiaMasyvoReiksme)
+
+//     };
+
+//     ////////////////// 2 UZDAVINIO DALIS ////////////////////////
+//     //
+//     // ieskome lyginiu indexu(Stalciu) ir sumuojame juose esancias reiksmes:
+//     //
+//     stalciausIndeksasSumavimui = i; // i reiksme(indexo/Stalciaus numeri), priskirame 'stalciausIndeksasSumavimui', kintamajam;
+
+//     if ((stalciausIndeksasSumavimui % 2 == 0) && (masyvas[i] > 15)) { //daliname indexo(Stalciaus), numeri is 2 ir randame lyginius indexus(Stalcius);
+
+//         oddIndexVariableSum += masyvas[i]; //sumuojame lyginiuose indexuose(Stalciuose) esancias reiksmes
+
+//         masyvas[i] = i - i;
+
+//     }
+
+// };
+
+//////////////////------------------- DESTYTOJO SPRENDIMAS--------------------  ////////////////////////
+//                                                                                                    //
+//                                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+for (let i = 0; i < masyvas.length; i += 2) { //Kol i maziau uz masyvas.length, kartok Cikla;
+
+    if (masyvas[i] >= 15) {
+
+        masyvas[i] = 0;
+    }
+
+};
+
+
+console.log(`
+
+||||||||||||||||||| 2-o G ARRAY |||||||||||||||||||
+||`);
+console.log(masyvas);
+console.log(`
+||
+||=============== 2-o G ATSAKYMAS ===============>
+||
+||  'Masyvo dydis = ${masyvas.length},
+||  'Didziausia masyvo reiksme = ${didziausiaMasyvoReiksme},
+||  'Stalciaus indeksas = ${stalciausIndeksas},
+||  'Lyginiuose indeksuose(Stalciuose) esanciu skaciu SUMA = ${oddIndexVariableSum},
+||
+||<================== 2 G END ===================||
+||
+||||||||||||||||||||||||||||||||||||||||||||||||||
+`);
+
+
 
 
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -401,7 +506,7 @@ if (masyvas.length < 39) {
 
     do {
         cicleWithinCicleCount++;
-        masyvas.push(rand(1, 2));
+        masyvas.push(rand(2, 3));
     } while (masyvas.length != 39); //kartok Cikla kol masyvas.length bus lygus 39 (nebebus nelygus 39)
 };
 console.log(`
@@ -421,84 +526,6 @@ console.log(`
 ||||||||||||||||||||||||||||||||||||||||||||||||||
 `);
 
-
-
-
-
-
-
-
-
-
-
-
-//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//
-//// Ciklai 2. G UZDAVINYS ------------------------------------------------------------------------
-//
-//      Naudodamiesi 1 uždavinio masyvu:
-// 	    Pirminio masyvo elementus su poriniais indeksais padarykite lygius 0 jeigu jie didesni už 15;
-//
-//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-masyvas[0];
-didziausiaMasyvoReiksme = masyvas[0]; // kintamasis, kuris bus naudojamas palyginti Stalciuje esancia reiksme.
-stalciausIndeksas = 0; // kuris bus naudojamas indexo(Stalciaus) numeriui atvaizduoti.
-
-oddIndexVariableSum = 0;
-stalciausIndeksasSumavimui = 0;
-
-for (let i = 0; i < masyvas.length; i++) {// kartojame Cikla, kol pasieksime Masyvo DYDI(.length).
-
-    ////////////////// 1 UZDAVINIO DALIS ////////////////////////
-    //
-    // Ieskome didžiausios masyvo reikšmę ir jos indeksą:
-
-    if (masyvas[i] > didziausiaMasyvoReiksme) { // imame Stalciuje esancia reiksme [i] ir Patikriname ar ji didesne uz Lygynamaja reiksme;
-
-        didziausiaMasyvoReiksme = masyvas[i]; // jeigu [i] reiksme buvo didesne uz Lygynamaja - 'didziausiaMasyvoReiksme', keiciam mazesne kintamojo 'didziausiaMasyvoReiksme'
-        // i didesne reiksme - [i];
-
-        stalciausIndeksas = i; //  kintamajam 'stalciausIndeksas', priskiriame indexo(Stalciaus) numeri - i.
-        // console.log('Pirmas cikle did reiksm', didziausiaMasyvoReiksme)
-
-    };
-
-    ////////////////// 2 UZDAVINIO DALIS ////////////////////////
-    //
-    // ieskome lyginiu indexu(Stalciu) ir sumuojame juose esancias reiksmes:
-    //
-    stalciausIndeksasSumavimui = i; // i reiksme(indexo/Stalciaus numeri), priskirame 'stalciausIndeksasSumavimui', kintamajam;
-
-    if ((stalciausIndeksasSumavimui % 2 == 0) && (masyvas[i] > 15)) { //daliname indexo(Stalciaus), numeri is 2 ir randame lyginius indexus(Stalcius);
-
-        oddIndexVariableSum += masyvas[i]; //sumuojame lyginiuose indexuose(Stalciuose) esancias reiksmes
-
-        masyvas[i] = i - i;
-
-    }
-
-};
-//oddIndexVariableSum;
-
-console.log(`
-
-||||||||||||||||||| 2-o G ARRAY |||||||||||||||||||
-||`);
-console.log(masyvas);
-console.log(`
-||
-||=============== 2-o G ATSAKYMAS ===============>
-||
-||  'Masyvo dydis = ${masyvas.length},
-||  'Didziausia masyvo reiksme = ${didziausiaMasyvoReiksme},
-||  'Stalciaus indeksas = ${stalciausIndeksas},
-||  'Lyginiuose indeksuose(Stalciuose) esanciu skaciu SUMA = ${oddIndexVariableSum},
-||
-||<================== 2 G END ===================||
-||
-||||||||||||||||||||||||||||||||||||||||||||||||||
-`);
 
 
 
@@ -525,7 +552,9 @@ for (let i = 0; i < masyvasH.length; i++) {// kartojame Cikla, kol pasieksime Ma
     if (masyvasH[i] > 20) {
 
         stalciausIndeksas = i;
-        break; //
+        // break;
+    }
+    else {
 
     }
 
