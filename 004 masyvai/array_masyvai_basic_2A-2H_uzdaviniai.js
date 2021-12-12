@@ -546,19 +546,31 @@ stalciausIndeksas = 0; // naudojamas indexo(Stalciaus) numeriui atvaizduoti.
 
 
 
-for (let i = 0; i < masyvasH.length; i++) {// kartojame Cikla, kol pasieksime Masyvo DYDI(.length).
+// for (let i = 0; i < masyvasH.length; i++) {// kartojame Cikla, kol pasieksime Masyvo DYDI(.length).
 
 
-    if (masyvasH[i] > 20) {
+//     if (masyvasH[i] > 20) {
 
-        stalciausIndeksas = i;
-        // break;
+//         stalciausIndeksas = i;
+//         // break;
+//     }
+//     else {
+
+//     }
+
+// };
+let stalciausIndeksas2;
+
+let indeX = 0;
+do {
+    if (masyvasH[indeX] > 20) {
+
+        stalciausIndeksas2 = indeX;
     }
-    else {
+    indeX++;
 
-    }
-
-};
+    // kodo optimizavimas: pirma rasom 
+} while (typeof stalciausIndeksas2 == 'undefined' && masyvasH.length >= indeX)
 
 
 console.log(`
@@ -572,7 +584,7 @@ console.log(`
 ||
 ||  'Masyvo dydis = ${masyvasH.length},
 
-||  'Stalciaus indeksas, kuris pirmas turejo didesni skaiciu uz 20  = ${stalciausIndeksas},
+||  'Stalciaus indeksas, kuris pirmas turejo didesni skaiciu uz 20  = ${stalciausIndeksas2},
 
 ||
 ||<================== 2 H END ===================||
