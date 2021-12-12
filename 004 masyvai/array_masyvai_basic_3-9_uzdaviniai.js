@@ -45,7 +45,7 @@ let skaiciuojamRaidesC = 0; // deklaruotas kintamasis, kuriame sumuosime raides 
 let skaiciuojamRaidesD = 0; // deklaruotas kintamasis, kuriame sumuosime raides D;
 
 
-for (let i = 0; i <= randomNumberOfElements; i++) { // kartojame cikla, kol bus pasiektas "randomNumberOfElements" skaicius;
+for (let i = 0; i < randomNumberOfElements; i++) { // kartojame cikla, kol bus pasiektas "randomNumberOfElements" skaicius;
 
 
     // !!!! TOKS DEKLARAVIMAS BETIKSLIS, TODEL ISKART DEDAME I arrayThree.push(); SALYGOS VIDU !!!!!!!!!!!!!!!!!!!!!!
@@ -72,7 +72,7 @@ for (let i = 0; i <= randomNumberOfElements; i++) { // kartojame cikla, kol bus 
 }
 console.log(arrayThree);
 
-console.log(`Elementu esanciu Objekte "array.Three" skaicius:`, arrayThree.length);
+console.log(randomNumberOfElements, `Elementu esanciu Objekte "array.Three" skaicius:`, arrayThree.length);
 
 console.log(`||
 ||  Skaiciuojam raides - A:`, skaiciuojamRaidesA);
@@ -104,18 +104,32 @@ let raides = ['A', 'B', 'C', 'D']; // deklaruotas papildomas Objektas(masyvas);
 // 3. - Tuomet antrame Objekte "arrayThree", vykdome PUSH naujas Elementas, kurio reiksme = Elentas Nr.(random skaicius) is Objekto "raides";
 let arrayThree2 = []; // deklaruotas Objektas(Masyvas),
 
+let letterCounter = [0, 0, 0, 0];
+
 //////////////////////// Objekto(Masyvo) Elementams atsitiktine tvarka bus priskiriamos reiksmes "'A', 'B', 'C'..",
 //////////////////////// kurias imsime is auksciau deklaruoto Objekto(Masyvo) "raides" = ['A', 'B',...];
 
-for (let i = 0; i <= randomNumberOfElements; i++) {
+for (let i = 0; i < randomNumberOfElements; i++) {
 
     arrayThree2.push( // Objekto(Masyvo) arrayThree2.push viduje, idedame pagalbini Objekta(Masyva) "raides", 
         raides[       // sekantis zingsnis - [] skliaustuose, kurie simbolizuoja Elemento reiksme,
         rand(0, 3)    // generuojame skaiciu (nuo 0 iki 3),
-        ]             // pvz.: rand. sk. = 2, tada 2 = 'C', nes 2 = Elemento(Stalciaus) Nr., papildomame Objekte(Masyve) "raides" 
+        ]             // pvz.: rand. sk. = 2, tada 2 = 'C', nes 2 = Elemento(Stalciaus) Nr., papildomame Objekte(Masyve) "raides"
+
+        //console.log(`elemento reiksme:`, raides[i], `masyvo index:`, i)
     ); 
+
+    // console.log(`elemento reiksme:`, raides[i], `masyvo index:`, i);
 };
-console.log(`Objekto Elementai su Kintamaisiais:`, arrayThree2)
+for (let i = 0; i < arrayThree2.length - 1; i++) {
+
+    let raidesIndex = raides.indexOf(arrayThree2[i]);
+    letterCounter[raidesIndex]++;
+
+}
+console.log(`Objekto Elementai su Kintamaisiais:`, arrayThree2);
+console.log(letterCounter, `Objekto Elementai su Kintamaisiais:`);
+
 console.log(`// 
 Objekto Dydis:`, arrayThree2.length)
 
