@@ -27,10 +27,10 @@ function rand(min, max) {
 
 
 
-//////////////////////////////// ARRAY Masyvo Basic UZDAVINIAI /////////////////////////
+//////////////////////////////// ARRAY Objekto Basic UZDAVINIAI /////////////////////////
 //
 //
-// Ciklai 3. UZDAVINYS ------------------------------------------------------------------------
+// ARRAY Objektai 3. UZDAVINYS ------------------------------------------------------------------------
 // Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, D ir D, o ilgis 200. Suskaičiuokite kiek yra kiekvienos raidės.
 //
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -121,7 +121,7 @@ for (let i = 0; i < randomNumberOfElements; i++) {
 
     // console.log(`elemento reiksme:`, raides[i], `masyvo index:`, i);
 };
-for (let i = 0; i < arrayThree2.length - 1; i++) {
+for (let i = 0; i < arrayThree2.length; i++) {
 
     let raidesIndex = raides.indexOf(arrayThree2[i]);
     letterCounter[raidesIndex]++;
@@ -131,7 +131,103 @@ console.log(`Objekto Elementai su Kintamaisiais:`, arrayThree2);
 console.log(letterCounter, `Objekto Elementai su Kintamaisiais:`);
 
 console.log(`// 
-Objekto Dydis:`, arrayThree2.length)
+Objekto Dydis:`, arrayThree2.length,
+    `
+//
+//////////////////////////////--------END 3-------//////////////////////////////////
+
+`)
+
+//////////////////////////////// ARRAY Objekto Basic UZDAVINIAI /////////////////////////
+//
+//
+// ARRAY Objektai 4. UZDAVINYS ------------------------------------------------------------------------
+// Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes.
+// Paskaičiuokite kiek unikalių(po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.
+//
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+let raides4 = ['A', 'B', 'C', 'D']; // deklaruotas papildomas Objektas(masyvas);
+
+let arrayFour = []; // deklaruotas Objektas(Masyvas),
+
+let letterCounter4 = [0, 0, 0, 0];
+
+let kazinkas = []
+
+for (let i = 0; i < 3; i++) {
+
+    arrayFour[i] = []; // generuojame i-taji kieki nauju Objektu(Masyvu);
+
+    for (let j = 0; j < randomNumberOfElements; j++) { //----!!! DEMESIO: kintamaji i ===> j, kad FOR nesisumuotu Iteraciju(Ciklu).
+
+        arrayFour[i][j] = raides[rand(0, 3)]; //----!!! DEMESIO: generuojame i-tojo Objekto, j Elemento reiksmes.
+
+        //console.log(`Elemento ${i}, reiksme:`, arrayFour[i][j]);
+
+        kazinkas[i] = arrayFour[i][j];
+    };
+    console.log(`${i} Objekto, Elementu reiksmes:`, arrayFour[i]);
+
+
+
+    arrayFour.indexOf
+
+
+
+    // console.log(`elemento reiksme:`, raides4[i], `masyvo index:`, i);
+};
+
+// jeigu 0-nio Objekto, 0 Elemento reiksme = 'A';
+// jeigu 0-nio Objekto, 0 Elemento reiksme = 'B';
+// jeigu 0-nio Objekto, 0 Elemento reiksme = 'A';
+// jeigu 0-nio Objekto, 0 Elemento reiksme = 'D';
+
+// Gauname: naujas Objektas, 0 Elementaas su nauja reiksme = 'AA';
+
+//sudedame tryju masyvu atitinkancias reiksmes(pvz 'A'+'A'+'A', 'B'+'B'+'B'..t.t.) i viena masyva
+
+
+
+// for (let m = 0; m < arrayFour.length; m++) { //----!!! DEMESIO: kintamaji i ===> j, kad FOR nesisumuotu Iteraciju(Ciklu).
+
+
+//     arrayFourMerge.push(arrayFourMerge[m] += arrayFour[]); //----!!! DEMESIO: generuojame i-tojo Objekto, j Elemento reiksmes.
+
+
+// };
+
+
+
+//
+//
+//
+
+const counts = {};
+arrayFour[0].forEach((x) => {
+    counts[x] = (counts[x] || 0) + 1;
+});
+
+let arrayFourMerge = [arrayFour.indexOf + arrayFour.indexOf + arrayFour.indexOf[2]];
+
+
+console.log(`
+||||||||||||||||||| 4-o UZDAVINIO ARRAY |||||||||||||||||||
+
+Skaiciuojam pasikartojancias reiksmes:`, counts, `
+
+Trys masyvai viename:`, kazinkas, `
+
+ARRAY Merge:`, arrayFourMerge, `
+
+
+Trys Objektai su viduje esanciais Objektais:`, arrayFour);
+
+
+console.log(`Objekto Elementai su Kintamaisiais:`);
+
+console.log(`// 
+Objekto Dydis:`, arrayFour.length);
 
 
 // 4.	Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes. Paskaičiuokite kiek unikalių (po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.
