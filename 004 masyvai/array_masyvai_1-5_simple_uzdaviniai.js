@@ -22,8 +22,11 @@ let pinigine = [];
 
 for (let i = 0; i < randomNumberOfLoops; i++) {
 
-    pinigine.push(rand(0, 10));
+    pinigine.push(rand(1, 10));
 }
+
+let pinigine2 = pinigine.slice(); // reiksmiu perdavimui is Masyvo i Masyva, butina naudoti ".slice()",
+// pvz.: is Masyvo "pinigine", Masyvui "pinigine2".
 
 console.log(`
 ||||||||||||||||||| 1-o UZDAVINIO ARRAY |||||||||||||||||||
@@ -34,7 +37,7 @@ console.log(`
 
 
 console.log(`|
-===> ARRAY: `, pinigine);
+===> ARRAY: `, pinigine.slice()); // !!! DEMESIO !!! .slice() = sukuriama virtuali Masyvo "pinigine", kopija, kurios reiksmiu nepakeicia zemiau vykdomos salygos;
 console.log(`|
 ===> ARRAY Length: `, pinigine.length);
 console.log(`|
@@ -63,7 +66,8 @@ for (let i = 0; i < pinigine.length; i++) {
 
 }
 
-pinigine.forEach(p => piniguSumaFancy += p);
+pinigine.forEach(p => piniguSumaFancy += p); // indexOf = kiekvieno Elemento index Nr, forEach = kiekvieno Elemento reiksme;
+//////////////// (kintamasis(p) arrow(=> funkcija) kintamasis(piniguFancy) += kintamsis(p))
 
 console.log(`
 
@@ -78,7 +82,7 @@ console.log(`
 
 
 console.log(`|
-===> ARRAY:`, pinigine);
+===> ARRAY:`, pinigine.slice()); 
 console.log(`|
 ===> ARRAY Length:`, pinigine.length);
 console.log(`|
@@ -106,6 +110,7 @@ for (let i = 0; i < pinigine.length; i++) {
         piniguSuma += pinigine[i];
     }
 }
+
 console.log(`
 
 ||||||||||||||||||| 3-o UZDAVINIO ARRAY |||||||||||||||||||
@@ -119,7 +124,7 @@ console.log(`
 
 
 console.log(`|
-===> ARRAY:`, pinigine);
+===> ARRAY:`, pinigine.slice());
 console.log(`|
 ===> ARRAY Length:`, pinigine.length);
 console.log(`|
@@ -139,12 +144,10 @@ console.log(`|
 //
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-piniguSuma = 0;
+for (let i = 0; i < pinigine2.length; i++) {
 
-for (let i = 0; i < pinigine.length; i++) {
-
-    if (pinigine[i] <= 2) {
-        pinigine[i] = 0;
+    if (pinigine2[i] <= 4) {
+        pinigine2[i] = 0;
     }
 }
 console.log(`
@@ -152,7 +155,7 @@ console.log(`
 ||||||||||||||||||| 4-o UZDAVINIO ARRAY |||||||||||||||||||
 *
 *
-*   Objekte pinigine reikšmių(pinigu) suma: ${piniguSuma}
+*   Objekte pinigine reikšmių(pinigu) suma: ${pinigine2}
 *
 *
 -----------------------STATISTIKA--------------------------`
@@ -160,9 +163,9 @@ console.log(`
 
 
 console.log(`|
-===> ARRAY:`, pinigine);
+===> ARRAY:`, pinigine2.slice());
 console.log(`|
-===> ARRAY Length:`, pinigine.length);
+===> ARRAY Length:`, pinigine2.length);
 console.log(`|
 ===> Random skaicius:`, randomNumberOfLoops);
 console.log(`|
@@ -182,49 +185,23 @@ console.log(`|
 
 let didziauasiSkaicius = pinigine[0];
 let sumOfTotalBigNumbers = 0;
-let masyvasIsDidSk = []
-let pinigoIndex = [];
-piniguSuma = 0;
+
 
 for (let i = 0; i < pinigine.length; i++) {
 
     if (pinigine[i] > didziauasiSkaicius) {
-        //
-
-        //pinigoIndex[i] = i;
-
 
         didziauasiSkaicius = pinigine[i];
         sumOfTotalBigNumbers = 0; // nunulinam ankstesnes didziausias reiksmes;
-
 
     }
     if (pinigine[i] === didziauasiSkaicius) {
 
         sumOfTotalBigNumbers++; // skaiciuojame didziausiu reiksmiu kieki;
 
-        pinigoIndex[i] = pinigine[i];
-        do {
-
-            pinigoIndex[i] = pinigine[i];
-
-        } while ((pinigoIndex[i] != pinigine[i]) > didziauasiSkaicius);
     };
 
-
-    // if (pinigoIndex[i] > masyvasIsDidSk[i]) {
-
-    //     sumOfTotalBigNumbers++; // skaiciuojame didziausiu reiksmiu kieki;
-
-    //     pinigoIndex[i] = i;
-
-    // };
-
-
-    //pinigine.forEach((p = p) => sumOfTotalBigNumbers++);
-
-
-    console.log(`Iteraciju kiekis`, pinigoIndex[i], pinigine[i], didziauasiSkaicius,);
+    //console.log(`Iteraciju kiekis`, pinigoIndex[i], pinigine[i], didziauasiSkaicius,);
     // sumOfTotalBigNumbers = didziauasiSkaicius++;
 
 
@@ -238,17 +215,13 @@ console.log(`
 *
 *   Didziausiu skaiciu kiekis: ${sumOfTotalBigNumbers}
 *
-*   Pinigo Index: ${pinigoIndex}
-
-    Pinigo Index: ${masyvasIsDidSk}
-*
 *
 -----------------------STATISTIKA--------------------------`
 );
 
 
 console.log(`|
-===> ARRAY:`, pinigine);
+===> ARRAY:`, pinigine.slice());
 console.log(`|
 ===> ARRAY Length:`, pinigine.length);
 console.log(`|

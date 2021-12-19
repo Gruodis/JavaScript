@@ -272,15 +272,16 @@ if (kartojasi == undefined) {
     vardoIndex = 0;
 
 };
-
+// let showtimesAsString = owners.join(', ');
+let showtimesAsString = vardoIndex.join(', '); 
 console.log(`
 
 ||||||||||||||||||| 5-o UZDAVINIO ARRAY |||||||||||||||||||
 *
 *
-*   Pasikartojantis vardas: ${kartojasi}, pasikartojo ${kartojasi2} karta(-us), vardo index: ${vardoIndex}
+*   Pasikartojantis vardas: ${kartojasi}, pasikartojo ${kartojasi2} karta(-us), vardo index: ${showtimesAsString}
 *
-*   Savininku vardai: ${owners}
+*   Savininku vardai: ${showtimesAsString}
 *
 *
     ----------------------- STATISTIKA--------------------------`
