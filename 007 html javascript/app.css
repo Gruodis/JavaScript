@@ -1,0 +1,83 @@
+*,
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #333;
+    height: 100vh;
+    width: 100vw;
+}
+
+.mystyle {
+    width: 100%;
+    padding: 25px;
+    background-color: coral;
+    color: white;
+    font-size: 25px;
+}
+
+.blue {
+    color: red;
+}
+
+
+.green {
+    color: pink;
+}
+
+#box {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 0;
+    background-color: aqua;
+    transition: all 2s ease;
+    margin: 10px;
+}
+
+.box {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 120px;
+    background-color: coral;
+    transition: all 2s ease;
+    margin: 10px;
+}
+
+.box3 {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 240px;
+    background-color: darkorange;
+    transition: all 2s ease;
+    margin: 10px;
+}
+
+.left {
+    transition: all 2s ease;
+    left: 0;
+}
+
+.right {
+    transition: all 2s ease;
+    left: calc(100% - 120px);
+}
+
+/*********************************************
+
+APSKRITIMO UZDAVINYS 
+
+*********************************************/
+.apskritimas {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: coral;
+    transition: all 2s ease;
+}

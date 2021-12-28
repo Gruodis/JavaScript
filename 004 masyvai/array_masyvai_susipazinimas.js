@@ -85,3 +85,57 @@ Masyvo dydis: ${masyvas.length}`); // print variables from Stalcius Nr2
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Kryziukai Nuliukai lentele is masyvu
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+const nuliukaiXiukai = [];
+// const eilute1 = [];
+// const eilute2 = [];
+// const eilute3 = [];
+
+// let xOr0 = ['X', '0'];
+
+let xiukai = 0;
+let nuliukai = 0;
+
+// for (let i = 0; i < 3; i++) {
+
+//     eilute1.push(xOr0[rand(0, 1)]);
+//     eilute2.push(xOr0[rand(0, 1)]);
+//     eilute3.push(xOr0[rand(0, 1)]);
+// }
+
+for (let i = 0; i < 3; i++) { // didysis Ciklas
+
+    // nuliukaiXiukai.push([]);
+    nuliukaiXiukai[i] = [];
+    for (let j = 0; j < 3; j++) { // mazasis Ciklas
+
+        nuliukaiXiukai[i][j] = rand(0, 1) ? 'X' : '0'; //generuojam tris reiksmes (X || 0)
+
+        nuliukaiXiukai[i][j] == 'X' ? xiukai++ : nuliukai++; //skaiciuojam sugeneruotas reiksmes (X || 0)
+    }
+}
+
+// nuliukaiXiukai[0] = eilute1;
+// nuliukaiXiukai[1] = eilute2;
+// nuliukaiXiukai[2] = eilute3;
+
+
+console.log(nuliukaiXiukai, `Nuliuku = `, nuliukai, `Xiuku = `, xiukai);
+
+

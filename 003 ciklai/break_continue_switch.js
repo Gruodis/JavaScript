@@ -147,7 +147,7 @@ console.log(`
 
 //////////////////////////////// JavaScript SWITCH /////////////////////////
 //
-// SWITCH yra ciklas, kuriame panaudoje BREAK padarome if funkcija
+// SWITCH yra ciklas, kuriame panaudojus BREAK, tada SWITCH atkartoja IF Ciklo veikima.
 //
 ///////////////////////////////////////////////////////////////////////////
 let sviesoforoSpalva;
