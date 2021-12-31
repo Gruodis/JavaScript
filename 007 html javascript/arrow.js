@@ -27,18 +27,17 @@ apsk.style.left = rand(0, intWV2) + 'px';
 
 let myVar = null;
 
-function go() {
+const go = () => {
     apsk.style.top = rand(0, intVH2) + 'px';
     apsk.style.left = rand(0, intWV2) + 'px';
 }
 
-function mahGogo() {
+const mahGogo = () => {
 
     if (apsk.dataset.game == 'stop') {
 
         apsk.dataset.game = 'play';
         apsk.style.display = 'block';
-
 
         function myStartFunction() {
             myVar = setInterval(go, 1000);
@@ -63,9 +62,7 @@ function mahGogo() {
 mahGogo();
 
 
-apsk.addEventListener('click', function () {
-    mahGogo();
-}
+apsk.addEventListener('click', () => mahGogo()
 );
 
 
@@ -85,7 +82,7 @@ let bodyRez = document.querySelector('.rezultatas');
 bodyRez.innerText = clickBodyCounter;
 
 
-document.querySelector('button').addEventListener("click", function (e) {
+document.querySelector('button').addEventListener("click", e => {
     e.stopImmediatePropagation();
     apsk.style.opacity = '1';
     apsk.style.top = '222px';
@@ -105,7 +102,7 @@ document.querySelector('button').addEventListener("click", function (e) {
 
 
 
-document.querySelector('.body').addEventListener("click", function () {
+document.querySelector('.body').addEventListener("click", () => {
     if (apsk.dataset.game == 'play') {
 
         bodyRez.innerText = ++clickBodyCounter;
@@ -122,9 +119,8 @@ circleRez.innerText = clickCircleCounter;
 
 
 
-apsk.addEventListener("click", function () {
-    circleRez.innerText = ++clickCircleCounter;
-});
+apsk.addEventListener("click", () => circleRez.innerText = ++clickCircleCounter
+);
 
 
 console.log();

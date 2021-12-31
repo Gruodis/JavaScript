@@ -7,8 +7,20 @@ body {
 
 body {
     background: #333;
+    position: relative;
     height: 100vh;
     width: 100vw;
+    z-index: 0;
+    /* background: url('https://static.vecteezy.com/system/resources/previews/004/920/294/large_2x/graphic-impossible-shapes-escher-paradox-geometry-optical-illusion-object-sacred-geometric-figures-op-art-vector.jpg'); */
+    background-size: contain;
+    }
+
+    .body {
+        /* background: rgb(143, 143, 143); */
+        height: 100vh;
+        width: 100vw;
+        z-index: 1;
+        position: absolute;
 }
 
 .mystyle {
@@ -74,10 +86,101 @@ APSKRITIMO UZDAVINYS
 
 *********************************************/
 .apskritimas {
+position: absolute;
+height: 100px;
+width: 100px;
+border-radius: 50%;
+background-color: coral;
+transition: all 2.4s;
+z-index: 2;
+}
+
+.display {
+transition: all 2s ease;
+opacity: .5;
+}
+
+.rezultatas {
     position: absolute;
-    height: 100px;
-    width: 100px;
+    padding: 1em;
+    font-size: 22px;
+    right: 0;
+    top: 0;
+    font-weight: 700;
+    border-radius: 20%;
+    background-color: darkslategray;
+    color: white;
+    z-index: 5;
+}
+
+.rezultatasCircle {
+    position: absolute;
+    padding: 1em;
+    font-size: 22px;
+    right: 50px;
+    top: 0;
+    font-weight: 700;
+    border-radius: 20%;
+    background-color: rgb(69, 8, 82);
+    color: white;
+    z-index: 4;
+}
+
+button {
+    z-index: 99999;
+    margin: 1em;
+    position: absolute;
+    bottom: 20px;
+    left: calc(50% - 50px);
+    background-color: red;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+
+/* bubbling */
+
+.tevas {
+    position: absolute;
+    padding: 6em;
+    font-size: 22px;
+    right: 100px;
+    top: 200px;
+    font-weight: 700;
     border-radius: 50%;
-    background-color: coral;
-    transition: all 2s ease;
+    background-color: darkslategray;
+    color: white;
+    z-index: 5;
+}
+
+.vaikas {
+    position: absolute;
+    padding: 2em;
+    font-size: 22px;
+    right: 300px;
+    top: 400px;
+    font-weight: 700;
+    border-radius: 50%;
+    background-color: rgb(69, 8, 82);
+    color: white;
+    z-index: 4;
+}
+
+a {
+    position: absolute;
+    padding: 2em;
+    font-size: 22px;
+    right: 600px;
+    top: 400px;
+    font-weight: 700;
+    border-radius: 50%;
+    background-color: rgb(101, 119, 2);
+    color: white;
+    z-index: 4;
 }

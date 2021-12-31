@@ -31,7 +31,7 @@ let vaikas = document.querySelector('.vaikas');
 let linkas = document.querySelector('a');
 
 tevas.addEventListener('click', function () {
-    tevas.style.backgroundColor = 'green'
+    tevas.style.backgroundColor = 'purple'
 });
 
 vaikas.addEventListener('click', function (e) {
@@ -43,4 +43,4 @@ linkas.addEventListener('click', function (e) {
     // e.preventDefault();
     linkas.style.backgroundColor = 'brown'
 });
-console.log(tevas)
+console.log(tevas, vaikas)
