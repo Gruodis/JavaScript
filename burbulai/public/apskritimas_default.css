@@ -1,0 +1,137 @@
+.button {
+  display: block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-align: center;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #4095c6;
+}
+
+*,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #59666d;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+  background-size: contain;
+}
+
+.body {
+  /* background: rgb(143, 143, 143); */
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+  position: relative;
+}
+
+/*********************************************
+
+APSKRITIMO UZDAVINYS 
+
+*********************************************/
+.apskritimas {
+  position: absolute;
+  border-radius: 50%;
+  background-color: coral;
+  transition: all 3s;
+  z-index: 2;
+  display: block;
+  padding: 0.6em;
+  line-height: 1;
+  font-size: 30px;
+}
+
+section {
+  background-color: cadetblue;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0.5em;
+  color: #fff;
+  z-index: 9999;
+}
+section #height {
+  font-size: 30px;
+  padding: 1em;
+  background-color: #233658;
+  left: 0;
+}
+section #width {
+  font-size: 30px;
+  padding: 1em;
+  background-color: #233658;
+  left: 100px;
+}
+section .rezDiv {
+  font-size: 30px;
+  padding: 1em;
+  background-color: #0d6e4e;
+  right: 0;
+}
+section .bubbleRezDiv {
+  position: relative;
+  font-size: 30px;
+  padding: 1em;
+}
+section .bubbleRezDiv::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("https://c.tenor.com/yzVsTWVKKmYAAAAi/pacman.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(90deg);
+  left: -10px;
+  bottom: -60px;
+}
+section .bubblesLeft {
+  font-size: 30px;
+  padding: 1em;
+  background-color: #0d476e;
+  right: 200px;
+}
+section .timer {
+  font-size: 30px;
+  padding: 1em;
+  background-color: #0d476e;
+  right: 200px;
+}
+
+.reset {
+  padding: 1em;
+  bottom: 0;
+  left: 60%;
+  z-index: 9;
+  position: absolute;
+  background-color: red;
+  color: azure;
+}
+
+.pause {
+  padding: 1em;
+  bottom: 0;
+  left: 40%;
+  z-index: 9;
+  position: absolute;
+  background-color: goldenrod;
+  color: azure;
+}

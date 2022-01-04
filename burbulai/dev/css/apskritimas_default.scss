@@ -1,0 +1,134 @@
+@import 'buttons';
+
+
+*,
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(89, 102, 109);
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    background-size: contain;
+}
+
+.body {
+    /* background: rgb(143, 143, 143); */
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    position: relative;
+}
+
+
+/*********************************************
+
+APSKRITIMO UZDAVINYS 
+
+*********************************************/
+.apskritimas {
+    position: absolute;
+    border-radius: 50%;
+    background-color: coral;
+    transition: all 3s;
+    z-index: 2;
+    display: block;
+    padding: .6em;
+    line-height: 1;
+    font-size: 30px;
+
+}
+
+section {
+    background-color: cadetblue;
+    position: relative;
+    display:flex;
+    justify-content: space-between;
+    padding: 0.5em 0.5em;
+    color: #fff;
+    z-index: 9999;
+
+    #height {
+        // position: absolute;
+        font-size: 30px;
+        padding: 1em;
+        background-color: rgb(35, 54, 88);
+        left: 0;
+    }
+
+    #width {
+        // position: absolute;
+        font-size: 30px;
+        padding: 1em;
+        background-color: rgb(35, 54, 88);
+        left: 100px;
+    }
+
+    .rezDiv {
+        // position: absolute;
+        font-size: 30px;
+        padding: 1em;
+        background-color: rgb(13, 110, 78);
+        right: 0;
+    }
+
+    .bubbleRezDiv {
+        // position: absolute;
+        position: relative;
+        font-size: 30px;
+        padding: 1em;
+    }
+    .bubbleRezDiv::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('https://c.tenor.com/yzVsTWVKKmYAAAAi/pacman.gif');
+        background-repeat:no-repeat;
+        background-size:contain;
+        transform: rotate(90deg);
+        left: -10px;
+        bottom: -60px;
+      }
+
+    .bubblesLeft {
+        // position: absolute;
+        font-size: 30px;
+        padding: 1em;
+        background-color: rgb(13, 71, 110);
+        right: 200px;
+    }
+
+    .timer {
+        // position: absolute;
+        font-size: 30px;
+        padding: 1em;
+        background-color: rgb(13, 71, 110);
+        right: 200px;
+    }
+}
+
+.reset {
+    padding: 1em;
+    bottom: 0;
+    left: 60%;
+    z-index: 9;
+    position: absolute;
+    background-color: red;
+    color: azure;
+}
+
+.pause {
+    padding: 1em;
+    bottom: 0;
+    left: 40%;
+    z-index: 9;
+    position: absolute;
+    background-color: goldenrod;
+    color: azure;
+}
