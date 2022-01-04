@@ -1,0 +1,74 @@
+*,
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #333;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    background-size: contain;
+}
+
+.body {
+    /* background: rgb(143, 143, 143); */
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    position: relative;
+}
+
+
+/*********************************************
+
+APSKRITIMO UZDAVINYS 
+
+*********************************************/
+.apskritimas {
+    position: absolute;
+    border-radius: 50%;
+    background-color: coral;
+    transition: all .1s;
+    z-index: 2;
+    display: block;
+    padding: 1em;
+    line-height: 1;
+    font-size: 30px;
+
+}
+
+.rezDiv {
+    position: absolute;
+    font-size: 30px;
+    padding: 1em;
+    background-color: rgb(13, 110, 78);
+    right: 0;
+}
+
+.bubbleRezDiv {
+    position: absolute;
+    font-size: 30px;
+    padding: 1em;
+    background-color: rgb(110, 84, 13);
+    right: 100px;
+}
+
+.bubblesLeft {
+    position: absolute;
+    font-size: 30px;
+    padding: 1em;
+    background-color: rgb(13, 71, 110);
+    right: 200px;
+}
+
+button {
+    padding: 1em;
+    bottom: 0;
+    left: 50%;
+    z-index: 9;
+    position: absolute;
+}

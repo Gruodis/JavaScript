@@ -184,7 +184,8 @@ const iMygt = _ => {
 }
 
 iMygt();
-//// Padaryti, kad paspaudus ant tago su klase prices, backgroundas pasikeistų į pilką, o paspaudus dar kartą vėl grįžtu į baltą spalvą;
+//// Padaryti, kad paspaudus ant tago su klase prices,
+//// backgroundas pasikeistų į pilką, o paspaudus dar kartą vėl grįžtu į baltą spalvą;
 const classPrices = document.querySelectorAll('.price-tag');
 
 const classPricesMygt = () => {
