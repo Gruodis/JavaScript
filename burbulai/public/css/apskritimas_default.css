@@ -9,13 +9,13 @@
   font-weight: 300;
   color: #FFFFFF;
   text-align: center;
-  transition: all 0.2s;
-  border: none;
   cursor: pointer;
+  border: solid 1rem #c50000;
 }
 
 .button:hover {
-  background-color: #4095c6;
+  background-color: red;
+  border: solid 1rem white;
 }
 
 *,
@@ -27,11 +27,6 @@ body {
 
 body {
   background: #59666d;
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  z-index: 0;
-  background-size: contain;
 }
 
 .body {
@@ -40,56 +35,68 @@ body {
   width: 100vw;
   z-index: 0;
   position: relative;
+  background-image: url("smario.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /*********************************************
 
-APSKRITIMO UZDAVINYS 
+APSKRITIMO UZDAVINYS 2
 
 *********************************************/
 .apskritimas {
   position: absolute;
   border-radius: 50%;
-  background-color: coral;
-  transition: all 3s;
   z-index: 2;
   display: block;
   padding: 0.6em;
-  line-height: 1;
-  font-size: 30px;
+  font-size: 34px;
+}
+
+section:first-of-type {
+  background-color: #008f1f;
+  font-size: 16px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 section {
-  background-color: cadetblue;
   position: relative;
   display: flex;
   justify-content: space-between;
   padding: 0.5em 0.5em;
   color: #fff;
   z-index: 9999;
+  text-align: center;
+  font-size: 22px;
+  align-items: center;
+  font-family: "Helvetica Neue", Helvetica, Arial;
 }
 section #height {
-  font-size: 30px;
   padding: 1em;
   background-color: #233658;
   left: 0;
 }
 section #width {
-  font-size: 30px;
   padding: 1em;
   background-color: #233658;
   left: 100px;
 }
 section .rezDiv {
-  font-size: 30px;
-  padding: 1em;
-  background-color: #0d6e4e;
-  right: 0;
+  background-color: red;
+  border-radius: 50%;
+  width: 66px;
+  line-height: 66px;
+  border: solid 0.1rem white;
 }
 section .bubbleRezDiv {
   position: relative;
-  font-size: 30px;
-  padding: 1em;
+  background-color: #00bb28;
+  border-radius: 50%;
+  width: 66px;
+  line-height: 66px;
+  border: solid 0.1rem white;
+  transition: all 1s;
 }
 section .bubbleRezDiv::before {
   content: "";
@@ -100,17 +107,24 @@ section .bubbleRezDiv::before {
   background-repeat: no-repeat;
   background-size: contain;
   transform: rotate(90deg);
-  left: -10px;
+  left: 0px;
   bottom: -60px;
 }
+section #secondsCounter {
+  background-color: #8b13a0;
+  border-radius: 50%;
+  width: 66px;
+  line-height: 66px;
+  border: solid 0.1rem white;
+}
 section .bubblesLeft {
-  font-size: 30px;
-  padding: 1em;
-  background-color: #0d476e;
-  right: 200px;
+  background-color: #8b13a0;
+  border-radius: 50%;
+  width: 66px;
+  line-height: 66px;
+  border: solid 0.1rem white;
 }
 section .timer {
-  font-size: 30px;
   padding: 1em;
   background-color: #0d476e;
   right: 200px;
@@ -118,20 +132,32 @@ section .timer {
 
 .reset {
   padding: 1em;
-  bottom: 0;
-  left: 60%;
+  margin: 0;
+  top: 50%;
+  left: 50%;
   z-index: 9;
   position: absolute;
   background-color: red;
   color: azure;
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.6s;
+  transform-origin: 0 0;
 }
 
 .pause {
   padding: 1em;
   bottom: 0;
-  left: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 9;
   position: absolute;
-  background-color: goldenrod;
+  background-color: red;
   color: azure;
+  font-size: 22px;
+  font-weight: bold;
+  transition: all 0.6s;
+  transform-origin: 0 0;
 }

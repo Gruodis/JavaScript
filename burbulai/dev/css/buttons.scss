@@ -9,11 +9,12 @@
     font-weight: 300;
     color: #FFFFFF;
     text-align: center;
-    transition: all 0.2s;
-    border: none;
+    
     cursor: pointer;
+    border: solid 1rem rgb(197, 0, 0);
 }
 
 .button:hover {
-    background-color: #4095c6;
+    background-color: red;
+    border: solid 1rem white;
 }

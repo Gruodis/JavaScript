@@ -7,23 +7,43 @@ function rand(min, max) {
 let intWV2;
 let intVH2;
 
+let intervaloGreitis;
+
+let nIntervId;
+
+let speed;
+let changeSpeed = speed;
+
+let timeRemaining = 20000;
+
+document.getElementById("start").addEventListener("click", startInterval);
+document.getElementById("stop").addEventListener("click", stopInterval);
+
 const heightOutput = document.querySelector('#height');
 const widthOutput = document.querySelector('#width');
+
+const section = document.querySelectorAll('section');
+
+// document.querySelectorAll('section').addEventListener('click', e => e.stopPropagation());
+
 
 let apsk = document.querySelectorAll('.apskritimas');
 let reset = document.querySelector('.reset');
 let pause = document.querySelector('.pause');
 let classBody = document.querySelector('.body');
 let rezDiv = document.querySelector('.rezDiv');
-let bubblesLeftCounter = document.querySelector('.bubblesLeft');
+const bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
 let bubbleRezDiv = document.querySelector('.bubbleRezDiv');
 let timerDiv = document.querySelector('.timer');
 
 let bodyClickCount = 0;
 let bubbleClickCount = 0;
-let bubblesLeft = bubblesLeftCounter.innerText = apsk.length;
+let bubblesLeft = apsk.length;
+bubblesLeftCounter.innerText = bubblesLeft;
 
 let myVar = null;
+
+let newTimeInt;
 
 // Rasome funkcija responsive langui
 let responsiveWindow = () => {
@@ -42,7 +62,7 @@ function myTimer() {
     timerDiv.innerHTML = d.toLocaleTimeString();
 }
 myTimer();
-setInterval(myTimer, 1000);
+setInterval(null);
 
 const go = i => {
 
@@ -50,40 +70,91 @@ const go = i => {
     if (apsk[i].dataset.game == 'play' && apsk[i].dataset.gameState == 'pause') {
         apsk[i].style.top = rand(150, (intVH2 - 50)) + 'px';
         apsk[i].style.left = rand(0, intWV2) + 'px';
-        apsk[i].innerText = 1 + i++;
+        // apsk[i].innerText = 1 + i++;
+        apsk[i].innerText = '😊';
+
+        let sekunde = 1 - (bubbleClickCount / 20)
+        apsk[i].style.transition = 'all ' + sekunde + "s";
+    }
+    else {
+        apsk[i].style.cursor = null;
     }
     // }
 
 }
 
 
+/*///////////////////////////////////////////////////////////////////////
 
+RESET mygtukas
+
+//////////////////////////////////////////////////////////////////////*/
 
 reset.addEventListener('click', function (e) {
 
     e.stopPropagation();
-
+    // priskiriam kintamajam burbulu skaiciu ir su innerText atvaizduojam
+    bubblesLeft = apsk.length;
     bubblesLeftCounter.innerText = bubblesLeft;
+    // resetinam nepataikytus paspaudimus
     bodyClickCount = 0;
     rezDiv.innerText = bodyClickCount;
+    // resetinam pataikytus paspaudimus
     bubbleClickCount = 0;
     bubbleRezDiv.innerText = bubbleClickCount;
+
+
+
+
     for (let i = 0; i < apsk.length; i++) {
+        // resetinam burbulo display: none
         apsk[i].style = null;
-        apsk[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
         apsk[i].dataset.game = 'play';
         apsk[i].dataset.gameState = 'pause';
         pause.innerText = 'Pause ||';
-
-
     }
+
+    clearInterval(nIntervId);
+
+    startInterval();
+    // cicleStop();
+
+    // Timer(null, null);
+    // // timer(null, null)
+    // timer.resume(null)
+    // timer.pause(null)
+    // clearInterval(timer);
+    // clearInterval(timer.resume);
+    // clearInterval(timer.pause);
+
+    window.clearTimeout(newTimeInt);
+    newTimeInt = setTimeout(stopInterval, timeRemaining);
+
+
 })
 
+
+/*///////////////////////////////////////////////////////////////////////
+
+Play/Pause mygtukas
+
+//////////////////////////////////////////////////////////////////////*/
 pause.addEventListener('click', function (e) {
 
     e.stopPropagation();
 
+    if (pause.innerText != 'PLAY !') {
+        // timer.pause();
+        window.clearTimeout(newTimeInt);
+        console.log('Pause init');
+    } else {
+        // timer.resume();
+        window.clearTimeout(newTimeInt);
+        newTimeInt = setTimeout(stopInterval, timeRemaining);
+        console.log('Resume init');
+
+    }
 
     for (let i = 0; i < apsk.length; i++) {
 
@@ -94,17 +165,24 @@ pause.addEventListener('click', function (e) {
             apsk[i].dataset.gameState = 'unpause';
             pause.innerText = 'PLAY !';
 
-            apsk[i].style.top = rand(100, (intVH2 - 50)) + 'px';
-            apsk[i].style.left = rand(0, intWV2) + 'px';
+            console.log('Pause && Stop')
 
-        } else {
-            apsk[i].dataset.gameState = 'pause';
-            pause.innerText = 'Pause ||';
-            apsk[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+        }
+
+        else if (apsk[i].dataset.gameState == 'unpause' && apsk[i].dataset.game == 'play') {
             if (apsk[i].dataset.game == 'stop') {
-
+                apsk[i].dataset.gameState = 'unpause';
+                apsk[i].dataset.game = 'stop'
                 apsk[i].style.backgroundColor = 'red';
             }
+            else {
+                apsk[i].dataset.gameState = 'pause';
+            }
+            pause.innerText = 'Pause ||';
+            apsk[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            console.log('Unpause && PLay 2')
+
 
         }
 
@@ -112,46 +190,58 @@ pause.addEventListener('click', function (e) {
     }
 })
 
+/*///////////////////////////////////////////////////////////////////////
 
+BODY mygtukas
 
-
-classBody.style.cursor = 'pointer';
-
-let gugu = true;
-
+//////////////////////////////////////////////////////////////////////*/
 classBody.addEventListener('click', function (e) {
+    if (nIntervId != null) {
+        if (bubblesLeft == 0 || pause.innerText == 'PLAY !') {
 
-    for (let i = 0; i < apsk.length; i++) {
-        if ((apsk[i].dataset.gameState == 'unpause')) {
             e.stopPropagation();
-            gugu = false;
-            // bubblesLeft - bubbleClickCount;
-        } else {
-            gugu = true;
         }
-    }
+        else {
+            e.stopPropagation();
+            rezDiv.innerText = ++bodyClickCount;
+        }
+    } // if interval not NULL
 
-    if ((bubblesLeft - bubbleClickCount) != 0 && gugu == true) {
-        e.stopPropagation();
-        rezDiv.innerText = ++bodyClickCount;
-
-
-    }
 })
 
+// nepataikyti paspaudimai nesibublina paspaudus ant HEADeri esanciu elementu "section"
 
+for (let i = 0; i < section.length; i++) {
+    section[i].addEventListener('click', function (e) {
+        e.stopPropagation();
+    })
+}
+
+
+
+
+/*///////////////////////////////////////////////////////////////////////
+
+BURBULAI mygtukas
+
+//////////////////////////////////////////////////////////////////////*/
 for (let i = 0; i < apsk.length; i++) {
     apsk[i].addEventListener('click', function (e) {
 
+        if (nIntervId != null) {
+            apsk[i].style.cursor = 'pointer';
+            apsk[i].style.display = 'block';
+
         function offset(el) {
-            var rect = el.getBoundingClientRect(),
+            let rect = el.getBoundingClientRect(),
                 scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
                 scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
         }
-        var div = document.querySelector('.bubbleRezDiv');
-        var divOffset = offset(div);
-        console.log(divOffset.left, divOffset.top);
+            let div = document.querySelector('.bubbleRezDiv');
+            let divOffset = offset(div);
+
+        // console.log(divOffset.left, divOffset.top);
 
 
 
@@ -162,44 +252,71 @@ for (let i = 0; i < apsk.length; i++) {
             apsk[i].dataset.game = 'stop';
             apsk[i].style.backgroundColor = 'red';
 
-            apsk[i].style.top = (divOffset.top + 95) + 'px';
-            apsk[i].style.left = (divOffset.left + 45) + 'px';
-            apsk[i].style.padding = '0px';
-            apsk[i].style.fontSize = '0px';
-            apsk[i].style.zIndex = '9999';
+            apsk[i].style.top = (divOffset.top + 165) + 'px';
+            apsk[i].style.left = (divOffset.left - 20) + 'px';
+            apsk[i].innerText = '😲'
+            apsk[i].style.backgroundImage = "url('pow.png')"
 
-            // setTimeout(() => {
+            setTimeout(() => {
+
+                apsk[i].style.top = (divOffset.top + 55) + 'px';
+                apsk[i].style.left = (divOffset.left + 40) + 'px';
+                apsk[i].style.padding = '0px';
+                apsk[i].style.fontSize = '0px';
+            }, 1000)
 
             bubbleRezDiv.innerText = ++bubbleClickCount;
-            // }, 2500)
 
+            bubblesLeft--;
+            bubblesLeftCounter.innerText = bubblesLeft;
+
+
+
+            startInterval();
+
+
+
+
+
+
+            console.log(nIntervId, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
         }
 
-        bubblesLeftCounter.innerText = bubblesLeft - bubbleClickCount;
-        console.log('Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft)
+
+
+            if (bubblesLeft == 0) {
+                window.setTimeout(() => {
+                    // reset.style.display = 'block';
+                    reset.style.transform = 'scale(1) translate(-50%, -50%)';
+
+
+                    // window.setTimeout(function () {
+                    reset.style.opacity = '1';
+                    // reset.style.transform = 'scale(1)';
+                    pause.style.opacity = 0;
+                    pause.style.display = 'none';
+
+
+                    // }, 300);
+                }, 1000)
+            }
+        } // if interval not NULL
 
     })
+
 }
 
 
-// const gohaha = i => {
-//     classBody = document.createElement('div');
-//     classBody.textContent = "Sup, y'all?";
-//     classBody.setAttribute('class', 'apskritimas', 'data-game-state="pause"');
-//     document.body.appendChild(classBody);
-// }
-// gohaha();
+
 
 //  Nustatome kiekvieno burbulo pirmine pozicija
 for (let i = 0; i < apsk.length; i++) {
-
     go(i);
 }
 
 
 // Kiekvienam burbului paleidziame funkcija
-setInterval(
-    () => {
+const buhu = () => {
         for (let i = 0; i < apsk.length; i++) {
             if (apsk[i].dataset.game == 'play' && apsk[i].dataset.gameState == 'pause') {
                 apsk[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -207,9 +324,129 @@ setInterval(
             setTimeout(() => {
                 go(i);
             },
-                rand(0, 600))
+                0)
+    }
+}
+
+function startInterval() {
+
+
+    // reset.style.display = 'none';
+    reset.style.transform = 'scale(0) translate(-50%, -50%)';
+    reset.style.opacity = '0';
+    // reset.style.transform = 'scale(0)';
+    pause.style.opacity = '1';
+    // pause.style.display = 'block';
+    pause.style.transform = 'scale(1) translate(-50%, -50%)';
+
+    // check if already an interval has been set up
+    if (!nIntervId) {
+        nIntervId = setInterval(buhu, 1200);
+    } else {
+        clearInterval(nIntervId);
+
+        speed = (1200 - (bubbleClickCount * 80));
+        changeSpeed = speed;
+        nIntervId = setInterval(buhu, changeSpeed);
+    }
+
+
+}
+startInterval();
+
+
+function stopInterval() {
+    clearInterval(nIntervId);
+    // release our intervalID from the variable
+    nIntervId = null;
+
+
+
+    window.setTimeout(() => {
+        // reset.style.display = 'block';
+        reset.style.transform = 'scale(1) translate(-50%, -50%)';
+        reset.style.opacity = '1';
+        // reset.style.transform = 'scale(0)';
+        pause.style.transform = 'scale(0) translate(-50%, -50%)';
+
+        pause.style.opacity = '0';
+        // pause.style.display = 'none';
+
+    }, 1000);
+}
+/*///////////////////////////////////////////////////////////////////////
+
+// TIMER
+
+//////////////////////////////////////////////////////////////////////*/
+
+// let state = document.getElementById('secondsCounter');
+
+// var Timer = function (callback, delay) {
+//     var timerId, start, remaining = delay;
+
+//     this.pause = function () {
+//         window.clearTimeout(timerId);
+//         timerId = null;
+//         remaining -= Date.now() - start;
+//         state.innerText = remaining;
+
+
+//     };
+
+//     this.resume = function () {
+//         if (timerId) {
+//             return;
+//         }
+
+//         start = Date.now();
+//         timerId = window.setTimeout(callback, remaining);
+//     };
+
+//     this.resume();
+
+//     function timeTest() {
+//         return console.log('Vars ', timerId, start, remaining);
+//     }
+
+//     setInterval(timeTest, 1000)
+
+
+
+// };
+
+// var timer = new Timer(stopInterval, 10000);
+
+// stabdom viska po n laiko
+// var timer = new Timer(stopInterval, 10000);
+
+
+
+const cicleStop = () => {
+    newTimeInt = setTimeout(stopInterval, timeRemaining);
+}
+cicleStop();
+
+// rodome kiek sekundziu trunka zaidimas
+
+let seconds = 0;
+let el = document.getElementById('secondsCounter');
+
+function incrementSeconds() {
+    for (let i = 0; i < 1; i++) {
+
+        if (seconds >= 0) {
+            el.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+            console.log(timeRemaining / 1000)
         }
-    }, 3000);
+        else {
+            el.innerText = ':('
+        }
+    }
+}
+incrementSeconds();
 
+let cancel = setInterval(incrementSeconds, timeRemaining);
 
-console.log(go, intVH2, intWV2)
+// console.log('Timer :', timer.stop, timer.resume, nIntervId, intVH2, intWV2)
+

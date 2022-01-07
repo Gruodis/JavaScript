@@ -5,28 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apskritimas pagal destytoja</title>
-    <link rel="stylesheet" href="apskritimas_default.css">
-    <script src="apskritimas_default.js" defer></script>
+    <link rel="stylesheet" href="css/apskritimas_default.css">
+    <script src="js/apskritimas_default.js" defer></script>
 </head>
 <body>
 <div class="body">
     <section>
-        <span id="height"></span>
-        <span id="width"></span>
-        <div class="timer"></div>
-        <div class="bubblesLeft"></div>
+        <span>Bega laikas</span>
+        <span>Liko burbulu</span>
+        <span>Pagavai</span>
+        <span>Nepataikei</span>
+        </section>
+        <section>
+            <span id="height" style="display: none"></span>
+            <span id="width" style="display: none"></span>
+            <div class="timer" style="display: none"></div>
+            <div id="secondsCounter"></div>
+            <div class="bubblesLeft">
+                <strong></strong>
+            </div>
         <div class="bubbleRezDiv">0</div>
         <div class="rezDiv">0</div>
     </section>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <!-- <div class="apskritimas" data-game="play" data-game-state="pause"></div>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
     <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div>
+    <div class="apskritimas" data-game="play" data-game-state="pause"></div> -->
     <button class="reset button">RESET</button>
     <button class="pause button">Pasue ||</button>
+<button id="start">Start</button>
+<button id="stop">Stop</button>
 </div>
 </body>
 </html>
