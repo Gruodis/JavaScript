@@ -32,10 +32,33 @@ var heightOutput = document.querySelector('#height');
 var widthOutput = document.querySelector('#width');
 var section = document.querySelectorAll('section'); // document.querySelectorAll('section').addEventListener('click', e => e.stopPropagation());
 
+var classBody = document.querySelector('.body');
+
+var newBall = function newBall() {
+  var newBallGo = document.createElement('div');
+  var text = document.createTextNode("");
+  newBallGo.appendChild(text);
+  newBallGo.classList.add("apskritimas");
+
+  function setAttributes(el, options) {
+    Object.keys(options).forEach(function (attr) {
+      el.setAttribute(attr, options[attr]);
+    });
+  }
+
+  setAttributes(newBallGo, {
+    'data-game': 'play',
+    'data-game-state': 'pause',
+    'data-xxx': 'xxx'
+  }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
+
+  classBody.appendChild(newBallGo); // console.log('test', skc);
+};
+
+newBall();
 var apsk = document.querySelectorAll('.apskritimas');
 var reset = document.querySelector('.reset');
 var pause = document.querySelector('.pause');
-var classBody = document.querySelector('.body');
 var rezDiv = document.querySelector('.rezDiv');
 var bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
 var bubbleRezDiv = document.querySelector('.bubbleRezDiv');
@@ -56,28 +79,6 @@ var responsiveWindow = function responsiveWindow() {
 responsiveWindow(); // iskvieciame responsive funkcija su listneriu 'resize'
 
 window.addEventListener('resize', responsiveWindow);
-
-var newBall = function newBall() {
-  var newBallGo = document.createElement('div');
-  var text = document.createTextNode("Woohoo");
-  newBallGo.appendChild(text);
-  newBallGo.className = "apskritimas";
-
-  function setAttributes(el, options) {
-    Object.keys(options).forEach(function (attr) {
-      el.setAttribute(attr, options[attr]);
-    });
-  }
-
-  setAttributes(newBallGo, {
-    'data-game': 'play',
-    'data-game-state': 'pause'
-  }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
-
-  classBody.appendChild(newBallGo); // console.log('test', skc);
-};
-
-newBall();
 
 var go = function go(itemInitGo) {
   // for (let i = 0; i < apsk.length; i++) {
