@@ -7,6 +7,8 @@ import { rand } from './functions';
 //     return Math.floor(Math.random() * (max - min + 1)) + min;
 // }
 
+
+
 let intWV2;
 let intVH2;
 
@@ -28,11 +30,34 @@ const section = document.querySelectorAll('section');
 
 // document.querySelectorAll('section').addEventListener('click', e => e.stopPropagation());
 
+let classBody = document.querySelector('.body');
+
+
+
+let newBall = () => {
+
+    let newBallGo = document.createElement('div');
+    let text = document.createTextNode(``);
+    newBallGo.appendChild(text);
+    newBallGo.classList.add("apskritimas");
+
+    function setAttributes(el, options) {
+        Object.keys(options).forEach(function (attr) {
+            el.setAttribute(attr, options[attr]);
+        })
+    }
+    setAttributes(newBallGo, { 'data-game': 'play', 'data-game-state': 'pause', 'data-xxx': 'xxx' });
+    // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
+    classBody.appendChild(newBallGo);
+    // console.log('test', skc);
+}
+newBall();
+
 
 let apsk = document.querySelectorAll('.apskritimas');
 let reset = document.querySelector('.reset');
 let pause = document.querySelector('.pause');
-let classBody = document.querySelector('.body');
+
 let rezDiv = document.querySelector('.rezDiv');
 const bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
 let bubbleRezDiv = document.querySelector('.bubbleRezDiv');
@@ -57,24 +82,7 @@ responsiveWindow();
 window.addEventListener('resize', responsiveWindow);
 
 
-let newBall = () => {
 
-    let newBallGo = document.createElement('div');
-    let text = document.createTextNode(`Woohoo`);
-    newBallGo.appendChild(text);
-    newBallGo.className = "apskritimas";
-
-    function setAttributes(el, options) {
-        Object.keys(options).forEach(function (attr) {
-            el.setAttribute(attr, options[attr]);
-        })
-    }
-    setAttributes(newBallGo, { 'data-game': 'play', 'data-game-state': 'pause' });
-    // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
-    classBody.appendChild(newBallGo);
-    // console.log('test', skc);
-}
-newBall();
 
 
 
