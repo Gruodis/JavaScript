@@ -9,7 +9,7 @@ const mix = require('laravel-mix');
 | file for the application as well as bundling up all the JS files.
 |
  */
-mix.js('dev/js/apskritimas_default.js', 'public/js')
+mix.js('dev/js/apskritimas_refactor_v1.js', 'public/js')
     .sass('dev/css/apskritimas_default.scss', 'public/css').options({
         processCssUrls: false
     });

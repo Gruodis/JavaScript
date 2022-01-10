@@ -371,29 +371,61 @@ eventAnimals();
 //// Padaryti, kad paspaudus ant “PATINKA”, atitinkamai (tėvinei) sekcijai būtų priskirta klasė like;
 const ulButonLike = document.querySelectorAll('.like-button');
 
-const eventLike = () => {
-    for (let i = 0; i < ulButonLike.length; i++) {
 
-        ulButonLike[i].style.cursor = 'pointer';
+// const ulLike = () => {
+ulButonLike.forEach(
+    (like) => {
+        like.style.cursor = 'pointer';
+        like.addEventListener('click', function () {
 
-        ulButonLike[i].addEventListener('click', function () {
+            like = like.closest('ul');
 
-            if (ulTag[i].style.backgroundColor == 'black') {
-                ulTag[i].style.cursor = 'pointer';
-                ulTag[i].style.backgroundColor = null;
-                ulTag[i].style.color = null;
+            // ternary
 
-            }
-            else {
-                ulTag[i].style.cursor = 'pointer';
-                ulTag[i].style.backgroundColor = 'black';
-                ulTag[i].style.color = 'silver';
+            like.style.backgroundColor == 'pink' ? like.style.backgroundColor = 'transparent' : like.style.backgroundColor = 'pink';
 
-            }
+                // if (ulTag[i].style.backgroundColor == 'black') {
+                //     ulTag[i].style.cursor = 'pointer';
+                //     ulTag[i].style.backgroundColor = null;
+                //     ulTag[i].style.color = null;
+
+            // }
+            // else {
+            //     ulTag[i].style.cursor = 'pointer';
+            //     ulTag[i].style.backgroundColor = 'black';
+            //     ulTag[i].style.color = 'silver';
+
+            // }
         });
+
     }
-}
-eventLike();
+)
+// }
+// ulLike();
+
+// const eventLike = () => {
+//     for (let i = 0; i < ulButonLike.length; i++) {
+
+//         ulButonLike[i].style.cursor = 'pointer';
+
+//         ulButonLike[i].addEventListener('click', function () {
+
+//             if (ulTag[i].style.backgroundColor == 'black') {
+//                 ulTag[i].style.cursor = 'pointer';
+//                 ulTag[i].style.backgroundColor = null;
+//                 ulTag[i].style.color = null;
+
+//             }
+//             else {
+//                 ulTag[i].style.cursor = 'pointer';
+//                 ulTag[i].style.backgroundColor = 'black';
+//                 ulTag[i].style.color = 'silver';
+
+//             }
+//         });
+//     }
+// }
+// eventLike();
 
 
 // Dinaminis elementų kūrimas (su createElement)
@@ -437,15 +469,16 @@ addElement();
  * 
  * ****************/
 
-function myFunction() {
-    const currentDiv2 = document.querySelector(".prices");
-    let btn = document.createElement("h1");
+// function myFunction() {
+let currentDiv2 = document.querySelector(".prices");
+let h1 = document.createElement("h1");
 
-    btn.textContent = 'Testukas ++++';
-    currentDiv2.appendChild(btn);
+let textas = document.createTextNode('Testukas ++++');
+h1.appendChild(textas);
+currentDiv2.appendChild(h1);
 
-}
-myFunction();
+// }
+// myFunction();
 
 
 /******************

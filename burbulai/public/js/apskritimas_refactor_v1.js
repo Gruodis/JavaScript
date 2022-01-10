@@ -1,21 +1,27 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./dev/js/apskritimas_default.js":
-/*!***************************************!*\
-  !*** ./dev/js/apskritimas_default.js ***!
-  \***************************************/
-/***/ (() => {
+/***/ "./dev/js/apskritimas_refactor_v1.js":
+/*!*******************************************!*\
+  !*** ./dev/js/apskritimas_refactor_v1.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-function rand(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "heightOutput": () => (/* binding */ heightOutput),
+/* harmony export */   "widthOutput": () => (/* binding */ widthOutput)
+/* harmony export */ });
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./functions */ "./dev/js/functions.js");
+ // function rand(min, max) {
+//     min = Math.ceil(min);
+//     max = Math.floor(max);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
 
 var intWV2;
 var intVH2;
-var intervaloGreitis;
 var nIntervId;
 var speed;
 var changeSpeed = speed;
@@ -38,7 +44,6 @@ var bodyClickCount = 0;
 var bubbleClickCount = 0;
 var bubblesLeft = apsk.length;
 bubblesLeftCounter.innerText = bubblesLeft;
-var myVar = null;
 var newTimeInt; // Rasome funkcija responsive langui
 
 var responsiveWindow = function responsiveWindow() {
@@ -52,25 +57,39 @@ responsiveWindow(); // iskvieciame responsive funkcija su listneriu 'resize'
 
 window.addEventListener('resize', responsiveWindow);
 
-function myTimer() {
-  var d = new Date();
-  timerDiv.innerHTML = d.toLocaleTimeString();
-}
+var newBall = function newBall() {
+  var newBallGo = document.createElement('div');
+  var text = document.createTextNode("Woohoo");
+  newBallGo.appendChild(text);
+  newBallGo.className = "apskritimas";
 
-myTimer();
-setInterval(null);
+  function setAttributes(el, options) {
+    Object.keys(options).forEach(function (attr) {
+      el.setAttribute(attr, options[attr]);
+    });
+  }
 
-var go = function go(i) {
+  setAttributes(newBallGo, {
+    'data-game': 'play',
+    'data-game-state': 'pause'
+  }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
+
+  classBody.appendChild(newBallGo); // console.log('test', skc);
+};
+
+newBall();
+
+var go = function go(itemInitGo) {
   // for (let i = 0; i < apsk.length; i++) {
-  if (apsk[i].dataset.game == 'play' && apsk[i].dataset.gameState == 'pause') {
-    apsk[i].style.top = rand(150, intVH2 - 50) + 'px';
-    apsk[i].style.left = rand(0, intWV2) + 'px'; // apsk[i].innerText = 1 + i++;
+  if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+    itemInitGo.style.top = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(150, intVH2 - 50) + 'px';
+    itemInitGo.style.left = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, intWV2) + 'px'; // itemInitGo.innerText = 1 + i++;
 
-    apsk[i].innerText = '😊';
+    itemInitGo.innerText = '😊';
     var sekunde = 1 - bubbleClickCount / 20;
-    apsk[i].style.transition = 'all ' + sekunde + "s";
+    itemInitGo.style.transition = 'all ' + sekunde + "s";
   } else {
-    apsk[i].style.cursor = null;
+    itemInitGo.style.cursor = null;
   } // }
 
 };
@@ -92,25 +111,16 @@ reset.addEventListener('click', function (e) {
 
   bubbleClickCount = 0;
   bubbleRezDiv.innerText = bubbleClickCount;
-
-  for (var i = 0; i < apsk.length; i++) {
+  apsk.forEach(function (item) {
     // resetinam burbulo display: none
-    apsk[i].style = null;
-    apsk[i].dataset.game = 'play';
-    apsk[i].dataset.gameState = 'pause';
+    item.style = null;
+    item.dataset.game = 'play';
+    item.dataset.gameState = 'pause';
     pause.innerText = 'Pause ||';
-  }
+  }); // end forEach
 
   clearInterval(nIntervId);
-  startInterval(); // cicleStop();
-  // Timer(null, null);
-  // // timer(null, null)
-  // timer.resume(null)
-  // timer.pause(null)
-  // clearInterval(timer);
-  // clearInterval(timer.resume);
-  // clearInterval(timer.pause);
-
+  startInterval();
   window.clearTimeout(newTimeInt);
   newTimeInt = setTimeout(stopInterval, timeRemaining);
 });
@@ -134,26 +144,26 @@ pause.addEventListener('click', function (e) {
     console.log('Resume init');
   }
 
-  for (var i = 0; i < apsk.length; i++) {
-    if (apsk[i].dataset.gameState == 'pause' && apsk[i].dataset.game == 'play') {
-      apsk[i].style.backgroundColor = 'black';
-      apsk[i].dataset.gameState = 'unpause';
+  apsk.forEach(function (item) {
+    if (item.dataset.gameState == 'pause' && item.dataset.game == 'play') {
+      item.style.backgroundColor = 'black';
+      item.dataset.gameState = 'unpause';
       pause.innerText = 'PLAY !';
       console.log('Pause && Stop');
-    } else if (apsk[i].dataset.gameState == 'unpause' && apsk[i].dataset.game == 'play') {
-      if (apsk[i].dataset.game == 'stop') {
-        apsk[i].dataset.gameState = 'unpause';
-        apsk[i].dataset.game = 'stop';
-        apsk[i].style.backgroundColor = 'red';
+    } else if (item.dataset.gameState == 'unpause' && item.dataset.game == 'play') {
+      if (item.dataset.game == 'stop') {
+        item.dataset.gameState = 'unpause';
+        item.dataset.game = 'stop';
+        item.style.backgroundColor = 'red';
       } else {
-        apsk[i].dataset.gameState = 'pause';
+        item.dataset.gameState = 'pause';
       }
 
       pause.innerText = 'Pause ||';
-      apsk[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      item.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
       console.log('Unpause && PLay 2');
     }
-  }
+  }); // end forEach
 });
 /*///////////////////////////////////////////////////////////////////////
 
@@ -171,12 +181,12 @@ classBody.addEventListener('click', function (e) {
     }
   } // if interval not NULL
 
-}); // nepataikyti paspaudimai nesibublina paspaudus ant HEADeri esanciu elementu "section"
-// for (let i = 0; i < section.length; i++) {
-//     section[i].addEventListener('click', function (e) {
-//         e.stopPropagation();
-//     })
-// }
+});
+/*///////////////////////////////////////////////////////////////////////
+
+STOP bubling on header, neskaiciuoti nepataikytu paskaudimu ant header
+
+//////////////////////////////////////////////////////////////////////*/
 
 section.forEach(function (item) {
   item.addEventListener('click', function (e) {
@@ -188,44 +198,46 @@ section.forEach(function (item) {
 BURBULAI mygtukas
 
 //////////////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////////
 
-var _loop = function _loop(i) {
-  apsk[i].addEventListener('click', function (e) {
+apsk.forEach(function (burbulas) {
+  var div = document.querySelector('.bubbleRezDiv');
+  var divOffset = offset(div);
+
+  function offset(el) {
+    var rect = el.getBoundingClientRect(),
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return {
+      top: rect.top + scrollTop,
+      left: rect.left + scrollLeft
+    };
+  }
+
+  burbulas.addEventListener('click', function (e) {
     if (nIntervId != null) {
-      var offset = function offset(el) {
-        var rect = el.getBoundingClientRect(),
-            scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return {
-          top: rect.top + scrollTop,
-          left: rect.left + scrollLeft
-        };
-      };
-
-      apsk[i].style.cursor = 'pointer';
-      apsk[i].style.display = 'block';
-      var div = document.querySelector('.bubbleRezDiv');
-      var divOffset = offset(div); // console.log(divOffset.left, divOffset.top);
+      burbulas.style.cursor = 'pointer';
+      burbulas.style.display = 'block'; // console.log(divOffset.left, divOffset.top);
 
       e.stopPropagation();
 
-      if (apsk[i].dataset.game == 'play' && apsk[i].dataset.gameState == 'pause') {
-        apsk[i].dataset.game = 'stop';
-        apsk[i].style.backgroundColor = 'red';
-        apsk[i].style.top = divOffset.top + 165 + 'px';
-        apsk[i].style.left = divOffset.left - 20 + 'px';
-        apsk[i].innerText = '😲';
-        apsk[i].style.backgroundImage = "url('pow.png')";
+      if (burbulas.dataset.game == 'play' && burbulas.dataset.gameState == 'pause') {
+        burbulas.dataset.game = 'stop';
+        burbulas.style.backgroundColor = 'red';
+        burbulas.style.top = divOffset.top + 165 + 'px';
+        burbulas.style.left = divOffset.left - 20 + 'px';
+        burbulas.innerText = '😲';
+        burbulas.style.backgroundImage = "url('pow.png')";
         setTimeout(function () {
-          apsk[i].style.top = divOffset.top + 55 + 'px';
-          apsk[i].style.left = divOffset.left + 40 + 'px';
-          apsk[i].style.padding = '0px';
-          apsk[i].style.fontSize = '0px';
+          burbulas.style.top = divOffset.top + 55 + 'px';
+          burbulas.style.left = divOffset.left + 40 + 'px';
+          burbulas.style.padding = '0px';
+          burbulas.style.fontSize = '0px';
         }, 1000);
         bubbleRezDiv.innerText = ++bubbleClickCount;
         bubblesLeft--;
-        bubblesLeftCounter.innerText = bubblesLeft;
-        startInterval();
+        bubblesLeftCounter.innerText = bubblesLeft; // startInterval();
+
         console.log(nIntervId, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
       }
 
@@ -236,39 +248,31 @@ var _loop = function _loop(i) {
 
           reset.style.opacity = '1'; // reset.style.transform = 'scale(1)';
 
-          pause.style.opacity = 0;
-          pause.style.display = 'none'; // }, 300);
+          pause.style.opacity = 0; // pause.style.display = 'none';
+          // }, 300);
         }, 1000);
       }
     } // if interval not NULL
 
   });
-};
+}); //end forEach
+//  Nustatome kiekvieno burbulo pirmine pozicija
 
-for (var i = 0; i < apsk.length; i++) {
-  _loop(i);
-} //  Nustatome kiekvieno burbulo pirmine pozicija
-
-
-for (var _i = 0; _i < apsk.length; _i++) {
-  go(_i);
-} // Kiekvienam burbului paleidziame funkcija
-
+apsk.forEach(function (itemInitGo) {
+  go(itemInitGo);
+}); // Kiekvienam burbului paleidziame funkcija
 
 var buhu = function buhu() {
-  var _loop2 = function _loop2(_i2) {
-    if (apsk[_i2].dataset.game == 'play' && apsk[_i2].dataset.gameState == 'pause') {
-      apsk[_i2].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+  apsk.forEach(function (itemInitGo) {
+    if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+      itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      itemInitGo.style.cursor = 'pointer';
     }
 
     setTimeout(function () {
-      go(_i2);
-    }, 0);
-  };
-
-  for (var _i2 = 0; _i2 < apsk.length; _i2++) {
-    _loop2(_i2);
-  }
+      go(itemInitGo);
+    }, (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, 1000));
+  }); //end forEach
 };
 
 function startInterval() {
@@ -347,7 +351,7 @@ var seconds = 0;
 var el = document.getElementById('secondsCounter');
 
 function incrementSeconds() {
-  for (var _i3 = 0; _i3 < 1; _i3++) {
+  for (var i = 0; i < 1; i++) {
     if (seconds >= 0) {
       el.innerText = (timeRemaining - seconds++ * 1000) / 1000;
       console.log(timeRemaining / 1000);
@@ -362,13 +366,89 @@ var cancel = setInterval(incrementSeconds, timeRemaining); // console.log('Timer
 
 /***/ }),
 
+/***/ "./dev/js/functions.js":
+/*!*****************************!*\
+  !*** ./dev/js/functions.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "rand": () => (/* binding */ rand)
+/* harmony export */ });
+/* harmony import */ var _apskritimas_refactor_v1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apskritimas_refactor_v1 */ "./dev/js/apskritimas_refactor_v1.js");
+
+/*///////////////////////////////////////////////////////////////////////
+
+RANDOM GENERATOR
+
+//////////////////////////////////////////////////////////////////////*/
+
+var rand = function rand(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+/*///////////////////////////////////////////////////////////////////////
+
+// Rasome funkcija responsive langui
+
+//////////////////////////////////////////////////////////////////////*/
+// export const responsiveWindow = () => {
+//     intWV2 = window.innerWidth - 100;
+//     intVH2 = window.innerHeight - 100;
+//     heightOutput.textContent = window.innerHeight;
+//     widthOutput.textContent = window.innerWidth;
+// }
+// responsiveWindow();
+// /*///////////////////////////////////////////////////////////////////////
+// // Function to START everything
+// //////////////////////////////////////////////////////////////////////*/
+// export const go = itemInitAll => {
+//     // for (let i = 0; i < apsk.length; i++) {
+//     if (itemInitAll.dataset.game == 'play' && itemInitAll.dataset.gameState == 'pause') {
+//         heightOutput.textContent = window.innerHeight;
+//         widthOutput.textContent = window.innerWidth;
+//         intWV2 = window.innerWidth - 100;
+//         intVH2 = window.innerHeight - 100;
+//         itemInitAll.style.top = rand(150, (intVH2 - 50)) + 'px';
+//         itemInitAll.style.left = rand(0, intWV2) + 'px';
+//         // itemInitAll.innerText = 1 + i++;
+//         itemInitAll.innerText = '😊';
+//         let sekunde = 1 - (bubbleClickCount / 20)
+//         itemInitAll.style.transition = 'all ' + sekunde + "s";
+//     }
+//     else {
+//         itemInitAll.style.cursor = null;
+//     }
+//     // }
+// }
+// //  Nustatome kiekvieno burbulo pirmine pozicija
+// export const itemFirstInit = apsk.forEach(function (itemFirstGo) {
+//     go(itemFirstGo);
+// })
+// // Kiekvienam burbului paleidziame funkcija BUHU
+// export const buhu = () => {
+//     apsk.forEach(function (itemInitGo) {
+//         if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+//             itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+//             itemInitGo.style.cursor = 'pointer';
+//         }
+//         setTimeout(() => {
+//             go(itemInitGo);
+//         },
+//             0)
+//     }) //end forEach
+// }
+
+/***/ }),
+
 /***/ "./dev/css/apskritimas_default.scss":
 /*!******************************************!*\
   !*** ./dev/css/apskritimas_default.scss ***!
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -437,6 +517,18 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -461,7 +553,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/public/js/apskritimas_default": 0,
+/******/ 			"/public/js/apskritimas_refactor_v1": 0,
 /******/ 			"public/css/apskritimas_default": 0
 /******/ 		};
 /******/ 		
@@ -512,7 +604,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["public/css/apskritimas_default"], () => (__webpack_require__("./dev/js/apskritimas_default.js")))
+/******/ 	__webpack_require__.O(undefined, ["public/css/apskritimas_default"], () => (__webpack_require__("./dev/js/apskritimas_refactor_v1.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["public/css/apskritimas_default"], () => (__webpack_require__("./dev/css/apskritimas_default.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	

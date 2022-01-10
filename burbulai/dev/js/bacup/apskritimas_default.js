@@ -211,12 +211,20 @@ classBody.addEventListener('click', function (e) {
 
 // nepataikyti paspaudimai nesibublina paspaudus ant HEADeri esanciu elementu "section"
 
-for (let i = 0; i < section.length; i++) {
-    section[i].addEventListener('click', function (e) {
-        e.stopPropagation();
-    })
-}
+// for (let i = 0; i < section.length; i++) {
+//     section[i].addEventListener('click', function (e) {
+//         e.stopPropagation();
+//     })
+// }
 
+
+section.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+        e.stopPropagation();
+
+    }
+    )
+})
 
 
 
