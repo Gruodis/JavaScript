@@ -20,6 +20,18 @@ let changeSpeed = speed;
 
 let timeRemaining = 20000;
 
+// let userDigit = 0;
+// let userBalls = () => {
+//     // let userVar =
+//     // userDigit += document.getElementById("userVar").value
+
+//     var inputVal = ;
+
+//     userDigit = inputVal;
+
+//     console.log('userDigit: ', userDigit);
+// }
+
 document.getElementById("start").addEventListener("click", startInterval);
 document.getElementById("stop").addEventListener("click", stopInterval);
 
@@ -32,9 +44,21 @@ const section = document.querySelectorAll('section');
 
 let classBody = document.querySelector('.body');
 
+// let changeInputValue = document.getElementById("userVar");
+
+let bbb = parseInt(document.getElementById("userVar").value);
+
+document.getElementById("userVar").addEventListener('change', () => {
+
+    // document.getElementById("userVar").value;
+    bbb = parseInt(document.getElementById("userVar").value)
+    console.log('0 ', bbb)
 
 
-let newBall = () => {
+
+    console.log('1 ', bbb)
+
+    let newBall = () => {
 
     let newBallGo = document.createElement('div');
     let text = document.createTextNode(``);
@@ -51,10 +75,21 @@ let newBall = () => {
     classBody.appendChild(newBallGo);
     // console.log('test', skc);
 }
-newBall();
+    // var Malfunctions = parseInt(document.getElementById("Malfunctions").value);
 
 
-let apsk = document.querySelectorAll('.apskritimas');
+    // let gha = () => {
+    for (let i = 0; i < bbb; i++) {
+        newBall();
+        console.log('test for', bbb)
+    }
+    // }
+    // setInterval(gha, 1000)
+    console.log('3 ', bbb)
+    finalGo();
+    // end add ball
+})
+
 let reset = document.querySelector('.reset');
 let pause = document.querySelector('.pause');
 
@@ -65,10 +100,10 @@ let timerDiv = document.querySelector('.timer');
 
 let bodyClickCount = 0;
 let bubbleClickCount = 0;
-let bubblesLeft = apsk.length;
-bubblesLeftCounter.innerText = bubblesLeft;
+
 
 let newTimeInt;
+
 
 // Rasome funkcija responsive langui
 let responsiveWindow = () => {
@@ -81,36 +116,58 @@ responsiveWindow();
 // iskvieciame responsive funkcija su listneriu 'resize'
 window.addEventListener('resize', responsiveWindow);
 
+let apsk = document.querySelectorAll('.apskritimas');
+let bubblesLeft = apsk.length;
+bubblesLeftCounter.innerText = bubblesLeft;
+let finalGo = () => {
+
+    apsk = document.querySelectorAll('.apskritimas');
 
 
+    const go = itemInitGo => {
 
+        // for (let i = 0; i < apsk.length; i++) {
+        if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+            itemInitGo.style.top = rand(150, (intVH2 - 50)) + 'px';
+            itemInitGo.style.left = rand(0, intWV2) + 'px';
+            // itemInitGo.innerText = 1 + i++;
+            itemInitGo.innerText = '😊';
 
+            let sekunde = 1 - (bubbleClickCount / 20)
+            itemInitGo.style.transition = 'all ' + sekunde + "s";
+        }
+        else {
+            itemInitGo.style.cursor = null;
+        }
+        // }
 
-
-const go = itemInitGo => {
-
-    // for (let i = 0; i < apsk.length; i++) {
-    if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
-        itemInitGo.style.top = rand(150, (intVH2 - 50)) + 'px';
-        itemInitGo.style.left = rand(0, intWV2) + 'px';
-        // itemInitGo.innerText = 1 + i++;
-        itemInitGo.innerText = '😊';
-
-        let sekunde = 1 - (bubbleClickCount / 20)
-        itemInitGo.style.transition = 'all ' + sekunde + "s";
     }
-    else {
-        itemInitGo.style.cursor = null;
+
+    //  Nustatome kiekvieno burbulo pirmine pozicija
+    apsk.forEach(function (itemInitGo) {
+        go(itemInitGo);
+    })
+
+
+    // Kiekvienam burbului paleidziame funkcija
+    const buhu = () => {
+        apsk.forEach(function (itemInitGo) {
+            if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+                itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                itemInitGo.style.cursor = 'pointer';
+            }
+            setTimeout(() => {
+                go(itemInitGo);
+            },
+                rand(0, 1000))
+        }) //end forEach
     }
-    // }
 
 }
-
-
-/*///////////////////////////////////////////////////////////////////////
-
+    /*///////////////////////////////////////////////////////////////////////
+ 
 RESET mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 
 reset.addEventListener('click', function (e) {
@@ -150,9 +207,9 @@ reset.addEventListener('click', function (e) {
 
 
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 Play/Pause mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 pause.addEventListener('click', function (e) {
 
@@ -205,9 +262,9 @@ pause.addEventListener('click', function (e) {
 })
 
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 BODY mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 classBody.addEventListener('click', function (e) {
     if (nIntervId != null) {
@@ -224,9 +281,9 @@ classBody.addEventListener('click', function (e) {
 })
 
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 STOP bubling on header, neskaiciuoti nepataikytu paskaudimu ant header
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 
 section.forEach(function (item) {
@@ -240,9 +297,9 @@ section.forEach(function (item) {
 
 
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 BURBULAI mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 
 
@@ -267,7 +324,7 @@ apsk.forEach(function (burbulas) {
 
 
 
-            // console.log(divOffset.left, divOffset.top);
+                // console.log(divOffset.left, divOffset.top);
 
 
 
@@ -278,35 +335,35 @@ apsk.forEach(function (burbulas) {
                 burbulas.dataset.game = 'stop';
                 burbulas.style.backgroundColor = 'red';
 
-                burbulas.style.top = (divOffset.top + 165) + 'px';
-                burbulas.style.left = (divOffset.left - 20) + 'px';
-                burbulas.innerText = '😲'
-                burbulas.style.backgroundImage = "url('pow.png')"
+                    burbulas.style.top = (divOffset.top + 165) + 'px';
+                    burbulas.style.left = (divOffset.left - 20) + 'px';
+                    burbulas.innerText = '😲'
+                    burbulas.style.backgroundImage = "url('pow.png')"
 
-                setTimeout(() => {
+                    setTimeout(() => {
 
-                    burbulas.style.top = (divOffset.top + 55) + 'px';
-                    burbulas.style.left = (divOffset.left + 40) + 'px';
-                    burbulas.style.padding = '0px';
-                    burbulas.style.fontSize = '0px';
-                }, 1000)
+                        burbulas.style.top = (divOffset.top + 55) + 'px';
+                        burbulas.style.left = (divOffset.left + 40) + 'px';
+                        burbulas.style.padding = '0px';
+                        burbulas.style.fontSize = '0px';
+                    }, 1000)
 
-                bubbleRezDiv.innerText = ++bubbleClickCount;
+                    bubbleRezDiv.innerText = ++bubbleClickCount;
 
-                bubblesLeft--;
-                bubblesLeftCounter.innerText = bubblesLeft;
-
-
-
-                // startInterval();
+                    bubblesLeft--;
+                    bubblesLeftCounter.innerText = bubblesLeft;
 
 
+
+                    // startInterval();
 
 
 
 
-                console.log(nIntervId, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
-            }
+
+
+                    console.log(nIntervId, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
+                }
 
 
 
@@ -316,15 +373,15 @@ apsk.forEach(function (burbulas) {
                     reset.style.transform = 'scale(1) translate(-50%, -50%)';
 
 
-                    // window.setTimeout(function () {
-                    reset.style.opacity = '1';
-                    // reset.style.transform = 'scale(1)';
-                    pause.style.opacity = 0;
-                    // pause.style.display = 'none';
+                        // window.setTimeout(function () {
+                        reset.style.opacity = '1';
+                        // reset.style.transform = 'scale(1)';
+                        pause.style.opacity = 0;
+                        // pause.style.display = 'none';
 
 
-                    // }, 300);
-                }, 1000)
+                        // }, 300);
+                    }, 1000)
             }
         } // if interval not NULL
 
@@ -335,27 +392,16 @@ apsk.forEach(function (burbulas) {
 
 
 
-//  Nustatome kiekvieno burbulo pirmine pozicija
-apsk.forEach(function (itemInitGo) {
-    go(itemInitGo);
-})
 
 
-// Kiekvienam burbului paleidziame funkcija
-const buhu = () => {
-    apsk.forEach(function (itemInitGo) {
-        if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
-            itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-            itemInitGo.style.cursor = 'pointer';
-        }
-        setTimeout(() => {
-            go(itemInitGo);
-        },
-            rand(0, 1000))
-    }) //end forEach
-}
+
+
+
 
 function startInterval() {
+
+
+
 
 
     // reset.style.display = 'none';
@@ -368,18 +414,18 @@ function startInterval() {
 
     // check if already an interval has been set up
     if (!nIntervId) {
-        nIntervId = setInterval(buhu, 1200);
+        nIntervId = setInterval(finalGo, 1200);
+
     } else {
         clearInterval(nIntervId);
 
         speed = (1200 - (bubbleClickCount * 80));
         changeSpeed = speed;
-        nIntervId = setInterval(buhu, changeSpeed);
+        nIntervId = setInterval(finalGo, changeSpeed);
     }
 
-
 }
-startInterval();
+// startInterval(); // autostart game
 
 
 function stopInterval() {
@@ -449,31 +495,31 @@ function stopInterval() {
 
 
 
-const cicleStop = () => {
-    newTimeInt = setTimeout(stopInterval, timeRemaining);
-}
-cicleStop();
+// const cicleStop = () => {
+//     newTimeInt = setTimeout(stopInterval, timeRemaining);
+// }
+// cicleStop();
 
 // rodome kiek sekundziu trunka zaidimas
 
-let seconds = 0;
-let el = document.getElementById('secondsCounter');
+// let seconds = 0;
+// let el = document.getElementById('secondsCounter');
 
-function incrementSeconds() {
-    for (let i = 0; i < 1; i++) {
+// function incrementSeconds() {
+//     for (let i = 0; i < 1; i++) {
 
-        if (seconds >= 0) {
-            el.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
-            console.log(timeRemaining / 1000)
-        }
-        else {
-            el.innerText = ':('
-        }
-    }
-}
-incrementSeconds();
+//         if (seconds >= 0) {
+//             el.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+//             console.log(timeRemaining / 1000)
+//         }
+//         else {
+//             el.innerText = ':('
+//         }
+//     }
+// }
+// incrementSeconds();
 
-let cancel = setInterval(incrementSeconds, timeRemaining);
+// let cancel = setInterval(incrementSeconds, timeRemaining);
 
 // console.log('Timer :', timer.stop, timer.resume, nIntervId, intVH2, intWV2)
 

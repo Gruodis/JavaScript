@@ -25,38 +25,63 @@ var intVH2;
 var nIntervId;
 var speed;
 var changeSpeed = speed;
-var timeRemaining = 20000;
+var timeRemaining = 20000; // let userDigit = 0;
+// let userBalls = () => {
+//     // let userVar =
+//     // userDigit += document.getElementById("userVar").value
+//     var inputVal = ;
+//     userDigit = inputVal;
+//     console.log('userDigit: ', userDigit);
+// }
+
 document.getElementById("start").addEventListener("click", startInterval);
 document.getElementById("stop").addEventListener("click", stopInterval);
 var heightOutput = document.querySelector('#height');
 var widthOutput = document.querySelector('#width');
 var section = document.querySelectorAll('section'); // document.querySelectorAll('section').addEventListener('click', e => e.stopPropagation());
 
-var classBody = document.querySelector('.body');
+var classBody = document.querySelector('.body'); // let changeInputValue = document.getElementById("userVar");
 
-var newBall = function newBall() {
-  var newBallGo = document.createElement('div');
-  var text = document.createTextNode("");
-  newBallGo.appendChild(text);
-  newBallGo.classList.add("apskritimas");
+var bbb = parseInt(document.getElementById("userVar").value);
+document.getElementById("userVar").addEventListener('change', function () {
+  // document.getElementById("userVar").value;
+  bbb = parseInt(document.getElementById("userVar").value);
+  console.log('0 ', bbb);
+  console.log('1 ', bbb);
 
-  function setAttributes(el, options) {
-    Object.keys(options).forEach(function (attr) {
-      el.setAttribute(attr, options[attr]);
-    });
-  }
+  var newBall = function newBall() {
+    var newBallGo = document.createElement('div');
+    var text = document.createTextNode("");
+    newBallGo.appendChild(text);
+    newBallGo.classList.add("apskritimas");
 
-  setAttributes(newBallGo, {
-    'data-game': 'play',
-    'data-game-state': 'pause',
-    'data-xxx': 'xxx'
-  }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
+    function setAttributes(el, options) {
+      Object.keys(options).forEach(function (attr) {
+        el.setAttribute(attr, options[attr]);
+      });
+    }
 
-  classBody.appendChild(newBallGo); // console.log('test', skc);
-};
+    setAttributes(newBallGo, {
+      'data-game': 'play',
+      'data-game-state': 'pause',
+      'data-xxx': 'xxx'
+    }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
 
-newBall();
-var apsk = document.querySelectorAll('.apskritimas');
+    classBody.appendChild(newBallGo); // console.log('test', skc);
+  }; // var Malfunctions = parseInt(document.getElementById("Malfunctions").value);
+  // let gha = () => {
+
+
+  for (var i = 0; i < bbb; i++) {
+    newBall();
+    console.log('test for', bbb);
+  } // }
+  // setInterval(gha, 1000)
+
+
+  console.log('3 ', bbb);
+  finalGo(); // end add ball
+});
 var reset = document.querySelector('.reset');
 var pause = document.querySelector('.pause');
 var rezDiv = document.querySelector('.rezDiv');
@@ -65,8 +90,6 @@ var bubbleRezDiv = document.querySelector('.bubbleRezDiv');
 var timerDiv = document.querySelector('.timer');
 var bodyClickCount = 0;
 var bubbleClickCount = 0;
-var bubblesLeft = apsk.length;
-bubblesLeftCounter.innerText = bubblesLeft;
 var newTimeInt; // Rasome funkcija responsive langui
 
 var responsiveWindow = function responsiveWindow() {
@@ -79,25 +102,48 @@ var responsiveWindow = function responsiveWindow() {
 responsiveWindow(); // iskvieciame responsive funkcija su listneriu 'resize'
 
 window.addEventListener('resize', responsiveWindow);
+var apsk = document.querySelectorAll('.apskritimas');
+var bubblesLeft = apsk.length;
+bubblesLeftCounter.innerText = bubblesLeft;
 
-var go = function go(itemInitGo) {
-  // for (let i = 0; i < apsk.length; i++) {
-  if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
-    itemInitGo.style.top = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(150, intVH2 - 50) + 'px';
-    itemInitGo.style.left = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, intWV2) + 'px'; // itemInitGo.innerText = 1 + i++;
+var finalGo = function finalGo() {
+  apsk = document.querySelectorAll('.apskritimas');
 
-    itemInitGo.innerText = '😊';
-    var sekunde = 1 - bubbleClickCount / 20;
-    itemInitGo.style.transition = 'all ' + sekunde + "s";
-  } else {
-    itemInitGo.style.cursor = null;
-  } // }
+  var go = function go(itemInitGo) {
+    // for (let i = 0; i < apsk.length; i++) {
+    if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+      itemInitGo.style.top = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(150, intVH2 - 50) + 'px';
+      itemInitGo.style.left = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, intWV2) + 'px'; // itemInitGo.innerText = 1 + i++;
 
+      itemInitGo.innerText = '😊';
+      var sekunde = 1 - bubbleClickCount / 20;
+      itemInitGo.style.transition = 'all ' + sekunde + "s";
+    } else {
+      itemInitGo.style.cursor = null;
+    } // }
+
+  }; //  Nustatome kiekvieno burbulo pirmine pozicija
+
+
+  apsk.forEach(function (itemInitGo) {
+    go(itemInitGo);
+  }); // Kiekvienam burbului paleidziame funkcija
+
+  var buhu = function buhu() {
+    apsk.forEach(function (itemInitGo) {
+      if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
+        itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        itemInitGo.style.cursor = 'pointer';
+      }
+
+      setTimeout(function () {
+        go(itemInitGo);
+      }, (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, 1000));
+    }); //end forEach
+  };
 };
 /*///////////////////////////////////////////////////////////////////////
-
 RESET mygtukas
-
 //////////////////////////////////////////////////////////////////////*/
 
 
@@ -126,9 +172,9 @@ reset.addEventListener('click', function (e) {
   newTimeInt = setTimeout(stopInterval, timeRemaining);
 });
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 Play/Pause mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 
 pause.addEventListener('click', function (e) {
@@ -167,9 +213,9 @@ pause.addEventListener('click', function (e) {
   }); // end forEach
 });
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 BODY mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 
 classBody.addEventListener('click', function (e) {
@@ -184,9 +230,9 @@ classBody.addEventListener('click', function (e) {
 
 });
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 STOP bubling on header, neskaiciuoti nepataikytu paskaudimu ant header
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 
 section.forEach(function (item) {
@@ -195,9 +241,9 @@ section.forEach(function (item) {
   });
 });
 /*///////////////////////////////////////////////////////////////////////
-
+ 
 BURBULAI mygtukas
-
+ 
 //////////////////////////////////////////////////////////////////////*/
 ////////////////////////////////////////////////////////////////////
 
@@ -257,24 +303,6 @@ apsk.forEach(function (burbulas) {
 
   });
 }); //end forEach
-//  Nustatome kiekvieno burbulo pirmine pozicija
-
-apsk.forEach(function (itemInitGo) {
-  go(itemInitGo);
-}); // Kiekvienam burbului paleidziame funkcija
-
-var buhu = function buhu() {
-  apsk.forEach(function (itemInitGo) {
-    if (itemInitGo.dataset.game == 'play' && itemInitGo.dataset.gameState == 'pause') {
-      itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-      itemInitGo.style.cursor = 'pointer';
-    }
-
-    setTimeout(function () {
-      go(itemInitGo);
-    }, (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, 1000));
-  }); //end forEach
-};
 
 function startInterval() {
   // reset.style.display = 'none';
@@ -286,16 +314,15 @@ function startInterval() {
   pause.style.transform = 'scale(1) translate(-50%, -50%)'; // check if already an interval has been set up
 
   if (!nIntervId) {
-    nIntervId = setInterval(buhu, 1200);
+    nIntervId = setInterval(finalGo, 1200);
   } else {
     clearInterval(nIntervId);
     speed = 1200 - bubbleClickCount * 80;
     changeSpeed = speed;
-    nIntervId = setInterval(buhu, changeSpeed);
+    nIntervId = setInterval(finalGo, changeSpeed);
   }
-}
+} // startInterval(); // autostart game
 
-startInterval();
 
 function stopInterval() {
   clearInterval(nIntervId); // release our intervalID from the variable
@@ -340,30 +367,27 @@ function stopInterval() {
 // var timer = new Timer(stopInterval, 10000);
 // stabdom viska po n laiko
 // var timer = new Timer(stopInterval, 10000);
-
-
-var cicleStop = function cicleStop() {
-  newTimeInt = setTimeout(stopInterval, timeRemaining);
-};
-
-cicleStop(); // rodome kiek sekundziu trunka zaidimas
-
-var seconds = 0;
-var el = document.getElementById('secondsCounter');
-
-function incrementSeconds() {
-  for (var i = 0; i < 1; i++) {
-    if (seconds >= 0) {
-      el.innerText = (timeRemaining - seconds++ * 1000) / 1000;
-      console.log(timeRemaining / 1000);
-    } else {
-      el.innerText = ':(';
-    }
-  }
-}
-
-incrementSeconds();
-var cancel = setInterval(incrementSeconds, timeRemaining); // console.log('Timer :', timer.stop, timer.resume, nIntervId, intVH2, intWV2)
+// const cicleStop = () => {
+//     newTimeInt = setTimeout(stopInterval, timeRemaining);
+// }
+// cicleStop();
+// rodome kiek sekundziu trunka zaidimas
+// let seconds = 0;
+// let el = document.getElementById('secondsCounter');
+// function incrementSeconds() {
+//     for (let i = 0; i < 1; i++) {
+//         if (seconds >= 0) {
+//             el.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+//             console.log(timeRemaining / 1000)
+//         }
+//         else {
+//             el.innerText = ':('
+//         }
+//     }
+// }
+// incrementSeconds();
+// let cancel = setInterval(incrementSeconds, timeRemaining);
+// console.log('Timer :', timer.stop, timer.resume, nIntervId, intVH2, intWV2)
 
 /***/ }),
 
