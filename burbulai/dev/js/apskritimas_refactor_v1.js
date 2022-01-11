@@ -15,8 +15,12 @@ let intVH2;
 
 let nIntervId;
 
+
 let speed;
 let changeSpeed = speed;
+
+
+let seconds = 0;
 
 let timeRemaining = 20000;
 
@@ -31,6 +35,9 @@ let timeRemaining = 20000;
 
 //     console.log('userDigit: ', userDigit);
 // }
+
+let apsk = document.querySelectorAll('.apskritimas');
+
 
 document.getElementById("start").addEventListener("click", startInterval);
 document.getElementById("stop").addEventListener("click", stopInterval);
@@ -48,8 +55,14 @@ let classBody = document.querySelector('.body');
 
 let bbb = parseInt(document.getElementById("userVar").value);
 
-document.getElementById("userVar").addEventListener('change', () => {
+const bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
+let bubblesLeft = apsk.length;
 
+
+let elSecondsLeft = document.getElementById('secondsCounter');
+
+document.getElementById("userVar").addEventListener('change', () => {
+    elSecondsLeft.innerText = timeRemaining / 1000;
     // document.getElementById("userVar").value;
     bbb = parseInt(document.getElementById("userVar").value)
     console.log('0 ', bbb)
@@ -63,7 +76,9 @@ document.getElementById("userVar").addEventListener('change', () => {
     let newBallGo = document.createElement('div');
     let text = document.createTextNode(``);
     newBallGo.appendChild(text);
-    newBallGo.classList.add("apskritimas");
+        newBallGo.classList.add("apskritimas");
+        newBallGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
 
     function setAttributes(el, options) {
         Object.keys(options).forEach(function (attr) {
@@ -88,14 +103,18 @@ document.getElementById("userVar").addEventListener('change', () => {
     console.log('3 ', bbb)
     finalGo();
     // end add ball
+    bubblesLeft = apsk.length;
+    bubblesLeftCounter.innerText = bubblesLeft;
 })
 
 let reset = document.querySelector('.reset');
 let pause = document.querySelector('.pause');
 
 let rezDiv = document.querySelector('.rezDiv');
-const bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
+
+
 let bubbleRezDiv = document.querySelector('.bubbleRezDiv');
+
 let timerDiv = document.querySelector('.timer');
 
 let bodyClickCount = 0;
@@ -116,14 +135,18 @@ responsiveWindow();
 // iskvieciame responsive funkcija su listneriu 'resize'
 window.addEventListener('resize', responsiveWindow);
 
-let apsk = document.querySelectorAll('.apskritimas');
-let bubblesLeft = apsk.length;
-bubblesLeftCounter.innerText = bubblesLeft;
+// bubblesLeftCounter.innerText = bubblesLeft;
+
+
+
+
+
 let finalGo = () => {
 
     apsk = document.querySelectorAll('.apskritimas');
 
-
+    // let bubblesLeft = apsk.length;
+    bubblesLeftCounter.innerText = bubblesLeft;
     const go = itemInitGo => {
 
         // for (let i = 0; i < apsk.length; i++) {
@@ -142,10 +165,125 @@ let finalGo = () => {
         // }
 
     }
+    /*///////////////////////////////////////////////////////////////////////
+ 
+BURBULAI mygtukas
+ 
+//////////////////////////////////////////////////////////////////////*/
+
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    apsk.forEach(function (burbulas) {
+        burbulas.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+        let div = document.querySelector('.bubbleRezDiv');
+        let divOffset = offset(div);
+        function offset(el) {
+            let rect = el.getBoundingClientRect(),
+                scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+        }
+
+        burbulas.addEventListener('click', function (e) {
+
+            if (nIntervId != null) {
+                burbulas.style.cursor = 'pointer';
+                burbulas.style.display = 'block';
+
+
+
+                // console.log(divOffset.left, divOffset.top);
+
+
+
+                e.stopPropagation()
+
+                if (burbulas.dataset.gameState == 'pause' && burbulas.dataset.game == 'play') {
+                    for (let i = 0; i < 1; i++) {
+                        if (seconds >= 0) {
+                            elSecondsLeft.innerText = timeRemaining / 1000;
+                            console.log('Else seconds', timeRemaining / 1000)
+
+                        }
+                        else {
+                            elSecondsLeft.innerText = ':('
+                        }
+                    }
+                } else {
+                    elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+                    console.log('Count seconds', timeRemaining / 1000)
+
+                }
+
+                if (burbulas.dataset.game == 'play' && burbulas.dataset.gameState == 'pause') {
+                    burbulas.dataset.game = 'stop';
+                    burbulas.style.backgroundColor = 'red';
+
+                    burbulas.style.top = (divOffset.top + 165) + 'px';
+                    burbulas.style.left = (divOffset.left - 20) + 'px';
+                    burbulas.innerText = '😲'
+                    burbulas.style.backgroundImage = "url('pow.png')"
+
+                    setTimeout(() => {
+
+                        burbulas.style.top = (divOffset.top + 55) + 'px';
+                        burbulas.style.left = (divOffset.left + 40) + 'px';
+                        burbulas.style.padding = '0px';
+                        burbulas.style.fontSize = '0px';
+                    }, 1000)
+
+                    bubbleRezDiv.innerText = ++bubbleClickCount;
+
+                    bubblesLeft--;
+                    bubblesLeftCounter.innerText = bubblesLeft;
+
+
+
+                    startInterval(); // startuojam intervala, kad butu perskaiciuotas burbulo greitis
+
+
+
+
+
+
+                    console.log(nIntervId, 'Time: ', timeRemaining, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
+                }
+
+
+
+                if (bubblesLeft == 0) {
+                    window.setTimeout(() => {
+                        // reset.style.display = 'block';
+                        reset.style.transform = 'scale(1) translate(-50%, -50%)';
+
+
+                        // window.setTimeout(function () {
+                        reset.style.opacity = '1';
+                        // reset.style.transform = 'scale(1)';
+                        pause.style.opacity = 0;
+                        // pause.style.display = 'none';
+
+
+                        // }, 300);
+                    }, 1000)
+                }
+            } // if interval not NULL
+
+        })
+
+        console.log('Time remain Bubble :', timeRemaining)
+
+    }) //end forEach
 
     //  Nustatome kiekvieno burbulo pirmine pozicija
     apsk.forEach(function (itemInitGo) {
+        setTimeout(() => {
         go(itemInitGo);
+        },
+            rand(0, 1000))
     })
 
 
@@ -156,12 +294,36 @@ let finalGo = () => {
                 itemInitGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
                 itemInitGo.style.cursor = 'pointer';
             }
-            setTimeout(() => {
-                go(itemInitGo);
-            },
-                rand(0, 1000))
+            // setTimeout(() => {
+            //     go(itemInitGo);
+            // },
+            //     rand(0, 1000))
         }) //end forEach
     }
+
+
+
+    // function incrementSeconds() {
+    //     if (timeRemaining != 0 || seconds >= 0) {
+
+    //         for (let i = 0; i < 1; i++) {
+    //             if (i.dataset.gameState == 'pause' && i.dataset.game == 'play') {
+    //                 if (seconds >= 0) {
+    //                     elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+    //                     console.log('Count seconds', timeRemaining / 1000)
+    //                 }
+    //                 else {
+    //                     elSecondsLeft.innerText = ':('
+    //                 }
+    //             } else {
+    //                 elSecondsLeft.innerText = timeRemaining / 1000;
+    //                 console.log('Else seconds', timeRemaining / 1000)
+
+    //             }
+    //         }
+    //     }
+    // }
+    // incrementSeconds();
 
 }
     /*///////////////////////////////////////////////////////////////////////
@@ -183,6 +345,11 @@ reset.addEventListener('click', function (e) {
     bubbleClickCount = 0;
     bubbleRezDiv.innerText = bubbleClickCount;
 
+    seconds = null;
+    timeRemaining = null;
+    timeRemaining = 20000;
+    elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+    console.log('Seconds: ', seconds);
 
 
 
@@ -195,13 +362,27 @@ reset.addEventListener('click', function (e) {
         pause.innerText = 'Pause ||';
     }) // end forEach
 
+    window.clearTimeout(newTimeInt);
+    window.clearTimeout(cicleStop);
+    window.clearInterval(nIntervId);
     clearInterval(nIntervId);
+    clearTimeout(cicleStop);
+    console.log('nIntervId: ', newTimeInt)
 
-    startInterval();
+
+    // nIntervId = setInterval(finalGo, 1000);
+
+
 
     window.clearTimeout(newTimeInt);
+    // newTimeInt = setTimeout(stopInterval, timeRemaining);
+    console.log('NewTimeINT 1 : ', newTimeInt);
+    newTimeInt = null;
     newTimeInt = setTimeout(stopInterval, timeRemaining);
+    console.log('NewTimeINT 2 : ', newTimeInt)
+    console.log('Time Remain : ', timeRemaining)
 
+    startInterval();
 
 })
 
@@ -218,12 +399,19 @@ pause.addEventListener('click', function (e) {
     if (pause.innerText != 'PLAY !') {
         // timer.pause();
         window.clearTimeout(newTimeInt);
-        console.log('Pause init');
+        newTimeInt = null;
+
+        console.log('Pause init', newTimeInt);
     } else {
         // timer.resume();
         window.clearTimeout(newTimeInt);
+        console.log('Time Remain 01 : ', timeRemaining)
+
+        newTimeInt = null;
         newTimeInt = setTimeout(stopInterval, timeRemaining);
-        console.log('Resume init');
+
+        console.log('Resume init', newTimeInt);
+        console.log('Time Remain 2 : ', timeRemaining)
 
     }
 
@@ -237,6 +425,7 @@ pause.addEventListener('click', function (e) {
             pause.innerText = 'PLAY !';
 
             console.log('Pause && Stop')
+            elSecondsLeft.innerText = (timeRemaining) / 1000;
 
 
         }
@@ -253,6 +442,7 @@ pause.addEventListener('click', function (e) {
             pause.innerText = 'Pause ||';
             item.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             console.log('Unpause && PLay 2')
+            elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
 
 
         }
@@ -296,98 +486,7 @@ section.forEach(function (item) {
 
 
 
-/*///////////////////////////////////////////////////////////////////////
- 
-BURBULAI mygtukas
- 
-//////////////////////////////////////////////////////////////////////*/
 
-
-
-
-////////////////////////////////////////////////////////////////////
-apsk.forEach(function (burbulas) {
-    let div = document.querySelector('.bubbleRezDiv');
-    let divOffset = offset(div);
-    function offset(el) {
-        let rect = el.getBoundingClientRect(),
-            scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-    }
-
-    burbulas.addEventListener('click', function (e) {
-
-        if (nIntervId != null) {
-            burbulas.style.cursor = 'pointer';
-            burbulas.style.display = 'block';
-
-
-
-                // console.log(divOffset.left, divOffset.top);
-
-
-
-            e.stopPropagation()
-
-
-            if (burbulas.dataset.game == 'play' && burbulas.dataset.gameState == 'pause') {
-                burbulas.dataset.game = 'stop';
-                burbulas.style.backgroundColor = 'red';
-
-                    burbulas.style.top = (divOffset.top + 165) + 'px';
-                    burbulas.style.left = (divOffset.left - 20) + 'px';
-                    burbulas.innerText = '😲'
-                    burbulas.style.backgroundImage = "url('pow.png')"
-
-                    setTimeout(() => {
-
-                        burbulas.style.top = (divOffset.top + 55) + 'px';
-                        burbulas.style.left = (divOffset.left + 40) + 'px';
-                        burbulas.style.padding = '0px';
-                        burbulas.style.fontSize = '0px';
-                    }, 1000)
-
-                    bubbleRezDiv.innerText = ++bubbleClickCount;
-
-                    bubblesLeft--;
-                    bubblesLeftCounter.innerText = bubblesLeft;
-
-
-
-                    // startInterval();
-
-
-
-
-
-
-                    console.log(nIntervId, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
-                }
-
-
-
-            if (bubblesLeft == 0) {
-                window.setTimeout(() => {
-                    // reset.style.display = 'block';
-                    reset.style.transform = 'scale(1) translate(-50%, -50%)';
-
-
-                        // window.setTimeout(function () {
-                        reset.style.opacity = '1';
-                        // reset.style.transform = 'scale(1)';
-                        pause.style.opacity = 0;
-                        // pause.style.display = 'none';
-
-
-                        // }, 300);
-                    }, 1000)
-            }
-        } // if interval not NULL
-
-    })
-
-}) //end forEach
 
 
 
@@ -401,6 +500,7 @@ apsk.forEach(function (burbulas) {
 function startInterval() {
 
 
+    cicleStop();
 
 
 
@@ -414,14 +514,17 @@ function startInterval() {
 
     // check if already an interval has been set up
     if (!nIntervId) {
-        nIntervId = setInterval(finalGo, 1200);
+        nIntervId = setInterval(finalGo, 1000);
+        console.log('INIT speed', changeSpeed, speed)
 
     } else {
         clearInterval(nIntervId);
 
-        speed = (1200 - (bubbleClickCount * 80));
+        speed = (1000 - (bubbleClickCount * 80));
         changeSpeed = speed;
         nIntervId = setInterval(finalGo, changeSpeed);
+        console.log('Change SPEED ', bubbleClickCount, changeSpeed, speed)
+
     }
 
 }
@@ -495,29 +598,15 @@ function stopInterval() {
 
 
 
-// const cicleStop = () => {
-//     newTimeInt = setTimeout(stopInterval, timeRemaining);
-// }
+const cicleStop = () => {
+    window.clearTimeout(newTimeInt)
+    newTimeInt = setTimeout(stopInterval, timeRemaining);
+}
 // cicleStop();
 
 // rodome kiek sekundziu trunka zaidimas
 
-// let seconds = 0;
-// let el = document.getElementById('secondsCounter');
 
-// function incrementSeconds() {
-//     for (let i = 0; i < 1; i++) {
-
-//         if (seconds >= 0) {
-//             el.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
-//             console.log(timeRemaining / 1000)
-//         }
-//         else {
-//             el.innerText = ':('
-//         }
-//     }
-// }
-// incrementSeconds();
 
 // let cancel = setInterval(incrementSeconds, timeRemaining);
 
