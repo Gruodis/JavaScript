@@ -139,6 +139,9 @@ window.addEventListener('resize', responsiveWindow);
 
 
 
+let div = document.querySelector('.bubbleRezDiv');
+
+
 
 
 let finalGo = () => {
@@ -176,18 +179,17 @@ BURBULAI mygtukas
 
     ////////////////////////////////////////////////////////////////////
     apsk.forEach(function (burbulas) {
+        incrementSeconds();
         burbulas.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
-        let div = document.querySelector('.bubbleRezDiv');
-        let divOffset = offset(div);
-        function offset(el) {
-            let rect = el.getBoundingClientRect(),
-                scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-        }
-
         burbulas.addEventListener('click', function (e) {
+            let divOffset = offset(div);
+            function offset(el) {
+                let rect = el.getBoundingClientRect(),
+                    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+                    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+            }
 
             if (nIntervId != null) {
                 burbulas.style.cursor = 'pointer';
@@ -201,22 +203,6 @@ BURBULAI mygtukas
 
                 e.stopPropagation()
 
-                if (burbulas.dataset.gameState == 'pause' && burbulas.dataset.game == 'play') {
-                    for (let i = 0; i < 1; i++) {
-                        if (seconds >= 0) {
-                            elSecondsLeft.innerText = timeRemaining / 1000;
-                            console.log('Else seconds', timeRemaining / 1000)
-
-                        }
-                        else {
-                            elSecondsLeft.innerText = ':('
-                        }
-                    }
-                } else {
-                    elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
-                    console.log('Count seconds', timeRemaining / 1000)
-
-                }
 
                 if (burbulas.dataset.game == 'play' && burbulas.dataset.gameState == 'pause') {
                     burbulas.dataset.game = 'stop';
@@ -303,27 +289,7 @@ BURBULAI mygtukas
 
 
 
-    // function incrementSeconds() {
-    //     if (timeRemaining != 0 || seconds >= 0) {
 
-    //         for (let i = 0; i < 1; i++) {
-    //             if (i.dataset.gameState == 'pause' && i.dataset.game == 'play') {
-    //                 if (seconds >= 0) {
-    //                     elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
-    //                     console.log('Count seconds', timeRemaining / 1000)
-    //                 }
-    //                 else {
-    //                     elSecondsLeft.innerText = ':('
-    //                 }
-    //             } else {
-    //                 elSecondsLeft.innerText = timeRemaining / 1000;
-    //                 console.log('Else seconds', timeRemaining / 1000)
-
-    //             }
-    //         }
-    //     }
-    // }
-    // incrementSeconds();
 
 }
     /*///////////////////////////////////////////////////////////////////////
@@ -489,8 +455,24 @@ section.forEach(function (item) {
 
 
 
+function incrementSeconds() {
+    if (timeRemaining != 0) {
 
+        for (let i = 0; i < 1; i++) {
 
+            if (seconds >= 0) {
+                elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+                console.log(timeRemaining / 1000)
+                console.log('Seconds', seconds)
+            }
+            else {
+                elSecondsLeft.innerText = ':('
+            }
+        }
+    }
+}
+
+// incrementSeconds();
 
 
 
@@ -499,7 +481,7 @@ section.forEach(function (item) {
 
 function startInterval() {
 
-
+    // incrementSeconds();
     cicleStop();
 
 
