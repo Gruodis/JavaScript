@@ -357,7 +357,12 @@ function incrementSeconds() {
 
 function startInterval() {
   // incrementSeconds();
-  cicleStop(); // reset.style.display = 'none';
+  cicleStop();
+  apsk.forEach(function (itemInitGo) {
+    setTimeout(function () {
+      finalGo(itemInitGo);
+    }, (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, 1000));
+  }); // reset.style.display = 'none';
 
   reset.style.transform = 'scale(0) translate(-50%, -50%)';
   reset.style.opacity = '0'; // reset.style.transform = 'scale(0)';

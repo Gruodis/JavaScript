@@ -483,6 +483,12 @@ function startInterval() {
 
     // incrementSeconds();
     cicleStop();
+    apsk.forEach(function (itemInitGo) {
+        setTimeout(() => {
+            finalGo(itemInitGo);
+        },
+            rand(0, 1000))
+    })
 
 
 
