@@ -28,9 +28,7 @@ const upLi = () => {
 
         }
         e.addEventListener('click', () => {
-            // e.style.backgroundColor = (i % 2 !== 0) ? 'black' : null,
-            // e.style.backgroundColor = "#2B65AD";
-            // if (e.style.backgroundColor == 'rgb(43, 101, 173)') {
+
 
             if (e.style.backgroundColor = (i % 2)) {
                 e.style.backgroundColor == null ? e.style.backgroundColor = 'pink' : e.style.backgroundColor = null;
@@ -39,20 +37,7 @@ const upLi = () => {
                 e.style.backgroundColor == 'pink' ? e.style.backgroundColor = null : e.style.backgroundColor = 'pink';
 
             }
-                // e.style.color = (i % 2) ? 'yellow' : null;
 
-            // }
-            // else if (e.style.backgroundColor == 'black') {
-
-            //     e.style.backgroundColor = 'black';
-            // }
-            // else {
-
-            //     // e.style.backgroundColor = 'transparent';
-            //     e.style.backgroundColor = "#2B65AD";
-
-
-            // }
         })
     });
 }
@@ -78,24 +63,6 @@ for (let i = 0; i < 10; i++) {
 
 }
 
-
-
-// const upLi = () => {
-//     ul.querySelectorAll('li').forEach((e, i) => { // e = kintamasis, i = kintamojo indeksas
-//         e.style.backgroundColor = (i % 2 == 0) ? 'black' : null;
-//         e.style.color = i % 2 ? 'red' : 'yellow';
-//     });
-// }
-
-// ul.querySelectorAll('li').forEach((e) => {
-//     e.addEventListener('click', (i) => {
-//         // e.style.backgroundColor = (i % 2 !== 0) ? 'black' : null,
-//         i.style.color = 'yellow' ? 'red' : 'yellow';
-//         i.style.backgroundColor = 'black' ? 'black' : null;
-
-//     }
-//     )
-// })
 
 // ul.querySelectorAll('li').forEach((e, i) => { e.style.color = (i % 2 !== 0) ? 'white' : null; });
 
