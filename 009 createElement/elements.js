@@ -8,6 +8,7 @@
 let skc = 0;
 
 let ul = document.querySelector('ul');
+// let li = document.querySelectorAll('li');
 let body = document.querySelector('body');
 
 // let li = document.createElement('li');
@@ -17,22 +18,35 @@ let body = document.querySelector('body');
 const upLi = () => {
     ul.querySelectorAll('li').forEach((e, i) => { // e = kintamasis, i = kintamojo indeksas
 
-        e.style.backgroundColor = (i % 2) ? 'black' : null;
-        if (e.style.color != 'green' || e.style.backgroundColor == 'orange') {
-            e.style.color = 'green'
-            e.addEventListener('click', () => {
-                // e.style.backgroundColor = (i % 2 !== 0) ? 'black' : null,
-                e.style.backgroundColor = 'orange';
+
+        if (e.style.backgroundColor == 'rgb(43, 101, 173)') {
+            e.style.backgroundColor = "#2B65AD";
+
+        }
+        else {
+            e.style.backgroundColor = (i % 2) ? 'black' : null;
+
+        }
+        e.addEventListener('click', () => {
+            // e.style.backgroundColor = (i % 2 !== 0) ? 'black' : null,
+            // e.style.backgroundColor = "#2B65AD";
+            if (e.style.backgroundColor == 'rgb(43, 101, 173)') {
+                e.style.backgroundColor = (i % 2) ? 'black' : null;
+                e.style.color = (i % 2) ? 'yellow' : null;
 
             }
-            )
+            // else if (e.style.backgroundColor == 'black') {
 
-        } else {
-            e.style.color = i % 2 ? 'red' : 'yellow';
+            //     e.style.backgroundColor = 'black';
+            // }
+            else {
 
-            e.style.backgroundColor = (i % 2) ? 'black' : null;
-        }
+                // e.style.backgroundColor = 'transparent';
+                e.style.backgroundColor = "#2B65AD";
 
+
+            }
+        })
     });
 }
 const newLi = () => {
@@ -45,6 +59,8 @@ const newLi = () => {
 
     upLi();
 
+
+
 }
 newLi();
 
@@ -54,6 +70,8 @@ for (let i = 0; i < 10; i++) {
     // bW();
 
 }
+
+
 
 // const upLi = () => {
 //     ul.querySelectorAll('li').forEach((e, i) => { // e = kintamasis, i = kintamojo indeksas
