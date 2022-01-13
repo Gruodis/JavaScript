@@ -81,7 +81,7 @@ seas.forEach(sea => {
 
     freq += (sea.split('').length); // skaiciuojam kiek 'a' raidziu yra stringe
 
-    console.log(freq, '++||++', freq.slice('').length)
+    console.log(freq, '++||++', sea.slice('').length)
 
 }
 );
