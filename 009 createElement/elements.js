@@ -19,33 +19,40 @@ const upLi = () => {
     ul.querySelectorAll('li').forEach((e, i) => { // e = kintamasis, i = kintamojo indeksas
 
 
-        if (e.style.backgroundColor == 'rgb(43, 101, 173)') {
-            e.style.backgroundColor = "#2B65AD";
+        if (e.style.backgroundColor == 'pink') {
+            e.style.backgroundColor = "pink";
 
         }
         else {
-            e.style.backgroundColor = (i % 2) ? 'black' : null;
+            e.style.backgroundColor = (i % 2) ? 'pink' : null;
 
         }
         e.addEventListener('click', () => {
             // e.style.backgroundColor = (i % 2 !== 0) ? 'black' : null,
             // e.style.backgroundColor = "#2B65AD";
-            if (e.style.backgroundColor == 'rgb(43, 101, 173)') {
-                e.style.backgroundColor = (i % 2) ? 'black' : null;
-                e.style.color = (i % 2) ? 'yellow' : null;
+            // if (e.style.backgroundColor == 'rgb(43, 101, 173)') {
+
+            if (e.style.backgroundColor = (i % 2)) {
+                e.style.backgroundColor == null ? e.style.backgroundColor = 'pink' : e.style.backgroundColor = null;
+            }
+            else {
+                e.style.backgroundColor == 'pink' ? e.style.backgroundColor = null : e.style.backgroundColor = 'pink';
 
             }
+                // e.style.color = (i % 2) ? 'yellow' : null;
+
+            // }
             // else if (e.style.backgroundColor == 'black') {
 
             //     e.style.backgroundColor = 'black';
             // }
-            else {
+            // else {
 
-                // e.style.backgroundColor = 'transparent';
-                e.style.backgroundColor = "#2B65AD";
+            //     // e.style.backgroundColor = 'transparent';
+            //     e.style.backgroundColor = "#2B65AD";
 
 
-            }
+            // }
         })
     });
 }
