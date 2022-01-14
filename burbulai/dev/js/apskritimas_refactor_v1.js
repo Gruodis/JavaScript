@@ -13,7 +13,8 @@ let intWV2;
 let intVH2;
 
 
-let nIntervId;
+let nIntervId; // pagrindinis intervalo laikas
+let nIntervIdBubble = null; // paspaudus ant burbulo intervalo laikas nepratesiamas
 
 
 let speed;
@@ -24,22 +25,12 @@ let seconds = 0;
 
 let timeRemaining = 20000;
 
-// let userDigit = 0;
-// let userBalls = () => {
-//     // let userVar =
-//     // userDigit += document.getElementById("userVar").value
-
-//     var inputVal = ;
-
-//     userDigit = inputVal;
-
-//     console.log('userDigit: ', userDigit);
-// }
 
 let apsk = document.querySelectorAll('.apskritimas');
 
 
-document.getElementById("start").addEventListener("click", startInterval);
+
+document.getElementById("start").addEventListener("click", () => { startInterval(); timerInit.timer('start'); });
 document.getElementById("stop").addEventListener("click", stopInterval);
 
 export const heightOutput = document.querySelector('#height');
@@ -51,7 +42,6 @@ const section = document.querySelectorAll('section');
 
 let classBody = document.querySelector('.body');
 
-// let changeInputValue = document.getElementById("userVar");
 
 let bbb = parseInt(document.getElementById("userVar").value);
 
@@ -59,10 +49,9 @@ const bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
 let bubblesLeft = apsk.length;
 
 
-let elSecondsLeft = document.getElementById('secondsCounter');
 
 document.getElementById("userVar").addEventListener('change', () => {
-    elSecondsLeft.innerText = timeRemaining / 1000;
+    // elSecondsLeft.innerText = timeRemaining / 1000;
     // document.getElementById("userVar").value;
     bbb = parseInt(document.getElementById("userVar").value)
     console.log('0 ', bbb)
@@ -115,7 +104,7 @@ let rezDiv = document.querySelector('.rezDiv');
 
 let bubbleRezDiv = document.querySelector('.bubbleRezDiv');
 
-let timerDiv = document.querySelector('.timer');
+// let timerDiv = document.querySelector('.timer');
 
 let bodyClickCount = 0;
 let bubbleClickCount = 0;
@@ -179,7 +168,7 @@ BURBULAI mygtukas
 
     ////////////////////////////////////////////////////////////////////
     apsk.forEach(function (burbulas) {
-        incrementSeconds();
+        // incrementSeconds();
         burbulas.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
         burbulas.addEventListener('click', function (e) {
@@ -227,8 +216,10 @@ BURBULAI mygtukas
                     bubblesLeftCounter.innerText = bubblesLeft;
 
 
+                    nIntervIdBubble = true;
 
                     startInterval(); // startuojam intervala, kad butu perskaiciuotas burbulo greitis
+                    // del sios priezasties prasitesia laikas
 
 
 
@@ -311,11 +302,13 @@ reset.addEventListener('click', function (e) {
     bubbleClickCount = 0;
     bubbleRezDiv.innerText = bubbleClickCount;
 
+    nIntervIdBubble = null;
     seconds = null;
     timeRemaining = null;
     timeRemaining = 20000;
-    elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+    // elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
     console.log('Seconds: ', seconds);
+    timerInit.timer('reset');
 
 
 
@@ -331,7 +324,9 @@ reset.addEventListener('click', function (e) {
     window.clearTimeout(newTimeInt);
     window.clearTimeout(cicleStop);
     window.clearInterval(nIntervId);
+    window.clearInterval(timerInit);
     clearInterval(nIntervId);
+    clearInterval(timerInit);
     clearTimeout(cicleStop);
     console.log('nIntervId: ', newTimeInt)
 
@@ -367,6 +362,8 @@ pause.addEventListener('click', function (e) {
         window.clearTimeout(newTimeInt);
         newTimeInt = null;
 
+        timerInit.timer('stopas');
+
         console.log('Pause init', newTimeInt);
     } else {
         // timer.resume();
@@ -391,7 +388,7 @@ pause.addEventListener('click', function (e) {
             pause.innerText = 'PLAY !';
 
             console.log('Pause && Stop')
-            elSecondsLeft.innerText = (timeRemaining) / 1000;
+            // elSecondsLeft.innerText = (timeRemaining) / 1000;
 
 
         }
@@ -408,7 +405,7 @@ pause.addEventListener('click', function (e) {
             pause.innerText = 'Pause ||';
             item.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             console.log('Unpause && PLay 2')
-            elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+            // elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
 
 
         }
@@ -425,7 +422,6 @@ BODY mygtukas
 classBody.addEventListener('click', function (e) {
     if (nIntervId != null) {
         if (bubblesLeft == 0 || pause.innerText == 'PLAY !') {
-
             e.stopPropagation();
         }
         else {
@@ -455,40 +451,90 @@ section.forEach(function (item) {
 
 
 
-function incrementSeconds() {
-    if (timeRemaining != 0) {
+// function incrementSeconds() {
+//     if (timeRemaining != 0) {
 
-        for (let i = 0; i < 1; i++) {
+//         for (let i = 0; i < 1; i++) {
 
-            if (seconds >= 0) {
-                elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
-                console.log(timeRemaining / 1000)
-                console.log('Seconds', seconds)
-            }
-            else {
-                elSecondsLeft.innerText = ':('
-            }
-        }
-    }
-}
+//             if (seconds >= 0) {
+//                 elSecondsLeft.innerText = (timeRemaining - (seconds++ * 1000)) / 1000;
+//                 // console.log(timeRemaining / 1000)
+//                 // console.log('Seconds', seconds)
+//             }
+//             else {
+//                 elSecondsLeft.innerText = ':('
+//             }
+//         }
+//     }
+// }
 
 // incrementSeconds();
 
 
+/*///////////////////////////////////////////////////////////////////////
+
+// TIMER
+
+//////////////////////////////////////////////////////////////////////*/
+const elSecondsLeft = document.getElementById('secondsCounter');
+elSecondsLeft.innerText = '0';
+
+const timerInit = {
+    id: 0,
+    sec: 0,
+
+
+    timer: function (mode) {
+        switch (mode) {
+            case 'reset':
+                elSecondsLeft.innerText = '0';
+                this.sec = 0;
+                window.clearInterval(this.id);
+                clearInterval(this.id);
+
+            case 'start':
+                this.id = setInterval(() => {
+                    this.sec++;
+                    elSecondsLeft.innerText = this.sec;
+                    console.log('timerinit1');
+
+                }, 1000)
+                console.log('timerinit2');
+            case 'stopas':
+                if (sec > 20) {
+                    clearInterval(this.id);
+                }
+}
+
+
+    }
+
+}
 
 
 
 
 function startInterval() {
 
-    // incrementSeconds();
-    cicleStop();
-    apsk.forEach(function (itemInitGo) {
-        setTimeout(() => {
-            finalGo(itemInitGo);
-        },
-            rand(0, 1000))
-    })
+
+    if (nIntervIdBubble == null) {
+
+        cicleStop();
+        // nIntervIdBubble = true;
+        // incrementSeconds();
+
+        apsk.forEach(function (itemInitGo) {
+            setTimeout(() => {
+                finalGo(itemInitGo);
+            },
+                rand(0, 1000))
+        })
+
+    }
+
+    console.log('tikrinam buble click int', nIntervIdBubble)
+
+
 
 
 
@@ -538,54 +584,14 @@ function stopInterval() {
 
     }, 1000);
 }
+
+
+
 /*///////////////////////////////////////////////////////////////////////
 
-// TIMER
+// Initiate STOP everything after 'n' number of seconds
 
 //////////////////////////////////////////////////////////////////////*/
-
-// let state = document.getElementById('secondsCounter');
-
-// var Timer = function (callback, delay) {
-//     var timerId, start, remaining = delay;
-
-//     this.pause = function () {
-//         window.clearTimeout(timerId);
-//         timerId = null;
-//         remaining -= Date.now() - start;
-//         state.innerText = remaining;
-
-
-//     };
-
-//     this.resume = function () {
-//         if (timerId) {
-//             return;
-//         }
-
-//         start = Date.now();
-//         timerId = window.setTimeout(callback, remaining);
-//     };
-
-//     this.resume();
-
-//     function timeTest() {
-//         return console.log('Vars ', timerId, start, remaining);
-//     }
-
-//     setInterval(timeTest, 1000)
-
-
-
-// };
-
-// var timer = new Timer(stopInterval, 10000);
-
-// stabdom viska po n laiko
-// var timer = new Timer(stopInterval, 10000);
-
-
-
 const cicleStop = () => {
     window.clearTimeout(newTimeInt)
     newTimeInt = setTimeout(stopInterval, timeRemaining);
