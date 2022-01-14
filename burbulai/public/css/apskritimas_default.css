@@ -18,6 +18,34 @@
   border: solid 1rem white;
 }
 
+.plus,
+.minus {
+  position: absolute;
+  bottom: 10%;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #c50000;
+  border: solid 0.1rem white;
+}
+
+.plus:hover,
+.minus:hover {
+  border: solid 0.1rem white;
+  background-color: red;
+}
+
+.minus {
+  left: -60%;
+}
+
+.plus {
+  left: 80%;
+}
+
+#userVar {
+  display: none;
+}
+
 *,
 body {
   box-sizing: border-box;
@@ -118,6 +146,7 @@ section #secondsCounter {
   border: solid 0.1rem white;
 }
 section .bubblesLeft {
+  position: relative;
   background-color: #8b13a0;
   border-radius: 50%;
   width: 66px;
@@ -147,10 +176,25 @@ section .timer {
   transform-origin: 0 0;
 }
 
+.start {
+  padding: 1em;
+  bottom: 0;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  position: absolute;
+  background-color: red;
+  color: azure;
+  font-size: 22px;
+  font-weight: bold;
+  transition: all 0.6s;
+  transform-origin: 0 0;
+}
+
 .pause {
   padding: 1em;
   bottom: 0;
-  left: 50%;
+  left: 55%;
   transform: translate(-50%, -50%);
   z-index: 9;
   position: absolute;

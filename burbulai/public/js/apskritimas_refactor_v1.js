@@ -44,53 +44,6 @@ var widthOutput = document.querySelector('#width');
 var section = document.querySelectorAll('section'); // document.querySelectorAll('section').addEventListener('click', e => e.stopPropagation());
 
 var classBody = document.querySelector('.body');
-var bbb = parseInt(document.getElementById("userVar").value);
-var bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
-var bubblesLeft = apsk.length;
-document.getElementById("userVar").addEventListener('change', function () {
-  // elSecondsLeft.innerText = timeRemaining / 1000;
-  // document.getElementById("userVar").value;
-  bbb = parseInt(document.getElementById("userVar").value);
-  console.log('0 ', bbb);
-  console.log('1 ', bbb);
-
-  var newBall = function newBall() {
-    var newBallGo = document.createElement('div');
-    var text = document.createTextNode("");
-    newBallGo.appendChild(text);
-    newBallGo.classList.add("apskritimas");
-    newBallGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-
-    function setAttributes(el, options) {
-      Object.keys(options).forEach(function (attr) {
-        el.setAttribute(attr, options[attr]);
-      });
-    }
-
-    setAttributes(newBallGo, {
-      'data-game': 'play',
-      'data-game-state': 'pause',
-      'data-xxx': 'xxx'
-    }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
-
-    classBody.appendChild(newBallGo); // console.log('test', skc);
-  }; // var Malfunctions = parseInt(document.getElementById("Malfunctions").value);
-  // let gha = () => {
-
-
-  for (var i = 0; i < bbb; i++) {
-    newBall();
-    console.log('test for', bbb);
-  } // }
-  // setInterval(gha, 1000)
-
-
-  console.log('3 ', bbb);
-  finalGo(); // end add ball
-
-  bubblesLeft = apsk.length;
-  bubblesLeftCounter.innerText = bubblesLeft;
-});
 var reset = document.querySelector('.reset');
 var pause = document.querySelector('.pause');
 var rezDiv = document.querySelector('.rezDiv');
@@ -112,6 +65,100 @@ responsiveWindow(); // iskvieciame responsive funkcija su listneriu 'resize'
 window.addEventListener('resize', responsiveWindow); // bubblesLeftCounter.innerText = bubblesLeft;
 
 var div = document.querySelector('.bubbleRezDiv');
+var bbb = parseInt(document.getElementById("userVar").value);
+var buttonMinus = document.querySelector('.minus');
+var buttonPlus = document.querySelector('.plus');
+var bubblesLeftCounter = document.querySelector('.bubblesLeft strong');
+var bubblesLeft = apsk.length;
+var storeB = 0;
+/*///////////////////////////////////////////////////////////////////////
+ 
+Get nuber from input and generate bubble
+
+//////////////////////////////////////////////////////////////////////*/
+
+buttonMinus.addEventListener("click", function () {
+  var value = parseInt(document.getElementById('userVar').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value--;
+  document.getElementById('userVar').value = value;
+  judam();
+});
+buttonPlus.addEventListener("click", function () {
+  var value = parseInt(document.getElementById('userVar').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  document.getElementById('userVar').value = value;
+  judam();
+}); // document.getElementById("userVar").addEventListener('change', () => {
+
+var judam = function judam() {
+  var eur = document.querySelector('.apskritimas'); // elSecondsLeft.innerText = timeRemaining / 1000;
+  // document.getElementById("userVar").value;
+
+  console.log('eur', eur);
+  console.log('eur', buttonMinus);
+  console.log('eur', buttonPlus);
+  console.log('section', bubblesLeftCounter);
+  bbb = parseInt(document.getElementById("userVar").value);
+  console.log('User value 1 ', bbb); // if (storeB < bbb) {
+  //     storeB = bbb;
+  //     console.log('Store B + bbb: ', storeB)
+  // }
+  // else {
+  //     storeB -= bbb;
+  //     console.log('Store B - bbb: ', storeB)
+  // }
+
+  var newBall = function newBall() {
+    var newBallGo = document.createElement('div');
+    var text = document.createTextNode("");
+    newBallGo.appendChild(text);
+    newBallGo.classList.add("apskritimas");
+    newBallGo.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    newBallGo.style.opacity = 0;
+
+    function setAttributes(el, options) {
+      Object.keys(options).forEach(function (attr) {
+        el.setAttribute(attr, options[attr]);
+      });
+    }
+
+    setAttributes(newBallGo, {
+      'data-game': 'play',
+      'data-game-state': 'pause',
+      'data-xxx': 'xxx'
+    }); // newBallGo.setAttribute("data-game, data-game-state", "play", "data-game-state", "pause");
+
+    classBody.appendChild(newBallGo); // console.log('test', skc);
+  }; // let gha = () => {
+
+
+  if (storeB < bbb) {
+    storeB = bbb;
+
+    for (var i = 0; i < 1; i++) {
+      newBall();
+      console.log('BBB for cycle', bbb);
+    }
+  } else {
+    storeB -= 1; // select the target element
+    // remove the list item
+
+    eur.parentElement.removeChild(eur); // storeB -= bbb;
+
+    console.log('Store B - bbb: ', storeB);
+  } // }
+  // setInterval(gha, 1000)
+
+
+  console.log('BBB after for Cycle ', bbb);
+  finalGo(); // end add ball
+
+  bubblesLeft = apsk.length;
+  bubblesLeftCounter.innerText = bubblesLeft;
+}; //}) //addlistener on change END
+
 
 var finalGo = function finalGo() {
   timerInit.timer('stopas');
@@ -126,6 +173,8 @@ var finalGo = function finalGo() {
       itemInitGo.style.left = (0,_functions__WEBPACK_IMPORTED_MODULE_0__.rand)(0, intWV2) + 'px'; // itemInitGo.innerText = 1 + i++;
 
       itemInitGo.innerText = '😊';
+      itemInitGo.style.cursor = 'pointer';
+      itemInitGo.style.opacity = 1;
       var sekunde = 1 - bubbleClickCount / 20;
       itemInitGo.style.transition = 'all ' + sekunde + "s";
     } else {
@@ -134,7 +183,9 @@ var finalGo = function finalGo() {
 
   };
   /*///////////////////////////////////////////////////////////////////////
+   
   BURBULAI mygtukas
+   
   //////////////////////////////////////////////////////////////////////*/
   ////////////////////////////////////////////////////////////////////
 

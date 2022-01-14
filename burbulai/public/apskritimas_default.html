@@ -9,7 +9,7 @@
     <script src="js/apskritimas_refactor_v1.js" async defer></script>
 </head>
 <body>
-<div class="body">
+<div id="container" class="body">
     <section>
         <span>Bega laikas</span>
         <span>Liko burbulu</span>
@@ -22,7 +22,9 @@
             <!-- <div class="timer"></div> -->
             <div id="secondsCounter"></div>
             <div class="bubblesLeft">
-                <strong></strong>
+                <strong>0</strong>
+                <div class="button minus">-</div>
+                <div class="button plus">+</div>
             </div>
         <div class="bubbleRezDiv">0</div>
         <div class="rezDiv">0</div>
@@ -46,7 +48,7 @@
     <button class="reset button">RESET</button>
     <button class="pause button">Pasue ||</button>
     <input type="number" value="0" name="userVar" id="userVar" min="1" max="50">
-<button id="start">Start</button>
+<button id="start" class="start reset button">Start</button>
 <button id="stop">Stop</button>
 </div>
 </body>
