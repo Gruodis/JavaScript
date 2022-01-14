@@ -114,6 +114,7 @@ window.addEventListener('resize', responsiveWindow); // bubblesLeftCounter.inner
 var div = document.querySelector('.bubbleRezDiv');
 
 var finalGo = function finalGo() {
+  timerInit.timer('stopas');
   apsk = document.querySelectorAll('.apskritimas'); // let bubblesLeft = apsk.length;
 
   bubblesLeftCounter.innerText = bubblesLeft;
@@ -139,7 +140,11 @@ var finalGo = function finalGo() {
 
 
   apsk.forEach(function (burbulas) {
-    // incrementSeconds();
+    if (elSecondsLeft.innerText > 20) {
+      timerInit.timer('stopas');
+    } // incrementSeconds();
+
+
     burbulas.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
     burbulas.addEventListener('click', function (e) {
       var divOffset = offset(div);
@@ -179,8 +184,7 @@ var finalGo = function finalGo() {
           nIntervIdBubble = true;
           startInterval(); // startuojam intervala, kad butu perskaiciuotas burbulo greitis
           // del sios priezasties prasitesia laikas
-
-          console.log(nIntervId, 'Time: ', timeRemaining, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
+          // console.log(nIntervId, 'Time: ', timeRemaining, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
         }
 
         if (bubblesLeft == 0) {
@@ -196,8 +200,7 @@ var finalGo = function finalGo() {
         }
       } // if interval not NULL
 
-    });
-    console.log('Time remain Bubble :', timeRemaining);
+    }); // console.log('Time remain Bubble :', timeRemaining)
   }); //end forEach
   //  Nustatome kiekvieno burbulo pirmine pozicija
 
@@ -378,21 +381,27 @@ var timerInit = {
         this.sec = 0;
         window.clearInterval(this.id);
         clearInterval(this.id);
+        console.log('Reset: ', this.sec);
 
       case 'start':
         this.id = setInterval(function () {
           _this.sec++;
           elSecondsLeft.innerText = _this.sec; // console.log('timerinit1');
+
+          console.log('Start: ', _this.sec);
         }, 1000);
       // console.log('timerinit2');
 
       case 'stopas':
-        if (this.sec > 20) {
-          clearInterval(this.id);
-          console.log('Stop: ', this.sec);
-        }
-
-        console.log('Stop2 :', this.sec);
+        setTimeout(function () {
+          if (_this.sec > 19 || bubblesLeft == 0) {
+            clearInterval(_this.id);
+            clearInterval(_this.id);
+            console.log('Stop: ', _this.sec);
+            elSecondsLeft.innerText = _this.sec;
+          }
+        }, 1000);
+      // console.log('Stop2 :', this.sec);
     }
   }
 };
@@ -454,9 +463,19 @@ function stopInterval() {
 var cicleStop = function cicleStop() {
   window.clearTimeout(newTimeInt);
   newTimeInt = setTimeout(stopInterval, timeRemaining);
-  timerInit.timer('stopas');
 }; // cicleStop();
-// rodome kiek sekundziu trunka zaidimas
+
+
+var zz = function zz(n) {
+  var tr = 0;
+  tr = +elSecondsLeft.innerText + 0;
+
+  if (Number('tr') > 18) {
+    timerInit.timer('stopas');
+  }
+};
+
+zz(); // rodome kiek sekundziu trunka zaidimas
 // let cancel = setInterval(incrementSeconds, timeRemaining);
 // console.log('Timer :', timer.stop, timer.resume, nIntervId, intVH2, intWV2)
 

@@ -136,6 +136,8 @@ let div = document.querySelector('.bubbleRezDiv');
 
 let finalGo = () => {
 
+    timerInit.timer('stopas'); 
+
     apsk = document.querySelectorAll('.apskritimas');
 
     // let bubblesLeft = apsk.length;
@@ -169,6 +171,11 @@ BURBULAI mygtukas
 
     ////////////////////////////////////////////////////////////////////
     apsk.forEach(function (burbulas) {
+
+        if (elSecondsLeft.innerText > 20) {
+            timerInit.timer('stopas');
+        }
+
         // incrementSeconds();
         burbulas.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
@@ -227,12 +234,14 @@ BURBULAI mygtukas
 
 
 
-                    console.log(nIntervId, 'Time: ', timeRemaining, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
+                    // console.log(nIntervId, 'Time: ', timeRemaining, 'Length: ', apsk.length, ' BubleClick: ', bubbleClickCount, ' BublesLeft: ', bubblesLeft, 'change speed', speed, changeSpeed);
                 }
 
 
 
                 if (bubblesLeft == 0) {
+
+
                     window.setTimeout(() => {
                         // reset.style.display = 'block';
                         reset.style.transform = 'scale(1) translate(-50%, -50%)';
@@ -252,7 +261,8 @@ BURBULAI mygtukas
 
         })
 
-        console.log('Time remain Bubble :', timeRemaining)
+        // console.log('Time remain Bubble :', timeRemaining)
+
 
     }) //end forEach
 
@@ -492,22 +502,34 @@ const timerInit = {
                 this.sec = 0;
                 window.clearInterval(this.id);
                 clearInterval(this.id);
+                console.log('Reset: ', this.sec);
+
 
             case 'start':
                 this.id = setInterval(() => {
+
                     this.sec++;
+
                     elSecondsLeft.innerText = this.sec;
                     // console.log('timerinit1');
+                    console.log('Start: ', this.sec);
+
 
                 }, 1000)
                 // console.log('timerinit2');
             case 'stopas':
-                if (this.sec > 20) {
-                    clearInterval(this.id);
-                    console.log('Stop: ', this.sec);
+                setTimeout(() => {
+                    if (this.sec > 19 || bubblesLeft == 0) {
+                        clearInterval(this.id);
 
-                }
-                console.log('Stop2 :', this.sec);
+                        clearInterval(this.id);
+                    console.log('Stop: ', this.sec);
+                        elSecondsLeft.innerText = this.sec;
+
+
+                    }
+                }, 1000)
+                // console.log('Stop2 :', this.sec);
 
 }
 
@@ -559,6 +581,7 @@ function startInterval() {
     } else {
         clearInterval(nIntervId);
 
+
         speed = (1000 - (bubbleClickCount * 80));
         changeSpeed = speed;
         nIntervId = setInterval(finalGo, changeSpeed);
@@ -598,11 +621,22 @@ function stopInterval() {
 
 //////////////////////////////////////////////////////////////////////*/
 const cicleStop = () => {
+
     window.clearTimeout(newTimeInt)
     newTimeInt = setTimeout(stopInterval, timeRemaining);
-    timerInit.timer('stopas')
+
 }
 // cicleStop();
+const zz = (n) => {
+    let tr = 0;
+
+    tr = +elSecondsLeft.innerText + 0;
+
+    if (Number('tr') > 18) {
+        timerInit.timer('stopas');
+    }
+}
+zz();
 
 // rodome kiek sekundziu trunka zaidimas
 
