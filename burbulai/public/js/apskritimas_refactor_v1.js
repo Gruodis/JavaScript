@@ -35,7 +35,10 @@ document.getElementById("start").addEventListener("click", function () {
   startInterval();
   timerInit.timer('start');
 });
-document.getElementById("stop").addEventListener("click", stopInterval);
+document.getElementById("stop").addEventListener("click", function () {
+  stopInterval();
+  timerInit.timer('stopas');
+});
 var heightOutput = document.querySelector('#height');
 var widthOutput = document.querySelector('#width');
 var section = document.querySelectorAll('section'); // document.querySelectorAll('section').addEventListener('click', e => e.stopPropagation());
@@ -379,16 +382,17 @@ var timerInit = {
       case 'start':
         this.id = setInterval(function () {
           _this.sec++;
-          elSecondsLeft.innerText = _this.sec;
-          console.log('timerinit1');
+          elSecondsLeft.innerText = _this.sec; // console.log('timerinit1');
         }, 1000);
-        console.log('timerinit2');
+      // console.log('timerinit2');
 
       case 'stopas':
-        if (sec > 20) {
+        if (this.sec > 20) {
           clearInterval(this.id);
+          console.log('Stop: ', this.sec);
         }
 
+        console.log('Stop2 :', this.sec);
     }
   }
 };
@@ -450,6 +454,7 @@ function stopInterval() {
 var cicleStop = function cicleStop() {
   window.clearTimeout(newTimeInt);
   newTimeInt = setTimeout(stopInterval, timeRemaining);
+  timerInit.timer('stopas');
 }; // cicleStop();
 // rodome kiek sekundziu trunka zaidimas
 // let cancel = setInterval(incrementSeconds, timeRemaining);
