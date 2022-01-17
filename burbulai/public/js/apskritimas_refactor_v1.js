@@ -78,14 +78,14 @@ Get nuber from input and generate bubble
 //////////////////////////////////////////////////////////////////////*/
 
 buttonMinus.addEventListener("click", function () {
-  var value = parseInt(document.getElementById('userVar').value, 10);
+  var value = document.getElementById('userVar').value;
   value = isNaN(value) ? 0 : value;
   value--;
   document.getElementById('userVar').value = value;
   judam();
 });
 buttonPlus.addEventListener("click", function () {
-  var value = parseInt(document.getElementById('userVar').value, 10);
+  var value = document.getElementById('userVar').value;
   value = isNaN(value) ? 0 : value;
   value++;
   document.getElementById('userVar').value = value;
