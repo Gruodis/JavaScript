@@ -186,7 +186,7 @@ checkboxGroup.forEach((check) => {
             }
         })
 
-        saugykla.holdData = holdData.slice() // kopijuojame masyva su supusitais duomenimis i objekta
+        saugykla.holdData = holdData.slice() // kopijuojame masyva su supusintais duomenimis i objekta
 
         if (holdData.length > 0) {
 
@@ -235,16 +235,105 @@ function tikrinamObjekta() {
     saugykla.holdData.forEach(userValue => {
         console.log(`GAUNAM DUOMENIS  `, userValue)
     })
+
+    // localStorage.setItem('checkBoxesValues', JSON.stringify(saugykla.holdData));
+
+
     saugykla.holdRadio.forEach(userValue => {
         console.log(`GAUNAM DUOMENIS R `, userValue)
     })
+
+
 }
 
-tikrinamObj.addEventListener('click', tikrinamObjekta)
+tikrinamObj.addEventListener('click', () => {
+    localStorage.setItem('radio', JSON.stringify(saugykla.holdRadio));
+    localStorage.setItem('check', JSON.stringify(saugykla.holdData));
+
+    tikrinamObjekta;
+    console.log(`SAUGYKLA Supushinta`, saugykla);
+
+
+
+})
+
+const ar = document.getElementById("clearArrayVal");
+ar.addEventListener('click', () => {
+    saugykla.holdData = [];
+    saugykla.holdRadio = [];
+    console.log(`SAUGYKLA Isvalyta`, saugykla);
+
+})
 
 /**
  *
  *
- *  Kuriam elementus
+ *  Imam duomenis is local storage id Kuriam elementus
  *
  * ****************/
+
+let radioData = localStorage.getItem('radio');
+let checkData = localStorage.getItem('check');
+
+radioData = JSON.parse(radioData);
+checkData = JSON.parse(checkData);
+
+console.log('X', checkData, radioData)
+
+const get = document.getElementById("getStorageData");
+
+get.addEventListener('click', () => {
+
+    /************************************************
+*
+*  RADIO values from localstorage
+*
+* ***********************************************/
+
+
+    console.log(radioData);
+
+    radius.forEach(item => {
+        radioData.forEach(ch => {
+            if (item.value === ch) {
+                console.log(ch, item.value)
+
+                item.value = item.checked = true;
+
+            }
+        })
+
+    })
+
+
+    /************************************************
+ *
+ *  CHECKBOX values from localstorage
+ *
+ * ***********************************************/
+
+    console.log(checkData);
+
+    checkboxGroup.forEach(item => {
+        checkData.forEach(ch => {
+            if (item.value === ch) {
+                console.log(ch, item.value)
+
+                item.value = item.checked = true;
+
+            }
+        })
+
+    })
+})
+
+
+const obj = { radio: "zipFM, M-1, Lietus", check: "Gaming, Sleep, Eat" }
+
+console.log(obj)
+
+const clr = document.getElementById("clr");
+
+clr.addEventListener('click', () => {
+    localStorage.clear();
+})
