@@ -1,4 +1,45 @@
-const myInputButton = document.getElementById("myButton");
+/**
+ * 
+ * 
+ *  OBJEKTAS su masyvais
+ * 
+ * ****************/
+
+
+const saugykla = {};
+
+saugykla.holdData = [];
+saugykla.holdRadio = [];
+
+
+// namas.stogas.anterna = {};
+
+// for (let i = 0; i < 100; i++) {
+
+//     // namas.stogas.kaminas[i] = 'Plyta NR.:' + (i + 1);
+//     namas.stogas.kaminas.push('Plyta Nr.: ' + (i + 1));
+
+// };
+
+// for (let i = 0; i < 4; i++) {
+
+//     // namas.stogas.kaminas[i] = 'Plyta NR.:' + (i + 1);
+//     namas.siena.push('Langas Nr.: ' + (i + 1));
+
+// };
+
+// for (let i = 0; i < 10; i++) {
+
+//     // namas.stogas.kaminas[i] = 'Plyta NR.:' + (i + 1);
+//     namas.stogas.stoglangiai.push('Stoglangis Nr.: ' + (i + 1));
+
+// };
+
+
+
+
+
+
 /**
  * 
  * 
@@ -6,6 +47,7 @@ const myInputButton = document.getElementById("myButton");
  * 
  * ****************/
 
+const myInputButton = document.getElementById("myButton");
 
 const myTextOne = document.getElementById("myTextOne");
 
@@ -41,47 +83,168 @@ select2.addEventListener("change", () => {
 
     console.log("Input Select", select2.value);
 })
-/**
+/****************************************************
  *
  *
  *  RADIO
  *
- * ****************/
+ * 
+ * ***************************************************/
 
 let radio = document.querySelector('[name="fm"]');
 
 const myRadioButton = document.getElementById("myRadioButton");
 
 
-// myRadioButton.addEventListener("click", () => {
-//     // radio.forEach((fm) => {
-
-//     console.log("Radio", radio.value);
-//     // })
-// })
 
 
-// document.getElementById('myRadioButton').onclick = function () {
-//     var selected = document.querySelector('[name=fm]:checked');
-//     console.log("Radio", selected.value);
-// }
 
+document.getElementById('myRadioButton').onclick = function () {
+    var selected = document.querySelector('[name=fma]:checked');
+    console.log("Radio", selected.value);
+}
+
+
+/************************************************
+ *
+ *  RADIO multiple radios
+ *
+ * ***********************************************/
 let radius = document.querySelectorAll('[name=fm]')
 
 
 radius.forEach((fm) => {
 
-    fm.addEventListener("change", () => {
+    fm.addEventListener("click", () => {
         let rad = document.querySelector('[name=fm]:checked')
         console.log("Radio", rad.value);
+
+        if (saugykla.holdRadio.length > 0) {
+            saugykla.holdRadio.shift();
+            saugykla.holdRadio.push(rad.value)
+
+        } else {
+            saugykla.holdRadio.push(rad.value)
+        }
+        console.log(`SAUGYKLA R`, saugykla);
+
     })
 
 })
-// function () {
-//     var selected = document.querySelector('[name=fm]:checked');
-//     console.log("Radio", selected.value);
-// }
 
-// radio.addEventListener("click", () => {
-//     console.log("Radio", radio.value);
-// })
+/**
+ *
+ *
+ *  CHECKBOX
+ *
+ * ****************/
+
+let checkbox = document.querySelectorAll('[name=che]');
+
+
+const checkboxGo = () => {
+    checkbox.forEach((check) => {
+
+        let che = check.checked ? 'YES' : 'NO';
+        console.log("Che Pirmas", che, check.value);
+
+        check.addEventListener("click", () => {
+            che = check.checked ? 'YES' : 'NO';
+
+            console.log(`Che Pirmas `, che, check.value);
+
+        })
+    })
+}
+checkboxGo();
+
+
+/**
+ *
+ *
+ *  CHECKBOX su duomenimis Masyve
+ *
+ * ****************/
+
+let fieldset = document.getElementById('getValueFromJS');
+const checkboxGroup = document.querySelectorAll('[name=cheGroup]');
+
+// let holdData = [];
+
+checkboxGroup.forEach((check) => {
+    check.addEventListener("change", () => {
+
+        let fieldsetRemove = document.getElementById('show');
+
+        const holdData = [];
+
+        checkboxGroup.forEach(che => {
+            if (che.checked) {
+                holdData.push(che.value)
+                console.log(`Push value `, che.value);
+
+            }
+        })
+
+        saugykla.holdData = holdData.slice() // kopijuojame masyva su supusitais duomenimis i objekta
+
+        if (holdData.length > 0) {
+
+            if (fieldsetRemove) {
+                fieldsetRemove.remove();
+            }
+
+            let sendValue = document.createElement('div');
+            sendValue.setAttribute("id", "show")
+            sendValue.classList.add('alert', 'alert-success');
+            checkboxGroup.forEach(che => {
+                if (che.checked) {
+                    const span = document.createElement('span');
+                    let text = document.createTextNode(" " + che.value + " ");
+                    span.appendChild(text);
+                    sendValue.appendChild(span);
+                }
+
+            })
+            fieldset.appendChild(sendValue);
+            console.log("MASYVAS ", holdData, holdData.length);
+        }
+        else {
+            fieldsetRemove.remove();
+
+        }
+        console.log(`SAUGYKLA`, saugykla);
+
+    })
+})
+// console.log("MASYVAS ", holdData);
+
+
+
+/**
+ *
+ *
+ *  IMAM duomenis is objekto SAUGYKLA (deklaruotas paciame virsuje)
+ *
+ * ****************/
+
+const tikrinamObj = document.getElementById("tikrinamObjekta");
+
+
+function tikrinamObjekta() {
+    saugykla.holdData.forEach(userValue => {
+        console.log(`GAUNAM DUOMENIS  `, userValue)
+    })
+    saugykla.holdRadio.forEach(userValue => {
+        console.log(`GAUNAM DUOMENIS R `, userValue)
+    })
+}
+
+tikrinamObj.addEventListener('click', tikrinamObjekta)
+
+/**
+ *
+ *
+ *  Kuriam elementus
+ *
+ * ****************/
