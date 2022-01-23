@@ -19,9 +19,12 @@ function rand(min, max) {
 // deklaruojame objekta su dviem savybemis => name ir age.
 const cat = {
     name: 'Pupulis', // string
-    age: 11 // number
+    age: 11, // number
+    bigLetters: null, // TS problems solved
+    inceaseCatAge: null // TS problems solved
 }
 console.log(`obj cat: `, cat); // print object
+
 
 
 // print Cat name in uppercase letters
@@ -168,7 +171,7 @@ for (i = 0; i < kvartaslas33.length; i++) {
 
 
     const colorC = kvartaslas33[i].spalva;
-    console.log(`Color Count:`, colorCount.red, colorCount[colorC])
+    // console.log(`Color Count:`, colorCount.red, colorCount[colorC])
     colorCount[colorC]++;
 
 
@@ -178,17 +181,19 @@ for (i = 0; i < kvartaslas33.length; i++) {
 let maxColor;
 
 if (colorCount.red > colorCount.green && colorCount.red > colorCount.blue && colorCount.red > colorCount.yellow) {
-    maxColor = `Red: ${colorCount.red}`
+    maxColor = `raudonos(${colorCount.red}) spalvos`
 }
 else if (colorCount.green > colorCount.red && colorCount.green > colorCount.blue && colorCount.green > colorCount.yellow) {
-    maxColor = `Green: ${colorCount.green}`
+    maxColor = `zalios(${colorCount.green}) spalvos`
 }
 else if (colorCount.blue > colorCount.red && colorCount.blue > colorCount.red && colorCount.blue > colorCount.yellow) {
-    maxColor = `Blue: ${colorCount.blue}`
+    maxColor = `melynos(${colorCount.blue}) spalvos`
 }
-else { maxColor = `Yellow: ${colorCount.yellow}` }
+else { maxColor = `geltonos(${colorCount.yellow}) spalvos` }
 
 
-console.log(colorCount, maxColor, `Kvartale turime sunu: ${dogo}, Daugiausia turime ${maxColor} spalvos namu, 33 Namu Kvartalas:`, kvartaslas33);
+console.log(`Kvartale turime sunu: ${dogo}, 
+Daugiausia turime ${maxColor} namu,
+33 Namu Kvartalas:`, kvartaslas33);
 
 // agregacija - duomenu bloko apibendrinimas
