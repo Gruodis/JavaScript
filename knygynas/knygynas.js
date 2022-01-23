@@ -37,6 +37,74 @@ let localBookData = [];
 
 let localBookTypes = [];
 
+
+/* Client side, works in Chrome 55 and Firefox 52 without transpilation */
+//https://blogs.msdn.microsoft.com/typescript/2016/11/08/typescript-2-1-rc-better-inference-async-functions-and-more/
+async function fetchURLs() {
+    try {
+        // Promise.all() lets us coalesce multiple promises into a single super-promise
+        let data = await Promise.all([
+            /* Alternatively store each in an array */
+            // var [x, y, z] = await Promise.all([
+            // parse results as json; fetch data response has several reader methods available:
+            //.arrayBuffer()
+            //.blob()
+            //.formData()
+            //.json()
+            //.text()
+            fetch('https://in3.dev/knygos/').then((response) => response.json()),// parse each response as json
+            fetch('https://in3.dev/knygos/types/').then((response) => response.json()),
+
+
+
+        ]);
+
+        if (data[0].length === 0 || data[1].length === 0) {
+            data = await Promise.all([
+                /* Alternatively store each in an array */
+                // var [x, y, z] = await Promise.all([
+                // parse results as json; fetch data response has several reader methods available:
+                //.arrayBuffer()
+                //.blob()
+                //.formData()
+                //.json()
+                //.text()
+                fetch('https://in3.dev/knygos/').then((response) => response.json()),// parse each response as json
+                fetch('https://in3.dev/knygos/types/').then((response) => response.json()),
+
+
+
+            ]);
+        }
+
+        localBookData = data[0];
+
+        localBookTypes = data[1];
+
+        console.log('data: ', data, data[0].length, data[1].length);
+        console.log('books data: ', localBookData);
+        console.log('books types: ', localBookTypes);
+
+        render();
+
+
+
+        // for (var i of data) {
+        //     console.log(`RESPONSE ITEM \n`);
+        //     for (var obj of i) {
+        //         console.log(obj);
+        //         //logger utility method, logs output to screen
+        //         console.log(obj);
+        //     }
+        // }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+fetchURLs();
+
 const render = () => {
     /*
     ****** clear list
@@ -161,69 +229,3 @@ const render = () => {
 //     })
 
 
-/* Client side, works in Chrome 55 and Firefox 52 without transpilation */
-//https://blogs.msdn.microsoft.com/typescript/2016/11/08/typescript-2-1-rc-better-inference-async-functions-and-more/
-async function fetchURLs() {
-    try {
-        // Promise.all() lets us coalesce multiple promises into a single super-promise
-        let data = await Promise.all([
-            /* Alternatively store each in an array */
-            // var [x, y, z] = await Promise.all([
-            // parse results as json; fetch data response has several reader methods available:
-            //.arrayBuffer()
-            //.blob()
-            //.formData()
-            //.json()
-            //.text()
-            fetch('https://in3.dev/knygos/').then((response) => response.json()),// parse each response as json
-            fetch('https://in3.dev/knygos/types/').then((response) => response.json()),
-
-
-
-        ]);
-
-        if (data[0].length === 0 || data[1].length === 0) {
-            data = await Promise.all([
-                /* Alternatively store each in an array */
-                // var [x, y, z] = await Promise.all([
-                // parse results as json; fetch data response has several reader methods available:
-                //.arrayBuffer()
-                //.blob()
-                //.formData()
-                //.json()
-                //.text()
-                fetch('https://in3.dev/knygos/').then((response) => response.json()),// parse each response as json
-                fetch('https://in3.dev/knygos/types/').then((response) => response.json()),
-
-
-
-            ]);
-        }
-
-        localBookData = data[0];
-
-        localBookTypes = data[1];
-
-        console.log('data: ', data, data[0].length, data[1].length);
-        console.log('books data: ', localBookData);
-        console.log('books types: ', localBookTypes);
-
-        render();
-
-
-
-        // for (var i of data) {
-        //     console.log(`RESPONSE ITEM \n`);
-        //     for (var obj of i) {
-        //         console.log(obj);
-        //         //logger utility method, logs output to screen
-        //         console.log(obj);
-        //     }
-        // }
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-fetchURLs();

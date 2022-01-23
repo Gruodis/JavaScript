@@ -16,8 +16,65 @@ function rand(min, max) {
 //
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+// deklaruojame objekta su dviem savybemis => name ir age.
+const cat = {
+    name: 'Pupulis', // string
+    age: 11 // number
+}
+console.log(`obj cat: `, cat); // print object
 
 
+// print Cat name in uppercase letters
+cat.bigLetters = function () {
+    console.log(`Uppercase this: `, this.name.toUpperCase());
+
+}
+cat.bigLetters() // cat.name is argument
+
+// print Cat name in uppercase letters
+cat.inceaseCatAge = function () {
+    console.log(`icrease cat age by 1 this: `, this.age++);
+
+}
+cat.inceaseCatAge() // cat.name is argument
+
+// print Cat name and "STRING" separated with " - ".
+const stringFun = (a, b) => {
+    console.log(`Arg and String: `, a + ' - ' + b); // print Cat name in uppercase letters
+
+}
+stringFun(cat.name, 'Miau');
+
+// Make a Copy of object "cat"
+// first method only used for specific reasons
+let catCopy = {
+    ...cat
+};
+
+catCopy.name = 'Leopoldas';
+catCopy.age = 2;
+
+
+console.log(`catCopy Name: `, catCopy.name); // print object
+console.log(`catCopy name bigLetters: `,); // print object
+catCopy.bigLetters()
+
+// second method should be used instead of first
+
+let catRainius = {
+    name: 'Rainius',
+    age: 2,
+    inceaseCatAge: function () {
+        console.log(`Icrease ${this.name} age by 1 year: `, ++this.age);
+    },
+    bigLetters: function () {
+        console.log(`Cat ${this.name} Uppercase: `, this.name.toUpperCase());
+    }
+
+};
+
+catRainius.bigLetters();
+catRainius.inceaseCatAge();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -132,6 +189,6 @@ else if (colorCount.blue > colorCount.red && colorCount.blue > colorCount.red &&
 else { maxColor = `Yellow: ${colorCount.yellow}` }
 
 
-console.log(colorCount, maxColor, `Kvartale turime sunu: ${dogo}, Daugiausia turime ${colorCount} spalvos namu, 33 Namu Kvartalas:`, kvartaslas33);
+console.log(colorCount, maxColor, `Kvartale turime sunu: ${dogo}, Daugiausia turime ${maxColor} spalvos namu, 33 Namu Kvartalas:`, kvartaslas33);
 
 // agregacija - duomenu bloko apibendrinimas

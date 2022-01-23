@@ -23,12 +23,30 @@ function rand(min, max) {
 //
 // 6. Fubkcijos iskvietimas vykdomas nurodzius funkcijos varda, skliaustus ir argumentus juose pvz.: "sayHello(argumentas8, argumentas9);".
 //
-//     !!!!     Objekto kintamasis vadinamas = savybe, Objekto funkcija vadinama = metodu    !!!!
+//     !!!!     Objekto kintamasis yra vadinamas => savybe, Objekto funkcija vadinama => metodu    !!!!
 //
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
+const cat = {
+    name: 'Pupulis', // string
+    age: 11 // number
+}
 
+console.log(`obj cat: `, cat);
+
+const uppercaseLetters = (param1) => {
+    console.log(`Uppercase: `, param1.toUpperCase()); // print Cat name in uppercase letters
+
+}
+uppercaseLetters(cat.name) // cat.name is argument
+
+
+const stringFun = (a, b) => {
+    console.log(`String: `, a + ' - ' + b); // print Cat name in uppercase letters
+
+}
+stringFun('Labas', 'Vakaras') // cat.name is argument
 
 /////////////////////////////////////////// Uzdavinys Anonimines Fubkcijos JavaScript //////////////////////////////////////////////////
 //
@@ -45,9 +63,11 @@ const baras = {
     kedes: rand(5, 20)
 };
 
-(function (d) {
+function gogogo(d) {
     d = (baras.daina = randGrupe);
-})();
+    console.log(`Rand grupe: `, d);
+}
+gogogo();
 
 baras.kdd = function () {
     // console.log(`Turime kedziu: `, baras.kedes); // jeigu naudosime Objekto "baras" kopija, kitam Objektui sukurti, 
@@ -62,7 +82,8 @@ const baras2 = { ...baras }; // darome Objekto "baras" kopija!!!
 baras2.kedes = '1000';
 
 
-baras.kdd();
-baras2.kdd();
+baras.kdd('1 Baras');
+baras2.kdd('2 Baras');
 
-console.log('Baras: ', baras, baras2)
+console.log('Baras 1: ', baras)
+console.log('Baras 2: ', baras2)
