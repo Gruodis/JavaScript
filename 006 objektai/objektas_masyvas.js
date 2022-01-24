@@ -28,17 +28,18 @@ console.log(`obj cat: `, cat); // print object
 
 
 // print Cat name in uppercase letters
-cat.bigLetters = function () {
+cat.bigLetters = function () { // method = bigLetters
     console.log(`Uppercase this: `, this.name.toUpperCase());
 
 }
 cat.bigLetters() // cat.name is argument
 
 // print Cat name in uppercase letters
-cat.inceaseCatAge = function () {
+cat.inceaseCatAge = function () { // method = inceaseCatAge
     console.log(`icrease cat age by 1 this: `, this.age++);
 
 }
+cat.inceaseCatAge() // cat.name is argument
 cat.inceaseCatAge() // cat.name is argument
 
 // print Cat name and "STRING" separated with " - ".
