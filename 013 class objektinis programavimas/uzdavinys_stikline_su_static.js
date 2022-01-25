@@ -39,7 +39,7 @@ function rand(min, max) {
 console.log(`
 ////////////////// Uzdavinys /////////////////////
 //
-// Sukurti klase "Turis", 
+// Sukurti klase "Stikline", 
 // i, kurį ilipa ir išlipa keleiviai.
 //
 // Skaiciuoti kiekvieno marsruto srauta:
@@ -53,7 +53,7 @@ console.log(`
 //
 //||||||||||||||||||||||||||||||||||||||||||||||||
 `)
-class Turis {
+class Stikline {
     // savybes
 
     static pertekliausLikutis = 0;
@@ -65,7 +65,8 @@ class Turis {
 
 
         this.gerimas = 0;
-        this.kauptiPertekliu = 0;
+        this.ipilam = turis;
+        // this.kauptiPertekliu = 0;
         // this.ilipoViso = 0;
         // this.vaziuoja = 0;
 
@@ -75,56 +76,75 @@ class Turis {
 
     pripilti = (kiekis) => {
 
+        this.gerimas += kiekis;
+        this.gerimas = Math.min(this.ipilam, this.gerimas)
 
-        if ((kiekis) >= 0) {
-
-            Turis.ilipoViso += kiekis;
-
-            this.ilipo = kiekis;
-            this.ilipoViso += kiekis;
-
-            console.log(`
-            |${this.id}| GO:
-            Troleibuse yra keleiviu: `, this.vaziuoja, `
-            |${this.id}| STOP:
-            Ilipo nauju keleiviu: `, this.ilipo, `
-            Toliau vaziuoja keleiviu: `, this.vaziuoja += this.ilipo
-            );
-
-            // console.log('X ', this.vaziuoja)
-
-        }
-        else {
-            // this.islipo = Math.max(0, (this.vaziavo += kiekis))
-
-            if ((this.vaziuoja + kiekis) <= 0) {
-                this.islipo = 0;
-
-                console.log(`  
-                |${this.id}| GO:
-                Troleibuse yra keleiviu: `, this.vaziuoja, `
-                |${this.id}| STOP:
-                Troleibus yra keleiviu: `, this.vaziuoja, `
-                Islipo kiekis: `, this.vaziuoja, `
-                Toliau vaziuoja: `, 0
-                );
-
-                this.vaziuoja = 0;
-            }
-            else {
-                console.log(`
-            |${this.id}| GO:
-            Troleibuse yra keleiviu: `, this.vaziuoja, `
-            |${this.id}| STOP: 
-            Islipo kiekis: `, kiekis, `
-            Liko = `, + (this.vaziuoja += kiekis)
-                );
-
-            }
+console.log('\n', this.ipilam, this.gerimas);
 
 
 
-        }
+        // if ((kiekis) >= 0) {
+
+        //     Stikline.ilipoViso += kiekis;
+
+        //     this.ilipo = kiekis;
+        //     this.ilipoViso += kiekis;
+
+        //     console.log(`
+        //     |${this.id}| GO:
+        //     Troleibuse yra keleiviu: `, this.vaziuoja, `
+        //     |${this.id}| STOP:
+        //     Ilipo nauju keleiviu: `, this.ilipo, `
+        //     Toliau vaziuoja keleiviu: `, this.vaziuoja += this.ilipo
+        //     );
+
+        //     // console.log('X ', this.vaziuoja)
+
+        // }
+        // else {
+        //     // this.islipo = Math.max(0, (this.vaziavo += kiekis))
+
+        //     if ((this.vaziuoja + kiekis) <= 0) {
+        //         this.islipo = 0;
+
+        //         console.log(`  
+        //         |${this.id}| GO:
+        //         Troleibuse yra keleiviu: `, this.vaziuoja, `
+        //         |${this.id}| STOP:
+        //         Troleibus yra keleiviu: `, this.vaziuoja, `
+        //         Islipo kiekis: `, this.vaziuoja, `
+        //         Toliau vaziuoja: `, 0
+        //         );
+
+        //         this.vaziuoja = 0;
+        //     }
+        //     else {
+        //         console.log(`
+        //     |${this.id}| GO:
+        //     Troleibuse yra keleiviu: `, this.vaziuoja, `
+        //     |${this.id}| STOP: 
+        //     Islipo kiekis: `, kiekis, `
+        //     Liko = `, + (this.vaziuoja += kiekis)
+        //         );
+
+        //     }
+
+
+
+        // }
+    }
+
+    perpilti = () => {
+        const tarpinisKiekis = this.gerimas;
+        this.gerimas = 0;
+        return tarpinisKiekis;
+
+    }
+
+    visoStiklineje = () => {
+        return this.gerimas;
+
+    
     }
 
     galine = () => {
@@ -134,13 +154,15 @@ class Turis {
 
         Galine stoteleje islipo: `, this.vaziuoja, `keleivis(-iu)`);
 
-        Turis.paskutineStoteleViso += this.vaziuoja;
+        Stikline.paskutineStoteleViso += this.vaziuoja;
 
     }
 
 }
 
-const stikline = new Turis();
+const stikline200 = new Stikline(200);
+const stikline150 = new Stikline(150);
+const stikline100 = new Stikline(100);
 
 // const keleiviai = [1, 1, -22, 4, -3, -66, 10]
 
@@ -153,18 +175,24 @@ const stikline = new Turis();
 
 // })
 
-stikline.pripilti(200);
+stikline200.pripilti(400);
+stikline150.pripilti(stikline200.perpilti());
+stikline100.pripilti(stikline150.perpilti());
 
 
 
 console.log('\n');
+console.log('200 ', stikline200.visoStiklineje())
+console.log('150 ', stikline150.visoStiklineje())
+console.log('100 ', stikline100.visoStiklineje())
 
-// console.log(`Viso ilipo keleiviu: `, Turis.ilipoViso, `.`);
+
+// console.log(`Viso ilipo keleiviu: `, Stikline.ilipoViso, `.`);
 
 // marsrutas.galine()
 console.log('\n');
 
-// const marsrutas2 = new Turis();
+// const marsrutas2 = new Stikline();
 
 // const keleiviai2 = [10, -2, -7, 4, -3, 2, 10]
 
@@ -179,11 +207,11 @@ console.log('\n');
 
 // console.log('\n');
 
-// // console.log(`Viso ilipo keleiviu: `, Turis.ilipoViso, `.`);
+// // console.log(`Viso ilipo keleiviu: `, Stikline.ilipoViso, `.`);
 // marsrutas2.galine()
 // console.log('\n');
 
-// const marsrutas3 = new Turis();
+// const marsrutas3 = new Stikline();
 
 // const keleiviai3 = [10, -6, -4, 8, 4, -10]
 
@@ -198,10 +226,10 @@ console.log('\n');
 
 // console.log('\n');
 
-// // console.log(`Viso ilipo keleiviu: `, Turis.ilipoViso, `.`);
+// // console.log(`Viso ilipo keleiviu: `, Stikline.ilipoViso, `.`);
 
 // marsrutas3.galine()
 // console.log('\n');
 
 
-// console.log(`Per para galineje stoteleje VISO islipo keleiviu: `, Turis.paskutineStoteleViso, `.`);
+// console.log(`Per para galineje stoteleje VISO islipo keleiviu: `, Stikline.paskutineStoteleViso, `.`);
