@@ -136,6 +136,8 @@ console.log('\n', this.ipilam, this.gerimas);
 
     perpilti = () => {
         const tarpinisKiekis = this.gerimas;
+        console.log('\n Tara ', this.ipilam, ' kiekis', this.gerimas);
+
         this.gerimas = 0;
         return tarpinisKiekis;
 
@@ -175,7 +177,7 @@ const stikline100 = new Stikline(100);
 
 // })
 
-stikline200.pripilti(400);
+stikline200.pripilti(75);
 stikline150.pripilti(stikline200.perpilti());
 stikline100.pripilti(stikline150.perpilti());
 
