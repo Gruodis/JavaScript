@@ -61,7 +61,7 @@ class Turis {
     // static islipoViso = 0;
 
     // metodai
-    constructor() {
+    constructor(turis) {
 
 
         this.gerimas = 0;
