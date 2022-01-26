@@ -153,7 +153,6 @@ console.log('\n', this.ipilam, this.gerimas);
 
         console.log(`
         Viso |${this.id}|-to marsruto troleibusu vaziavo: ${this.ilipoViso} keleiviu
-
         Galine stoteleje islipo: `, this.vaziuoja, `keleivis(-iu)`);
 
         Stikline.paskutineStoteleViso += this.vaziuoja;
