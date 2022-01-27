@@ -57,96 +57,86 @@ class Stikline {
     // savybes
 
     static pertekliausLikutis = 0;
-    // static ilipoViso = 0;
-    // static islipoViso = 0;
 
     // metodai
     constructor(turis) {
 
 
-        this.gerimas = 0;
-        this.ipilam = turis;
-        // this.kauptiPertekliu = 0;
-        // this.ilipoViso = 0;
-        // this.vaziuoja = 0;
+        this.skystis = 0;
+        this.turis = turis;
+        this.likutis = 0;
 
-        // this.id = rand(2, 19);
 
     }
 
     pripilti = (kiekis) => {
 
-        this.gerimas += kiekis;
-        this.gerimas = Math.min(this.ipilam, this.gerimas)
+        this.skystis += kiekis;
+        // this.skystis = Math.min(this.turis, this.skystis)
 
-console.log('\n', this.ipilam, this.gerimas);
+        console.log('\n Pripilti turis/skystis', this.turis, this.skystis);
 
+        if (this.skystis > this.turis) {
+            if ((Stikline.pertekliausLikutis === 0)) {
 
+                Stikline.pertekliausLikutis += (this.skystis - this.turis)
+                console.log('\n Likutis !===0 ', Stikline.pertekliausLikutis);
 
-        // if ((kiekis) >= 0) {
-
-        //     Stikline.ilipoViso += kiekis;
-
-        //     this.ilipo = kiekis;
-        //     this.ilipoViso += kiekis;
-
-        //     console.log(`
-        //     |${this.id}| GO:
-        //     Troleibuse yra keleiviu: `, this.vaziuoja, `
-        //     |${this.id}| STOP:
-        //     Ilipo nauju keleiviu: `, this.ilipo, `
-        //     Toliau vaziuoja keleiviu: `, this.vaziuoja += this.ilipo
-        //     );
-
-        //     // console.log('X ', this.vaziuoja)
-
-        // }
-        // else {
-        //     // this.islipo = Math.max(0, (this.vaziavo += kiekis))
-
-        //     if ((this.vaziuoja + kiekis) <= 0) {
-        //         this.islipo = 0;
-
-        //         console.log(`  
-        //         |${this.id}| GO:
-        //         Troleibuse yra keleiviu: `, this.vaziuoja, `
-        //         |${this.id}| STOP:
-        //         Troleibus yra keleiviu: `, this.vaziuoja, `
-        //         Islipo kiekis: `, this.vaziuoja, `
-        //         Toliau vaziuoja: `, 0
-        //         );
-
-        //         this.vaziuoja = 0;
-        //     }
-        //     else {
-        //         console.log(`
-        //     |${this.id}| GO:
-        //     Troleibuse yra keleiviu: `, this.vaziuoja, `
-        //     |${this.id}| STOP: 
-        //     Islipo kiekis: `, kiekis, `
-        //     Liko = `, + (this.vaziuoja += kiekis)
-        //         );
-
-        //     }
+                this.skystis = this.turis;
 
 
+            }
+            else {
 
-        // }
+                Stikline.pertekliausLikutis -= (this.skystis - this.turis)
+                console.log('\n Else Likutis !===0 ', Stikline.pertekliausLikutis);
+
+
+            }
+
+            this.skystis = this.turis
+        }
+
+
     }
 
     perpilti = () => {
-        const tarpinisKiekis = this.gerimas;
-        console.log('\n Tara ', this.ipilam, ' kiekis', this.gerimas);
 
-        this.gerimas = 0;
-        return tarpinisKiekis;
+        console.log('\n If  kiekis', this.skystis, this.turis);
+
+        if (Stikline.pertekliausLikutis > 0) {
+            this.skystis = Stikline.pertekliausLikutis;
+
+            this.skystis = this.turis;
+
+            console.log('\n If2  kiekis', this.skystis, this.turis);
+
+            Stikline.pertekliausLikutis -= this.turis;
+
+            return Stikline.pertekliausLikutis;
+
+
+
+        }
+        else {
+            // const tarpinisKiekis = this.skystis;
+            console.log('\n else ', this.turis, ' kiekis', this.skystis);
+
+            this.skystis = 0;
+            return Stikline.pertekliausLikutis;
+
+        }
 
     }
 
     visoStiklineje = () => {
-        return this.gerimas;
+        // return this.skystis;
+        console.log('\n else ', this.turis, ' kiekis', this.skystis);
 
-    
+        return Stikline.pertekliausLikutis;
+
+
+
     }
 
     galine = () => {
@@ -176,9 +166,13 @@ const stikline100 = new Stikline(100);
 
 // })
 
-stikline200.pripilti(75);
-stikline150.pripilti(stikline200.perpilti());
-stikline100.pripilti(stikline150.perpilti());
+stikline200.pripilti(575);
+stikline100.pripilti(
+    stikline150.perpilti(
+        stikline200.perpilti()
+    )
+);
+// stikline100.pripilti(stikline150.perpilti());
 
 
 
