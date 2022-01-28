@@ -53,7 +53,7 @@ tokiu atveju produktų kiekis turėtų sumuotis.
 //||||||||||||||||||||||||||||||||||||||||||||||||
 `)
 
-const test = []
+const test = [] // masyvas skirtas to paties tipo prekiu skaiciavimui
 
 class PirkiniuKrepselis {
 
@@ -75,53 +75,24 @@ class PirkiniuKrepselis {
         test.push(this.preke); // skirtingu prekiu skaiciavimui
 
 
-        if (this.turinys.has(this.preke)) {
-
-            // this.total++;
-
-            // for (let [key, value] of this.turinys) {
-
-
-            // console.log(`Jau turim ${preke}`, kiekis);
+        if (this.turinys.has(this.preke)) { // jeigu Map jau turi preke tuo paciu pavadinimu
 
             console.log(`-- ${this.preke} jau ideta(-as), idedam dar: `, this.kiekis);
-            this.kiekis += this.turinys.get(this.preke)
-
-            this.turinys.set(this.preke, this.kiekis);
-
-
-
-
-            // this.turinys.set(preke, kiekis);
-
-
-
-
-
-            // this.turinys.set[key, value] = ([preke, value += kiekis]);
-            // console.log(preke, kiekis);
-
-            // kiekis = value;
-            // }
+            this.kiekis += this.turinys.get(this.preke) // imame prekes kieki(get(this.preke)) ir pridedame prie esamo kiekio
+            this.turinys.set(this.preke, this.kiekis); // idedam preke su jos kiekiu i Map
         }
         else {
-
             this.turinys.set(this.preke, this.kiekis);
             console.log(`\nIdedam ${this.preke}`, this.kiekis);
 
-
         }
 
-        // this.turinys.set('Surelis', kiekis);
-        // this.turinys.set(preke, kiekis);
-        // console.log(this.turinys);
 
     }
 
     krepselioTurinys = () => {
 
         test.forEach(name => {
-
             if (this.preke === name) {
                 // console.log('JJ', name, this.total);
                 this.total++;
@@ -132,14 +103,11 @@ class PirkiniuKrepselis {
 
         for (const krepselis of this.turinys) {
             console.log(`--preke ${krepselis[0]}, ${this.total}xPakuotes, pakuoteje`, krepselis[1] / this.total, ` vnt, Viso ${krepselis[1]}vnt.`);
-
         }
 
         console.log(`\n ============`);
 
     }
-
-
 }
 
 
