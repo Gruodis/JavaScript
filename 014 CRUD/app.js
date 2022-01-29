@@ -120,34 +120,34 @@ class Db {
         this.save();
     }
 
-    delete = id => {
-        id = parseInt(id);
-        let index;
-        this.data.forEach((c, i) => {
-            if (c.id === id) {
-                index = i;
-            }
-        });
-        this.data.splice(index, 1);
-        this.save();
-    }
+    // delete = id => {
+    //     id = parseInt(id);
+    //     let index;
+    //     this.data.forEach((c, i) => {
+    //         if (c.id === id) {
+    //             index = i;
+    //         }
+    //     });
+    //     this.data.splice(index, 1);
+    //     this.save();
+    // }
 
-    edit = (id, name, type, space) => {
-        const cloud = new Cloud(
-            id,
-            name,
-            type,
-            space
-        );
-        let index;
-        this.data.forEach((c, i) => {
-            if (c.id === id) {
-                index = i;
-            }
-        });
-        this.data[index] = cloud;
-        this.save();
-    }
+    // edit = (id, name, type, space) => {
+    //     const cloud = new Cloud(
+    //         id,
+    //         name,
+    //         type,
+    //         space
+    //     );
+    //     let index;
+    //     this.data.forEach((c, i) => {
+    //         if (c.id === id) {
+    //             index = i;
+    //         }
+    //     });
+    //     this.data[index] = cloud;
+    //     this.save();
+    // }
 
 }
 

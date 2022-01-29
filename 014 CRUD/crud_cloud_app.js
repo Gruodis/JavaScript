@@ -1,6 +1,3 @@
-let ideti = document.getElementById('idetiNauja');
-
-console.log('i', ideti);
 /******************
  * 
  *  App content
@@ -8,7 +5,7 @@ console.log('i', ideti);
  *  id = unique id for cloud
  *  name = cloud name
  *  type = cloud type:
-*                     Kakuoliniai
+*                     Kamuoliniai
 *                     Plunksniniai
 *                     Liutiniai
 *                     Sluoksniniai
@@ -19,7 +16,7 @@ console.log('i', ideti);
 
 //sukuriame klases
 
-class DebesuGamykla {
+class ConstructDebesis {
 
     constructor(id, name, type, radius) { // perduodame kintamuosius i salyga
         this.id = parseInt(id);
@@ -28,7 +25,7 @@ class DebesuGamykla {
 
         // debesu tipui priskirti naudojame switch salyga
         switch (parseInt(type)) {
-            case 1: this.type = 'Kakuoliniai';
+            case 1: this.type = 'Kamuoliniai';
                 break;
             case 2: this.type = 'Plunksniniai';
                 break;
@@ -48,7 +45,7 @@ class DebesuGamykla {
 
 // bendravimas su localStorage
 
-class NarsyklesStorage {
+class Connect2LocalDB {
 
     constructor() {
 
@@ -71,15 +68,17 @@ class NarsyklesStorage {
         // 2 !!! konvertuojame localStorage duomenis JSON.parse !!!
         tempData = JSON.parse(tempData); // konvertuojam string duomenys i javascript
 
-        // 3 !!! kiekvienam debesiui esanciam registre, kuriame objekta naudodami klase DebesuGamykla ir dedame ji i dataStorage masyva
+        // 3 !!! kiekvienam debesiui esanciam registre, kuriame objekta naudodami klase ConstructDebesis ir dedame ji i dataStorage masyva
 
         tempData.forEach(item => {
 
-            const debesis = new DebesuGamykla(
+            const debesis = new ConstructDebesis(
                 item.id,
                 item.name,
                 item.type,
-                item.radius
+                item.radius,
+
+                // console.log('tempData', debesis)
 
             );
             this.dataStorage.push(debesis);
@@ -112,13 +111,13 @@ class NarsyklesStorage {
 
     }
 
-    updateLocalStorageData = () => { // SAVE
+    saveData2DB = () => { // SAVE
         const cloudsUpdateLocalStorage = [];
         // invertinam tipo priskirima debesiui
         this.dataStorage.forEach(item => {
             let type;
             switch (item.type) {
-                case 'Kakuoliniai': type = 1;
+                case 'Kamuoliniai': type = 1;
                     break;
 
                 case 'Plunksniniai': type = 2;
@@ -143,32 +142,34 @@ class NarsyklesStorage {
 
         });
         localStorage.setItem('debesuRegistras', JSON.stringify(cloudsUpdateLocalStorage)) // irasome nauja debesi i localStorage
-
+        console.log('datastorage', this.dataStorage, 'SAVE', cloudsUpdateLocalStorage)
     }
 
-    generateNextID = (name, type, radius) => {
+    createNewObj = (name, type, radius) => {
+        console.log(`Var`, name, type, radius)
 
-        const newCloud = new DebesuGamykla( //naudojame konstruktoriu
+        const newCloud = new ConstructDebesis( //naudojame konstruktoriu
             this.getLastUsedID(), // irasome nauja debesies id
             name,
             type,
             radius
         );
+        console.log(`New cloud`, newCloud)
 
         this.dataStorage.push(newCloud) //
-        this.updateLocalStorageData() //  SAVE supusinam nauja debesi i localStorage panaudodami metoda
+        this.saveData2DB() //  SAVE supusinam nauja debesi i localStorage panaudodami metoda
 
     }
 }
 
 class DebesuApp {
-    static data;
+    static datas;
     static startApp = () => {
-        this.data = new NarsyklesStorage(); // kreipaimes i localStorage per auksciau sukurta metoda
-        this.renderDataToHTML(); // sugeneruojam HTML turini
-        ideti.addEventListener('click', () => this.buttonGo());
+        this.datas = new Connect2LocalDB(); // kreipaimes i localStorage per auksciau sukurta metoda
+        this.renderHTML(); // sugeneruojam HTML turini
+        document.getElementById('idetiNauja').addEventListener('click', () => this.buttonGo());
 
-        console.log("", this.data)
+        console.log("", this.datas)
 
     } // start app
 
@@ -177,24 +178,29 @@ class DebesuApp {
 
         const newCloud = document.getElementById('newCloud');
 
-        this.data.updateLocalStorageData( // naudojam data ir metoda update..
+        this.datas.createNewObj( // naudojam data ir metoda update..
             newCloud.querySelector('[name=name]').value,
             newCloud.querySelector('[name=type]').value,
             newCloud.querySelector('[name=radius]').value,
         );
+        console.log(
+            newCloud.querySelector('[name=name]').value,
+            newCloud.querySelector('[name=type]').value,
+            newCloud.querySelector('[name=radius]').value,
+        )
 
         newCloud.querySelector('[name=name]').value = '';
         newCloud.querySelector('[name=type]').value = '0';
         newCloud.querySelector('[name=radius]').value = '';
 
-        this.renderDataToHTML(); // upadatinam puslapio duomenis po submito
+        this.renderHTML(); // upadatinam puslapio duomenis po submito
     }
 
-    static renderDataToHTML = () => {
+    static renderHTML = () => {
         const debesuListas = document.getElementById('debesuList');
         debesuListas.innerHTML = ''; // istrinam viska is HTML pries ikeldami duomenis
 
-        this.data.dataStorage.forEach(item => {
+        this.datas.dataStorage.forEach(item => {
 
             const html = `
             <h3>#<i>${item.id}</i> - ${item.name}</h3>
@@ -206,7 +212,7 @@ class DebesuApp {
             debesuListas.append(div)
 
         })
-    } // renderDataToHTML
+    } // renderHTML
 }
 
 DebesuApp.startApp();

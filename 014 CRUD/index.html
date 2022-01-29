@@ -57,17 +57,18 @@
 <body>
     <div class="col-lg-8 mx-auto p-3 py-md-5">
         <section id="newCloud">
-            <input type="text" id="name" name="name" placeholder="debesies vardas">
-            <select name="type" title='tit'>
+            <form action="">
+                <input type="text" id="name" required="true" name="name" placeholder="debesies vardas" required>
+                <select name="type" title='tit' required>
                 <option value="0"> Pasirikite tipa</option>
                 <option value="1">Kakuoliniai</option>
                 <option value="2">Plunksniniai</option>
                 <option value="2">Liutiniai</option>
                 <option value="4">Sluoksniniai</option>
             </select>
-            <input type="text" id="radius" name="radius" placeholder="plotas">
+            <input type="text" id="radius" required name="radius" placeholder="plotas">
             <button id="idetiNauja">Ideti nauja debesi</button>
-
+</form>
         </section>
         <section id="debesuList">
             asdadasdadadasd
