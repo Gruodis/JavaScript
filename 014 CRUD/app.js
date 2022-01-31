@@ -132,22 +132,22 @@ class Db {
     //     this.save();
     // }
 
-    // edit = (id, name, type, space) => {
-    //     const cloud = new Cloud(
-    //         id,
-    //         name,
-    //         type,
-    //         space
-    //     );
-    //     let index;
-    //     this.data.forEach((c, i) => {
-    //         if (c.id === id) {
-    //             index = i;
-    //         }
-    //     });
-    //     this.data[index] = cloud;
-    //     this.save();
-    // }
+    edit = (id, name, type, space) => {
+        const cloud = new Cloud(
+            id,
+            name,
+            type,
+            space
+        );
+        let index;
+        this.data.forEach((c, i) => {
+            if (c.id === id) {
+                index = i;
+            }
+        });
+        this.data[index] = cloud;
+        this.save();
+    }
 
 }
 
@@ -222,6 +222,8 @@ class CloudApp {
         modal.querySelector('[name=name]').value = cloud.name;
         modal.querySelector('[name=type]').value = type;
         modal.querySelector('[name=space]').value = cloud.space;
+
+        console.log('NEINA', cloud.name, type, cloud.space)
     }
 
     static hideModal = e => {

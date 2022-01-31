@@ -51,10 +51,13 @@ class Connect2LocalDB {
 
         this.dataStorage = []; // laikome visa info apie debesis
 
-        let tempData; // kailinas kitamasis atsisiustiems/sukurtiems duomenims saugoti
+        let tempData; // kailinas DATA kitamasis atsisiustiems/sukurtiems duomenims saugoti
 
         // atsisiunciame duomenis is localStorage
         tempData = localStorage.getItem('debesuRegistras');
+
+        console.log('tempData', tempData);
+
 
         // 1 !!! tikriname ar localStorage jau buvo irasyti kazkokie duomenys !!!
         if (null === tempData) { // jeigu duomenu neradome ar jie sugadinti
@@ -112,7 +115,7 @@ class Connect2LocalDB {
     }
 
     saveData2DB = () => { // SAVE
-        const cloudsUpdateLocalStorage = [];
+        const updateRemoteStorage = [];
         // invertinam tipo priskirima debesiui
         this.dataStorage.forEach(item => {
             let type;
@@ -138,14 +141,15 @@ class Connect2LocalDB {
                 type: type, // auksciau invertintas debesies tipas
                 radius: item.radius
             }
-            cloudsUpdateLocalStorage.push(newCloud)
+            updateRemoteStorage.push(newCloud)
 
         });
-        localStorage.setItem('debesuRegistras', JSON.stringify(cloudsUpdateLocalStorage)) // irasome nauja debesi i localStorage
-        console.log('datastorage', this.dataStorage, 'SAVE', cloudsUpdateLocalStorage)
+        localStorage.setItem('debesuRegistras', JSON.stringify(updateRemoteStorage)) // irasome nauja debesi i localStorage
+        console.log('datastorage', this.dataStorage, 'SAVE', updateRemoteStorage)
     }
 
-    createNewObj = (name, type, radius) => {
+    // Naujas debesis
+    createNewDebesis = (name, type, radius) => {
         console.log(`Var`, name, type, radius)
 
         const newCloud = new ConstructDebesis( //naudojame konstruktoriu
@@ -160,6 +164,38 @@ class Connect2LocalDB {
         this.saveData2DB() //  SAVE supusinam nauja debesi i localStorage panaudodami metoda
 
     }
+
+    delete = id => {
+        id = parseInt(id);
+        let index;
+        this.dataStorage.forEach((c, i) => {
+            if (c.id === id) {
+                index = i;
+            }
+        });
+        this.dataStorage.splice(index, 1);
+        this.saveData2DB();
+    }
+
+    // Redagavimas
+    edit = (id, name, type, radius) => {
+        const cloud = new ConstructDebesis(
+            id,
+            name,
+            type,
+            radius
+        );
+        let index;
+        this.dataStorage.forEach((debesis, elementas) => {
+            if (debesis.id === id) {
+                index = elementas;
+
+                console.log('Edit', debesis.id, elementas)
+            }
+        });
+        this.dataStorage[index] = cloud;
+        this.saveData2DB();
+    }
 }
 
 class DebesuApp {
@@ -167,7 +203,10 @@ class DebesuApp {
     static startApp = () => {
         this.datas = new Connect2LocalDB(); // kreipaimes i localStorage per auksciau sukurta metoda
         this.renderHTML(); // sugeneruojam HTML turini
+        // paspaudus mygtukapaleidziam duomenu issaugojimo funkcija
         document.getElementById('idetiNauja').addEventListener('click', () => this.buttonGo());
+        // document.querySelector('.redaguoti').addEventListener('click', () => this.edit());
+
 
         console.log("", this.datas)
 
@@ -175,10 +214,10 @@ class DebesuApp {
 
 
     static buttonGo = () => {
-
+// randame div'a kuriame generuosime HTML turini
         const newCloud = document.getElementById('newCloud');
 
-        this.datas.createNewObj( // naudojam data ir metoda update..
+        this.datas.createNewDebesis( // naudojam data ir metoda update..
             newCloud.querySelector('[name=name]').value,
             newCloud.querySelector('[name=type]').value,
             newCloud.querySelector('[name=radius]').value,
@@ -196,6 +235,56 @@ class DebesuApp {
         this.renderHTML(); // upadatinam puslapio duomenis po submito
     }
 
+    static delete = e => {
+        this.datas.delete(e.target.dataset.id);
+        this.renderHTML();
+    }
+
+
+    static edit = () => {
+        const modal = documentgetElementById('modal');
+        this.dataStorage.edit(
+            parseInt(modal.dataset.id),
+            modal.documentgetElementById('name').value,
+            modal.documentgetElementById('type').value,
+            modal.documentgetElementById('radius').value
+        )
+        // this.hideModal();
+        this.renderHTML();
+    }
+    static showModal = e => {
+        const modal = document.getElementById('modal');
+        // modal.style.display = null;
+        const id = parseInt(e.target.dataset.id);
+        modal.dataset.id = id;
+        const cloud = this.datas.dataStorage.filter(c => c.id === id)[0];
+        let type;
+        switch (cloud.type) {
+            case 'Kamuoliniai': type = 1;
+                break;
+
+            case 'Plunksniniai': type = 2;
+                break;
+
+            case 'Liutiniai': type = 3;
+                break;
+
+            case 'Sluoksniniai': type = 4;
+                break;
+
+            default: type = 0 // nezinomas tipas = 0
+        }
+        // modal.querySelector('[name=name]').value = cloud.name;
+        // modal.querySelector('[name=type]').value = type;
+        // modal.querySelector('[name=radius]').value = cloud.radius;
+        document.getElementById('name').value = cloud.name,
+            document.getElementById('type').value = type,
+            document.getElementById('radius').value = cloud.radius
+        console.log('NEINA', cloud.name, type, cloud.radius,
+            modal)
+
+    }
+
     static renderHTML = () => {
         const debesuListas = document.getElementById('debesuList');
         debesuListas.innerHTML = ''; // istrinam viska is HTML pries ikeldami duomenis
@@ -206,13 +295,64 @@ class DebesuApp {
             <h3>#<i>${item.id}</i> - ${item.name}</h3>
             <small>${item.radius}m<sup>2</sup></small>
             <i>${item.type}</i>
+            <button data-id="${item.id}" class="del">Trinti</button>
+            <button data-id="${item.id}" class="redaguoti">Redaguoti</button>
             `;
             const div = document.createElement('div');
+            div.setAttribute("id", item.id);
+            // div.classList.add('redaguoti');
             div.innerHTML = html;
             debesuListas.append(div)
 
+        }
+        )
+
+
+        document.querySelectorAll('button.del').forEach(b => {
+            b.addEventListener('click', e => {
+                this.delete(e);
+            })
+        });
+
+        // const editItemOut = document.querySelectorAll("redaguoti").addEventListener("mouseout",
+
+
+        // editItemOut.forEach(item => {
+        //     item.style.color = "blue";
+
+        // }
+        // )
+        // );
+
+        // document.querySelectorAll('redaguoti').addEventListener("mouseover", mouseOver);
+        // document.querySelectorAll('redaguoti').addEventListener("mouseout", mouseOut);
+
+
+        // function mouseOver() {
+        //     document.getElementById('debesuList').style.color = "red";
+        // }
+
+        // function mouseOut() {
+        //     document.getElementById('debesuList').style.color = "black";
+        // }
+        //let editItem = document.querySelectorAll('.redaguoti');
+
+        //console.log('RED XXX', editItem)
+
+        document.querySelectorAll('.redaguoti').forEach(b => {
+            b.addEventListener('click', e => {
+                this.showModal(e);
+            })
         })
     } // renderHTML
+
+
+
+
+
 }
+
+
+
 
 DebesuApp.startApp();
