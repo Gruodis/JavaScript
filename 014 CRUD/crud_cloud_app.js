@@ -274,14 +274,96 @@ class DebesuApp {
 
             default: type = 0 // nezinomas tipas = 0
         }
+        const divID = document.getElementById(`${id}`)
+        const editH3 = divID.querySelector('#editH3');
+
+
+        // console.log('cloud type', cloud)
+
+
+        // divID.addEventListener('click', () => {
+        //create
+        const dudu = editH3.querySelector('h3').innerHTML;
+        const editSelect = divID.querySelector('#typeEdit');
+        const editradius = divID.querySelector('small').innerHTML;
+
+        divID.querySelector('h3').remove();
+        // editradius.remove();
+        editSelect.remove();
+
+        const inputSelect = document.createElement('select');
+        inputSelect.name = 'type';
+        inputSelect.id = 'type';
+        // inputSelect.value = type;
+        let obj = localStorage.getItem('debesuRegistras');
+        let data = obj;
+        data = JSON.parse(data);
+
+
+
+
+        data.forEach(item => {
+            let typeName;
+
+
+            switch (item.type) {
+                case 1: typeName = 'Kamuoliniai';
+                    break;
+                case 2: typeName = 'Plunksniniai';
+                    break;
+
+                case 3: typeName = 'Liutiniai';
+                    break;
+
+                case 4: typeName = 'Sluoksniniai';
+                    break;
+
+                default: typeName = 'Nezinomas tipas'
+
+            }
+
+            let opt = document.createElement('option');
+            opt.innerHTML = typeName;
+            opt.value = item.type;
+            inputSelect.appendChild(opt);
+            console.log('type', item.type, typeName)
+        })
+        inputSelect.getElementById('type').value = type,
+
+        console.log('cloud options', data)
+        //
+        // let sel = document.getElementById('select');
+        // for (var key in data) {
+        //   if (data.hasOwnProperty(key)) {
+        //     var opt = document.createElement('option');
+        //     opt.innerHTML = data[key].pt;
+        //     opt.value = data[key].pt;
+        //     sel.appendChild(opt);
+        //   }
+        // }
         // modal.querySelector('[name=name]').value = cloud.name;
         // modal.querySelector('[name=type]').value = type;
         // modal.querySelector('[name=radius]').value = cloud.radius;
+
+        // const inputRadius = document.createElement('input');
+        const inputName = document.createElement('input');
+        inputName.id = id;
+        inputName.value = dudu;
+        // div.classList.add('redaguoti');
+        // input.innerHTML = html;
+        divID.append(inputSelect);
+        editH3.append(inputName);
+        // divID.append(input);
+
+
+        // })
+
+
         document.getElementById('name').value = cloud.name,
             document.getElementById('type').value = type,
             document.getElementById('radius').value = cloud.radius
         console.log('NEINA', cloud.name, type, cloud.radius,
-            modal)
+            modal, editSelect)
 
     }
 
@@ -292,9 +374,10 @@ class DebesuApp {
         this.datas.dataStorage.forEach(item => {
 
             const html = `
-            <h3>#<i>${item.id}</i> - ${item.name}</h3>
+            <h2>#<i>${item.id}</i></h2>
+            <div id="editH3"><h3>${item.name}</h3></div>
             <small>${item.radius}m<sup>2</sup></small>
-            <i>${item.type}</i>
+            <i id="typeEdit">${item.type}</i>
             <button data-id="${item.id}" class="del">Trinti</button>
             <button data-id="${item.id}" class="redaguoti">Redaguoti</button>
             `;
