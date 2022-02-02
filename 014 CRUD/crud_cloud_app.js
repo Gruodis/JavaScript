@@ -328,7 +328,7 @@ class DebesuApp {
             inputSelect.appendChild(opt);
             console.log('type', item.type, typeName)
         })
-        inputSelect.getElementById('type').value = type,
+        // inputSelect.getElementById('type').value = type
 
         console.log('cloud options', data)
         //
