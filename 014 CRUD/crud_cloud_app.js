@@ -13,6 +13,10 @@
  * 
  * */
 
+let debesuPavadinimai = { id: 'pavadinimas' }
+debesuPavadinimai = JSON.stringify(debesuPavadinimai)
+
+localStorage.setItem('debesuPavadinimai', debesuPavadinimai)
 
 //sukuriame klases
 
