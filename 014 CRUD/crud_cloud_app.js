@@ -18,6 +18,12 @@ debesuPavadinimai = JSON.stringify(debesuPavadinimai)
 
 localStorage.setItem('debesuPavadinimai', debesuPavadinimai)
 
+localStorage.getItem('debesuPavadinimai', debesuPavadinimai)
+
+let debName = []
+
+debName.push(parseInt(debesuPavadinimai));
+
 //sukuriame klases
 
 class ConstructDebesis {
