@@ -25,6 +25,7 @@ let debName = []
 debName.push(parseInt(debesuPavadinimai));
 
 //sukuriame klases
+//TO DO - code refacor
 
 class ConstructDebesis {
 
