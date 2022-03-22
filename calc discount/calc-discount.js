@@ -10,7 +10,7 @@ const base_price = document.querySelectorAll(".bazine").forEach(price => {
 }
 );
 const tevas = document.querySelectorAll(".akcija");
-const tevas2 = document.querySelectorAll(".ispardavimas");
+const tevas2 = document.querySelectorAll(".nuolaida");
 //const combine = [[sell_price], [base_price]];
 // const sell_price = parseFloat(document.querySelectorAll(".ispardavimas").innerText);
 // const base_price = parseFloat(document.querySelectorAll(".bazine").innerText);
@@ -123,6 +123,13 @@ function goWithForEach(array1, array2) {
 
     array1.forEach((arrayNumber, arrayIndex, smth) => {
         const num2 = array2[arrayIndex];
+        const span = document.createElement('h2');
+
+        let parentDiv = tevas2[arrayIndex];
+        let text = document.createTextNode(Math.round((array1[arrayIndex] / array2[arrayIndex]) * 100));
+        let text2 = document.createTextNode("% nuolaida su akcija");
+        span.append(text, text2);
+        parentDiv.append(span)
         console.log(
 
             // num + array2[idx]),
