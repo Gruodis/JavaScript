@@ -119,9 +119,9 @@ goWithFor(array1, array2);
  * 
  ***/
 
-function goWithForEach(array1, array2) {
+// function goWithForEach(array1, array2) {
 
-    array1.forEach((arrayNumber, arrayIndex, smth) => {
+array1.forEach((arrayNumber, arrayIndex, array) => {
         const num2 = array2[arrayIndex];
         const span = document.createElement('h2');
 
@@ -133,8 +133,15 @@ function goWithForEach(array1, array2) {
         console.log(
 
             // num + array2[idx]),
-            `~~~~~~~~>  ${arrayNumber}, ${arrayIndex}, smth ${smth} GoEach fun `, Math.round((arrayNumber / num2) * 100)
+            `~~~~~~~~>  ${arrayNumber}, ${arrayIndex}, array ${array} GoEach fun `, Math.round((array1[arrayIndex] / array2[arrayIndex]) * 100)
         )
     });
-};
-goWithForEach(array1, array2);
+// };
+// goWithForEach(array1, array2);
+
+let arrayOne = [1, 2, 3, 4, 5, 6, 7];
+let arrayTwo = [3, 5, 7];
+// let result = arrayOne.filter(el => !arrayTwo.includes(el));
+let result = arrayOne.filter(el => arrayTwo.includes(el));
+
+console.log(result);
